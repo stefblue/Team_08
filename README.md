@@ -29,10 +29,4 @@ can be used as kick start for a desired CO (student) Community.
 
 ##Features
 
-<<<<<<< ./README_LOCAL_26390.md
 * none so far :)
-||||||| ./README_BASE_26390.md
-* none so far :)
-=======
-* none so far :)
->>>>>>> ./README_REMOTE_26390.md
