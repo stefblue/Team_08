@@ -1,6 +1,6 @@
 # Augment my Campus
 
-![alt text] (https://github.com/sw21-tug/Team_08/master/images/proposal.png "Augment my Campus" width="340")
+![image] (https://github.com/sw21-tug/Team_08/blob/main/images/proposal.png "Augment my Campus" width="340")
 
 ## Team_08
 
