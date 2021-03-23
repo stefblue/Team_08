@@ -1,5 +1,7 @@
 # Augment my Campus
 
+![header image] (https://raw.githubusercontent.com/sw21-tug/Team_08/main/images/proposal.png "Augment my Campus" width="340")
+
 ## Team_08
 
 PO:
@@ -15,7 +17,7 @@ Developers:
 * Fussenegger, Laurenz Caspar
 * Hofer, Lukas
 * Lederer, Johannes Raphael
-* LÃ¶bl, Florian Patrick
+* Löbl, Florian Patrick
 * Porsche, Niklas Daniel
 * Sartory, Alexander
 * Wachter, Florian
@@ -29,4 +31,10 @@ can be used as kick start for a desired CO (student) Community.
 
 ##Features
 
+<<<<<<< ./README_LOCAL_26390.md
 * none so far :)
+||||||| ./README_BASE_26390.md
+* none so far :)
+=======
+* none so far :)
+>>>>>>> ./README_REMOTE_26390.md
