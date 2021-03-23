@@ -21,12 +21,12 @@ Developers:
 * Wachter, Florian
 * Ziegler, Kirsten-Stefanie
 
-##Vision
+## Vision
 
 Augment my campus is a project to provide QR codes with different functionality through a campus of an university. The system is designed to 
 be a flexible way to disseminate information to the student body, provide location and context sensitive services for students and staff as well and 
 can be used as kick start for a desired CO (student) Community.
 
-##Features
+## Features
 
 * none so far :)
