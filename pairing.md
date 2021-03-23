@@ -1,12 +1,12 @@
 ### Pairing Matrix
-Dev 1: Fussenegger, Laurenz Caspar
-Dev 2: Hofer, Lukas
-Dev 3: Lederer, Johannes Raphael
-Dev 4: Löbl, Florian Patrick
-Dev 5: Porsche, Niklas Daniel
-Dev 6: Sartory, Alexander
-Dev 7: Wachter, Florian
-Dev 8: Ziegler, Kirsten-Stefanie
+* Dev 1: Fussenegger, Laurenz Caspar
+* Dev 2: Hofer, Lukas
+* Dev 3: Lederer, Johannes Raphael
+* Dev 4: Löbl, Florian Patrick
+* Dev 5: Porsche, Niklas Daniel
+* Dev 6: Sartory, Alexander
+* Dev 7: Wachter, Florian
+* Dev 8: Ziegler, Kirsten-Stefanie
 
 | Syntax      | Dev 1   	  | Dev 2   	  | Dev 3   	  | Dev 4   	  | Dev 5   	  | Dev 6   	  | Dev 7   	  | Dev 8   	  |
 | :---        |    :----:   |    :----:   |    :----:   |    :----:   |    :----:   |    :----:   |    :----:   |    :----:   |
