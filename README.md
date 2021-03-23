@@ -1,7 +1,5 @@
 # Augment my Campus
 
-![header image] (https://raw.githubusercontent.com/sw21-tug/Team_08/main/images/proposal.png "Augment my Campus" width="340")
-
 ## Team_08
 
 PO:
