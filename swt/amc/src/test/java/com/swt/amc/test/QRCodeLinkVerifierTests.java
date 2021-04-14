@@ -1,23 +1,23 @@
 package com.swt.amc.test;
 
-import com.swt.amc.interfaces.IQRCodeLinkVerifier;
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.Assert;
 
-import javax.xml.ws.Response;
+import com.swt.amc.interfaces.IQRCodeLinkVerifier;
 
 @SpringBootTest
 public class QRCodeLinkVerifierTests {
 
-    @Autowired
-    private IQRCodeLinkVerifier verifier;
-    @Test
-    public void test(){
-        ResponseEntity<Boolean> retrunval =  verifier.verifyQRCodeLink("Test");
+	@Autowired
+	private IQRCodeLinkVerifier verifier;
 
-        Assert.isTrue(retrunval.getBody());
-    }
+	@Test
+	public void test() {
+		ResponseEntity<Boolean> retrunval = verifier.verifyQRCodeLink("Test");
+
+		Assert.assertEquals(retrunval.getBody(), true);
+	}
 }
