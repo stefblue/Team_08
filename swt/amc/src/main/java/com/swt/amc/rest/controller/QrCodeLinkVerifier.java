@@ -12,7 +12,7 @@ public class QrCodeLinkVerifier implements IQRCodeLinkVerifier {
 	@Override
 	public ResponseEntity<Boolean> verifyQRCodeLink(String qrCodeLink) {
 
-		return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+		return new ResponseEntity<Boolean>(false, HttpStatus.OK);
 	}
 
 }

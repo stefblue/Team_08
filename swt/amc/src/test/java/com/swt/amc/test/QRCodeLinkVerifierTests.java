@@ -20,4 +20,19 @@ public class QRCodeLinkVerifierTests {
 
 		Assert.assertEquals(retrunval.getBody(), true);
 	}
+
+	@Test
+	public void isInWhiteList() {
+		boolean returnVal = verifier.verifyQRCodeLink("bla").getBody();
+		returnVal = returnVal && verifier.verifyQRCodeLink("bli").getBody();
+		returnVal = returnVal && verifier.verifyQRCodeLink("blubb").getBody();
+		Assert.assertEquals(returnVal, true);
+	}
+
+	@Test
+	public void isNotinWhitelist() {
+		ResponseEntity<Boolean> returnval = verifier.verifyQRCodeLink("blabb");
+		Assert.assertEquals(returnval.getBody(), !returnval.getBody());
+	}
+
 }
