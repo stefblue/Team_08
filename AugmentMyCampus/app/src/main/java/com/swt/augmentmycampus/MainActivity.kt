@@ -17,12 +17,27 @@ import me.dm7.barcodescanner.zxing.ZXingScannerView
 
 class MainActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
 
+    private var mScannerView: ZXingScannerView? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.test);
     }
 
     public fun buttonClick(view: View) {
         Log.i("MainActivity", "buttonClick")
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                == PackageManager.PERMISSION_DENIED) {
+            var list = Array(1) {Manifest.permission.CAMERA};
+            ActivityCompat.requestPermissions(this, list, 0);
+        }
+        mScannerView = ZXingScannerView(this) // Programmatically initialize the scanner view
+        setContentView(mScannerView) // Set the scanner view as the content view
+        mScannerView!!.setResultHandler(this) // Register ourselves as a handler for scan results.
+        mScannerView!!.startCamera() // Start camera on resume
+
+        val handler = Handler()
+        handler.postDelayed({ handleResult(null) }, 5000)
     }
 
     override fun onResume() {
@@ -34,6 +49,20 @@ class MainActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
     }
 
     override fun handleResult(rawResult: Result?) {
+        if (rawResult != null) {
+            Log.i("MainActivity", rawResult.text)
+        } else {
+            Log.i("MainActivity", "no image found")
+        }
+        mScannerView!!.stopCamera()
+        setContentView(R.layout.test);
+        if (rawResult != null) {
+            var textview: TextView = findViewById(R.id.qrCodeText);
+            textview.text = rawResult.text;
+        } else {
+            var textview: TextView = findViewById(R.id.qrCodeText);
+            textview.text = "no image found";
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
