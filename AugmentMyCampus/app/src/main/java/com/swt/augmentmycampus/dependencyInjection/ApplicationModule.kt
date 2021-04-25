@@ -1,6 +1,7 @@
 package com.swt.augmentmycampus.dependencyInjection
 
 import androidx.viewbinding.BuildConfig
+import com.squareup.moshi.Moshi
 import com.swt.augmentmycampus.network.Webservice
 import dagger.Module
 import dagger.Provides
@@ -16,6 +17,12 @@ data class WebserviceConfiguration(val baseUrl: String)
 @Module
 @InstallIn(SingletonComponent::class)
 object ApplicationModule {
+
+    @Singleton
+    @Provides
+    fun provideJsonSerializer(): Moshi {
+        return Moshi.Builder().build()
+    }
 
     @Singleton
     @Provides
