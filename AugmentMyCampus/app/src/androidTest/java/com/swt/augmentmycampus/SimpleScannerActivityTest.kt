@@ -18,8 +18,8 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class SimpleScannerActivityTest {
 
-   // @Rule
-   // var intentsRule: IntentsTestRule<CameraActivity> = IntentsTestRule(CameraActivity::class.java)
+    // @Rule
+    // var intentsRule: IntentsTestRule<CameraActivity> = IntentsTestRule(CameraActivity::class.java)
 
     @get:Rule
     var mainActivity: ActivityScenarioRule<MainActivity>
@@ -59,10 +59,29 @@ class SimpleScannerActivityTest {
         onView(withId(R.id.scanButton)).perform(click())
         onView(withClassName(Matchers.containsString("ZXingScannerView")))
 
-        // Wait for user to scan qr-code
+        // Wait for user to scan qr-code (5000ms)
+        // result can be either user scanned qr.code
+        // or the timeout
+        // both return to mainactivity
         Thread.sleep(5500);
 
         onView(withClassName(Matchers.containsString("ZXingScannerView"))).check(doesNotExist())
         onView(withText("Press 'Scan' below")).check(doesNotExist())
+    }
+
+    @Test
+    fun testBackButtonOnCameraScreen() {
+        mainActivity
+        onView(withId(R.id.qrCodeText)).check(matches(isDisplayed()))
+        onView(withText("Press 'Scan' below")).check(matches(isDisplayed()))
+        onView(withId(R.id.scanButton)).perform(click())
+        onView(withClassName(Matchers.containsString("ZXingScannerView")))
+
+        // Wait for button to be available (500ms)
+        Thread.sleep(1000);
+        onView(withId(R.id.backButton)).perform(click())
+
+        onView(withClassName(Matchers.containsString("ZXingScannerView"))).check(doesNotExist())
+        onView(withText("Press 'Scan' below")).check(matches(isDisplayed()))
     }
 }
