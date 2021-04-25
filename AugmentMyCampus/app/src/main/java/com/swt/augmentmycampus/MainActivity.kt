@@ -5,8 +5,7 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -21,11 +20,11 @@ class MainActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.test);
+        setContentView(R.layout.main_activity);
     }
 
-    public fun buttonClick(view: View) {
-        Log.i("MainActivity", "buttonClick")
+    public fun scanButtonClick(view: View) {
+        Log.i("MainActivity", "scanButtonClick")
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
                 == PackageManager.PERMISSION_DENIED) {
             var list = Array(1) {Manifest.permission.CAMERA};
@@ -36,44 +35,38 @@ class MainActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
         mScannerView!!.setResultHandler(this) // Register ourselves as a handler for scan results.
         mScannerView!!.startCamera() // Start camera on resume
 
-        val handler = Handler()
-        handler.postDelayed({ handleResult(null) }, 5000)
+        val delayedBackButtonAddHandler = Handler()
+        delayedBackButtonAddHandler.postDelayed({ handleBackButton() }, 500)
+
+        val delayedCloseCameraViewHandler = Handler()
+        delayedCloseCameraViewHandler.postDelayed({
+            Log.i("MainActivity", "camera timeout")
+            handleResult(null)
+            var textView: TextView = findViewById(R.id.qrCodeText)
+            textView.text = "No image found."
+        }, 5000)
     }
 
-    override fun onResume() {
-        super.onResume()
+    private fun handleBackButton() {
+        // delay to wait for camera preview View
+        // last added child to FrameLayout is on top
+        // we need to make sure that the back-button is on top
+        val factory = LayoutInflater.from(this)
+        val myView: View = factory.inflate(R.layout.backbutton, null)
+        mScannerView!!.addView(myView)
     }
 
-    public override fun onPause() {
-        super.onPause()
+    public fun backButtonClick(view: View) {
+        handleResult(null)
     }
 
     override fun handleResult(rawResult: Result?) {
+        mScannerView!!.stopCamera()
+        setContentView(R.layout.main_activity);
         if (rawResult != null) {
             Log.i("MainActivity", rawResult.text)
-        } else {
-            Log.i("MainActivity", "no image found")
-        }
-        mScannerView!!.stopCamera()
-        setContentView(R.layout.test);
-        if (rawResult != null) {
-            var textview: TextView = findViewById(R.id.qrCodeText);
-            textview.text = rawResult.text;
-        } else {
-            var textview: TextView = findViewById(R.id.qrCodeText);
-            textview.text = "no image found";
-        }
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
+            var textView: TextView = findViewById(R.id.qrCodeText);
+            textView.text = rawResult.text;
         }
     }
 }

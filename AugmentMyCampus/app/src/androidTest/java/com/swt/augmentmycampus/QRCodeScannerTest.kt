@@ -16,7 +16,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class SimpleScannerActivityTest {
+class QRCodeScannerTest {
 
     // @Rule
     // var intentsRule: IntentsTestRule<CameraActivity> = IntentsTestRule(CameraActivity::class.java)
@@ -52,7 +52,7 @@ class SimpleScannerActivityTest {
     }
 
     @Test
-    fun testScannerOnQrCode() {
+    fun testCameraView() {
         mainActivity
         onView(withId(R.id.qrCodeText)).check(matches(isDisplayed()))
         onView(withText("Press 'Scan' below")).check(matches(isDisplayed()))
@@ -70,7 +70,7 @@ class SimpleScannerActivityTest {
     }
 
     @Test
-    fun testBackButtonOnCameraScreen() {
+    fun testBackButtonOnCameraView() {
         mainActivity
         onView(withId(R.id.qrCodeText)).check(matches(isDisplayed()))
         onView(withText("Press 'Scan' below")).check(matches(isDisplayed()))
