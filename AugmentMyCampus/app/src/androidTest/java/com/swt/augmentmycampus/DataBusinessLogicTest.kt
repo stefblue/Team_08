@@ -5,11 +5,8 @@ import androidx.test.espresso.IdlingResource
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import com.jakewharton.espresso.OkHttp3IdlingResource
 import com.squareup.moshi.Moshi
-import com.swt.augmentmycampus.businessLogic.DataBusinessLogic
-import com.swt.augmentmycampus.businessLogic.DataBusinessLogicImpl
-import com.swt.augmentmycampus.businessLogic.InvalidUrlException
-import com.swt.augmentmycampus.businessLogic.UrlNotWhitelistedException
-import com.swt.augmentmycampus.businessLogic.CouldNotReachServerException
+import com.swt.augmentmycampus.businessLogic.*
+import com.swt.augmentmycampus.dependencyInjection.ApplicationModule
 import com.swt.augmentmycampus.dependencyInjection.ConfigurationModule
 import com.swt.augmentmycampus.dependencyInjection.WebserviceConfiguration
 import dagger.Module
@@ -37,13 +34,12 @@ class DataBusinessLogicTest {
     @InstallIn(SingletonComponent::class)
     object FakeConfigurationModule {
         @Provides
-        fun provideTestApiConfiguration() = WebserviceConfiguration("http://localhost:8080/")
+        fun provideTestWebservice() = WebserviceConfiguration("http://localhost:8080/")
     }
 
     private lateinit var mockWebServer: MockWebServer
 
     private lateinit var dataBusinessLogic: DataBusinessLogic
-
 
     @get:Rule
     var hiltRule: HiltAndroidRule = HiltAndroidRule(this)
@@ -51,8 +47,7 @@ class DataBusinessLogicTest {
     @Inject
     lateinit var okHttpClient: OkHttpClient
 
-    @Inject
-    lateinit var moshi: Moshi
+    var moshi = ApplicationModule.provideJsonSerializer()
 
     @Before
     fun init() {
@@ -63,7 +58,14 @@ class DataBusinessLogicTest {
         mockWebServer = MockWebServer()
         mockWebServer.start(port = 8080)
 
-        dataBusinessLogic = DataBusinessLogicImpl()
+        dataBusinessLogic = DataBusinessLogicImpl(
+            ApplicationModule.provideUrlBusinessLogic(),
+            ApplicationModule.provideWebservice(
+                ApplicationModule.provideOkHttpClient(),
+                moshi,
+                WebserviceConfiguration("http://localhost:8080")
+            )
+        )
     }
 
     @After
@@ -95,11 +97,11 @@ class DataBusinessLogicTest {
 
     @Test
     fun textResponse_Success() {
-        val url = "https://www.ourwebservice.at"
+        val url = FakeConfigurationModule.provideTestWebservice().baseUrl + "test/path/"
         val response = "some data to display";
 
-        createUrlValidResponse();
-        createTextResponse(response);
+        createUrlValidResponse()
+        createTextResponse(response)
         Assert.assertEquals(response, dataBusinessLogic.getTextFromUrl(url));
     }
 

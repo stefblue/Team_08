@@ -2,6 +2,8 @@ package com.swt.augmentmycampus.dependencyInjection
 
 import androidx.viewbinding.BuildConfig
 import com.squareup.moshi.Moshi
+import com.swt.augmentmycampus.businessLogic.UrlBusinessLogic
+import com.swt.augmentmycampus.businessLogic.UrlBusinessLogicImpl
 import com.swt.augmentmycampus.network.Webservice
 import dagger.Module
 import dagger.Provides
@@ -10,6 +12,7 @@ import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
 
 data class WebserviceConfiguration(val baseUrl: String)
@@ -26,10 +29,11 @@ object ApplicationModule {
 
     @Singleton
     @Provides
-    fun provideWebservice(okHttpClient: OkHttpClient, webserviceConfiguration: WebserviceConfiguration): Webservice {
+    fun provideWebservice(okHttpClient: OkHttpClient, moshi: Moshi, webserviceConfiguration: WebserviceConfiguration): Webservice {
         return Retrofit.Builder()
             .client(okHttpClient)
             .baseUrl(webserviceConfiguration.baseUrl)
+            .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
             .create(Webservice::class.java)
     }
@@ -43,4 +47,8 @@ object ApplicationModule {
             addInterceptor(loggingInterceptor)
         }
     }.build()
+
+    @Singleton
+    @Provides
+    fun provideUrlBusinessLogic(): UrlBusinessLogic = UrlBusinessLogicImpl()
 }

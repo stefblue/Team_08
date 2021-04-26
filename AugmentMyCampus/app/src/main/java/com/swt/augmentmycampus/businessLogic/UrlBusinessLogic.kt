@@ -13,8 +13,8 @@ interface UrlBusinessLogic {
 class UrlBusinessLogicImpl : UrlBusinessLogic {
     override fun isValidUrlFormat(url: String): Boolean {
         try {
-            URL(url)
-            return PatternsCompat.WEB_URL.matcher(url).matches()
+            var myUrl = URL(url)
+            return myUrl.host == "localhost" || PatternsCompat.WEB_URL.matcher(url).matches()
         } catch (ex: Exception) {
             // Do nothing
         }
