@@ -22,8 +22,8 @@ class QRCodeScannerTest {
     // var intentsRule: IntentsTestRule<CameraActivity> = IntentsTestRule(CameraActivity::class.java)
 
     @get:Rule
-    var mainActivity: ActivityScenarioRule<MainActivity>
-            = ActivityScenarioRule(MainActivity::class.java)
+    var mainActivity: ActivityScenarioRule<ScanActivity>
+            = ActivityScenarioRule(ScanActivity::class.java)
 
     @Before
     fun setUp() {
