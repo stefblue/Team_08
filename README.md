@@ -15,7 +15,7 @@ Developers:
 * Fussenegger, Laurenz Caspar
 * Hofer, Lukas
 * Lederer, Johannes Raphael
-* Löbl, Florian Patrick
+* LÃ¶bl, Florian Patrick
 * Porsche, Niklas Daniel
 * Sartory, Alexander
 * Wachter, Florian
@@ -29,4 +29,5 @@ can be used as kick start for a desired CO (student) Community.
 
 ## Features
 
-* none so far :)
+* application startup [AC-14](https://github.com/sw21-tug/Team_08/issues/14)
+* camera scan         [AC-1](https://github.com/sw21-tug/Team_08/issues/1)
