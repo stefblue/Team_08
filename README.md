@@ -27,7 +27,10 @@ Augment my campus is a project to provide QR codes with different functionality 
 be a flexible way to disseminate information to the student body, provide location and context sensitive services for students and staff as well and 
 can be used as kick start for a desired CO (student) Community.
 
-## Features
+## Currently implemented Features
 
+### Sprint 1:
 * application startup [AC-14](https://github.com/sw21-tug/Team_08/issues/14)
 * camera scan         [AC-1](https://github.com/sw21-tug/Team_08/issues/1)
+
+### Sprint 2: 
