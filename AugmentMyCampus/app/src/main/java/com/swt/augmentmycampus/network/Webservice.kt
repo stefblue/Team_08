@@ -8,8 +8,8 @@ import java.net.URL
 
 interface Webservice {
 
-    @GET("/whitelist/{url}")
-    fun isUrlOnWhitelist(@Path("url") url: URL): Call<Boolean>
+    @GET("/verifyQrCode/{url}")
+    fun isUrlOnWhitelist(@Path("url") url: String): Call<Boolean>
 
     @GET
     fun getTextResponse(@Url url: String): Call<String>

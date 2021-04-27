@@ -1,10 +1,15 @@
 package com.swt.augmentmycampus.dependencyInjection
 
+import android.app.Application
 import androidx.viewbinding.BuildConfig
 import com.squareup.moshi.Moshi
+import com.swt.augmentmycampus.businessLogic.DataBusinessLogic
+import com.swt.augmentmycampus.businessLogic.DataBusinessLogicImpl
 import com.swt.augmentmycampus.businessLogic.UrlBusinessLogic
 import com.swt.augmentmycampus.businessLogic.UrlBusinessLogicImpl
 import com.swt.augmentmycampus.network.Webservice
+import dagger.BindsInstance
+import dagger.Component
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -51,4 +56,9 @@ object ApplicationModule {
     @Singleton
     @Provides
     fun provideUrlBusinessLogic(): UrlBusinessLogic = UrlBusinessLogicImpl()
+
+    @Singleton
+    @Provides
+    fun provideDataBusinessLogic(urlBusinessLogic: UrlBusinessLogic, webservice: Webservice): DataBusinessLogic = DataBusinessLogicImpl(urlBusinessLogic, webservice)
+
 }

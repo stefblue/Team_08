@@ -12,7 +12,6 @@ import javax.inject.Singleton
 object ConfigurationModule {
     @Singleton
     @Provides
-    //TODO set API Url
     fun provideWebserviceConfiguration(): WebserviceConfiguration =
-        WebserviceConfiguration("https://www.google.com/")
+        WebserviceConfiguration("http://10.0.2.2:8082")
 }
