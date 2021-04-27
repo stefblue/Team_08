@@ -24,16 +24,17 @@ class UserRepository implements IUserRepository {
 
     public boolean isUser(String username, String password) {
         //Function Logic without Database Queries
-        String database_username;
-        String username_password;
+        List<IUser> users = GetUsers();
 
-
-        if (username == database_username)
-        {
-            if (password == username_password)
-            {
-                return true;
+        for(IUser user : users){
+            if (username == user.GetUsername()) {
+                if (user.IsCorrectPassword(password)) {
+                    return true;
+                } else {
+                return false;
+                }
             }
         }
+        return false;
     }
 }
