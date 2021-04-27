@@ -16,4 +16,20 @@ public class UserRepositoryTests {
         boolean userIsAdmitted = userRepository.isAdmin(validAdminUsername, validAdminPassword);
         Assert.assertEquals(userIsAdmitted, true);
     }
+
+    @Test
+    public void isUser_admitsValidUser(){
+        String validUsername = "validUser";
+        String validPassword = "validUserPassword";
+        boolean userIsAdmitted = userRepository.isUser(validUsername, validPassword);
+        Assert.assertEquals(userIsAdmitted, true);
+    }
+
+    @Test
+    public void isUser_rejectsInvalidUser(){
+        String invalidUsername = "invalidUser";
+        String invalidPassword = "invalidUserPassword";
+        boolean userIsAdmitted = userRepository.isUser(invalidUsername, invalidPassword);
+        Assert.assertEquals(userIsAdmitted, false);
+    }
 }

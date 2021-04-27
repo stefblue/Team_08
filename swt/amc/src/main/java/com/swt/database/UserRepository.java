@@ -1,19 +1,25 @@
 package com.swt.database;
 
 
+import java.util.List;
+
 class UserRepository implements IUserRepository {
+
     public boolean isAdmin(String username, String password) {
-        //Function Logic without Database Queries
-        boolean admin;
-        if(isUser(username, password))
+
+        List<IUser> users = GetUsers();
+
+        for(IUser user : users)
         {
-            if(admin)
+            if(isUser(username, password))
             {
-                return true;
+                if(user.IsAdmin())
+                    return true;
+                else return false;
             }
         }
-        return false;
 
+        return false;
     }
 
     public boolean isUser(String username, String password) {
