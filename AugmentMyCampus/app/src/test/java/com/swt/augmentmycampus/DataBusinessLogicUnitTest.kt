@@ -21,8 +21,8 @@ class DataBusinessLogicUnitTest {
     @Test
     fun `test webservice response type`() {
         try {
-        var response = businessLogic.performRestCall("dummy:url");
-        assertThat(response, instanceOf(String::class.java))
+        var response = businessLogic.performRestCall("http://test.com");
+        assertThat(response.body(), instanceOf(String::class.java))
         } catch (e: Exception) {
             fail();
         }
@@ -31,29 +31,29 @@ class DataBusinessLogicUnitTest {
 
 }
 
-class MockCall : Call<Boolean> {
-    override fun enqueue(callback: Callback<Boolean>) {
+class MockCall : Call<String> {
+    override fun enqueue(callback: Callback<String>) {
         TODO("Not yet implemented")
     }
 
     override fun isExecuted(): Boolean {
-        TODO("Not yet implemented")
+        return true;
     }
 
-    override fun clone(): Call<Boolean> {
+    override fun clone(): Call<String> {
         TODO("Not yet implemented")
     }
 
     override fun isCanceled(): Boolean {
-        TODO("Not yet implemented")
+        return false;
     }
 
     override fun cancel() {
         TODO("Not yet implemented")
     }
 
-    override fun execute(): Response<Boolean> {
-        TODO("Not yet implemented")
+    override fun execute(): Response<String> {
+        return Response.success("test")
     }
 
     override fun request(): Request {
@@ -63,7 +63,7 @@ class MockCall : Call<Boolean> {
 }
 
 class MockWebservice : Webservice {
-    override fun isUrlOnWhitelist(url: String): Call<Boolean> {
+    override fun isUrlOnWhitelist(url: String): Call<String> {
         return MockCall();
     }
 

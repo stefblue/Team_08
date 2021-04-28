@@ -91,7 +91,7 @@ class DataBusinessLogicTest {
         val url = "http://www.google.com";
 
         createUrlInvalidResponse()
-        Assert.assertThrows(UrlNotWhitelistedException::class.java) { dataBusinessLogic.getTextFromUrl(url) }
+        Assert.assertThrows(CouldNotReachServerException::class.java) { dataBusinessLogic.getTextFromUrl(url) }
     }
 
     @Test
