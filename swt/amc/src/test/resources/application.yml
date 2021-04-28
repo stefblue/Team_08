@@ -2,7 +2,7 @@ server:
   port: 8082
   
 amc:
-  urlWhiteList:
-    - "bla"
-    - "bli"
-    - "blubb"
+  urlWhiteListMap:
+    bla: "https://bla.com"
+    bli: "https://bli.com"
+    blubb: "https://blubb.com"

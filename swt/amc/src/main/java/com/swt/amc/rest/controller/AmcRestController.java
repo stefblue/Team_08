@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.swt.amc.interfaces.IQRCodeLinkVerifier;
+import com.swt.amc.rest.exceptions.AmcException;
 
 @RestController
 public class AmcRestController {
@@ -14,8 +15,13 @@ public class AmcRestController {
 	private IQRCodeLinkVerifier qrCodeLinkVerifier;
 
 	@GetMapping("/verifyQrCode/{qrCodeLink}")
-	public boolean greeting(@PathVariable("qrCodeLink") final String qrCodeLink) {
-		return qrCodeLinkVerifier.isInWhiteList(qrCodeLink);
+	public String verifyQrCode(@PathVariable("qrCodeLink") final String qrCodeLink) {
+		try {
+			return qrCodeLinkVerifier.getRedirectLink(qrCodeLink);
+		} catch (AmcException e) {
+			// TODO impl
+			return "";
+		}
 	}
 
 }
