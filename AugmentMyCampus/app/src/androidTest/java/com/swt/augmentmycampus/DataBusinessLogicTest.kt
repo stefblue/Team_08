@@ -4,7 +4,6 @@ import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.IdlingResource
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import com.jakewharton.espresso.OkHttp3IdlingResource
-import com.squareup.moshi.Moshi
 import com.swt.augmentmycampus.businessLogic.*
 import com.swt.augmentmycampus.dependencyInjection.ApplicationModule
 import com.swt.augmentmycampus.dependencyInjection.ConfigurationModule
