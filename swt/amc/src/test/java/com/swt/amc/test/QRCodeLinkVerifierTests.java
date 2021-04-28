@@ -12,8 +12,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.swt.amc.exceptions.AmcException;
 import com.swt.amc.interfaces.IQRCodeLinkVerifier;
-import com.swt.amc.rest.exceptions.AmcException;
 
 @SpringBootTest
 public class QRCodeLinkVerifierTests {

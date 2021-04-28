@@ -1,6 +1,6 @@
 package com.swt.amc.interfaces;
 
-import com.swt.amc.rest.exceptions.AmcException;
+import com.swt.amc.exceptions.AmcException;
 
 public interface IQRCodeLinkVerifier {
 

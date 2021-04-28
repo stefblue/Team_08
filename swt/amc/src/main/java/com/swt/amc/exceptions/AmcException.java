@@ -1,4 +1,4 @@
-package com.swt.amc.rest.exceptions;
+package com.swt.amc.exceptions;
 
 public class AmcException extends Exception {
 
