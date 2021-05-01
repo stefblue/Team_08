@@ -22,6 +22,8 @@ class SettingsTest {
     @Before
     fun setUp() {
         Intents.init()
+        mainActivity
+        onView(withId(R.id.navigation_settings)).perform(click())
     }
 
     @After
@@ -46,6 +48,7 @@ class SettingsTest {
 
     @Test
     fun canTypeName() {
+        mainActivity
         val textToType = "Lorem ipsum dolor sit amet"
         onView(withId(R.id.fragment_settings_user)).perform(typeText(textToType))
         closeSoftKeyboard();
@@ -62,6 +65,4 @@ class SettingsTest {
         onView(withId(R.id.fragment_settings_submit)).perform(click());
         onView(withText(textToType)).check(matches(isDisplayed()))
     }
-
-
 }
