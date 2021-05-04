@@ -65,4 +65,9 @@ class SettingsTest {
         onView(withId(R.id.fragment_settings_submit)).perform(click());
         onView(withText(textToType)).check(matches(isDisplayed()))
     }
+
+    @Test
+    fun languageSelectorExists() {
+        onView(withId(R.id.fragment_settings_language)).check(matches(isDisplayed()))
+    }
 }
