@@ -8,10 +8,9 @@
     android:id="@+id/fragment_data_id">
 
     <TextView
-        android:id="@+id/textview_first"
+        android:id="@+id/fragment_data_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Data view"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
