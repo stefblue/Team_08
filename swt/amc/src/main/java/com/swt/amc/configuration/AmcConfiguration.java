@@ -1,7 +1,7 @@
 package com.swt.amc.configuration;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
@@ -10,14 +10,14 @@ import org.springframework.context.annotation.Configuration;
 @ConfigurationProperties("amc")
 public class AmcConfiguration {
 
-	private List<String> urlWhiteList = new ArrayList<String>();
+	private Map<String, String> urlWhiteListMap = new HashMap<String, String>();
 
-	public List<String> getUrlWhiteList() {
-		return urlWhiteList;
+	public Map<String, String> getUrlWhiteListMap() {
+		return urlWhiteListMap;
 	}
 
-	public void setUrlWhiteList(List<String> urlWhiteList) {
-		this.urlWhiteList = urlWhiteList;
+	public void setUrlWhiteListMap(Map<String, String> urlWhiteListMap) {
+		this.urlWhiteListMap = urlWhiteListMap;
 	}
 
 }

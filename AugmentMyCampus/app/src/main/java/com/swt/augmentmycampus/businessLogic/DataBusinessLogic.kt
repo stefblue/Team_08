@@ -1,17 +1,22 @@
 package com.swt.augmentmycampus.businessLogic
 
 import com.swt.augmentmycampus.network.Webservice
+import retrofit2.Call
+import retrofit2.Response
+import java.lang.IllegalStateException
 import java.net.URL
 import javax.inject.Inject
 import kotlin.jvm.Throws
 
 class InvalidUrlException() : Exception("Url not valid!")
-class UrlNotWhitelistedException() : Exception("Url is not on the whitelist!")
 class CouldNotReachServerException() : Exception("Server could not reached!")
 
 interface DataBusinessLogic {
-    @Throws(InvalidUrlException::class, UrlNotWhitelistedException::class, CouldNotReachServerException::class)
+    @Throws(InvalidUrlException::class)
     fun getTextFromUrl(url: String): String;
+
+    @Throws(InvalidUrlException::class)
+    fun performRestCall(url: String): Response<String>;
 }
 
 class DataBusinessLogicImpl @Inject constructor (
@@ -19,12 +24,15 @@ class DataBusinessLogicImpl @Inject constructor (
     private val webservice: Webservice
 ) : DataBusinessLogic {
 
-    override fun getTextFromUrl(url: String): String {
-        //if (!urlBusinessLogic.isValidUrlFormat(url)) throw InvalidUrlException()
+    override fun performRestCall(url: String): Response<String> {
+        return webservice.isUrlOnWhitelist(url).execute();
+    }
 
-        val urlResponse = webservice.isUrlOnWhitelist(url).execute()
+    override fun getTextFromUrl(url: String): String {
+        if (!urlBusinessLogic.isValidUrlFormat(url)) throw InvalidUrlException()
+
+        val urlResponse = performRestCall(url);
         if (!urlResponse.isSuccessful) throw CouldNotReachServerException()
-        if (urlResponse.body() !is Boolean || !(urlResponse.body() as Boolean)) throw UrlNotWhitelistedException()
 
         val textResponse = webservice.getTextResponse(url).execute()
         if (!textResponse.isSuccessful) throw CouldNotReachServerException()

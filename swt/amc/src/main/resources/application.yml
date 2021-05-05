@@ -2,7 +2,7 @@ server:
   port: 8082
 
 amc:
-  urlWhiteList:
-    - "localhost"
-    - "google.com"
-    - "gmail.com"
+  urlWhiteListMap:
+    localhost : "localhost"
+    google : "https://google.com"
+    gmail : "https://gmail.com"
