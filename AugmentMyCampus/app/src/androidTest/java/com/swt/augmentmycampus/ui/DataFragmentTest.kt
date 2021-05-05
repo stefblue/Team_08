@@ -5,8 +5,8 @@ import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
-import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.espresso.matcher.ViewMatchers
+import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.swt.augmentmycampus.MainActivity
@@ -29,5 +29,14 @@ class DataFragmentTest {
         onView(withId(R.id.navigation_data)).perform(click())
         onView(withId(R.id.fragment_data_id)).check(matches(isDisplayed()))
     }
+
+    @Test
+    fun testDataFragmentHasHeaderLabel() {
+        onView(withId(R.id.navigation_data)).perform(click())
+        onView(withId(R.id.fragment_data_id)).check(matches(isDisplayed()))
+        onView(withId(R.id.label_header)).check(matches(isDisplayed()))
+        onView(withId(R.id.label_header)).check(matches(withText("Agile Software Development")))
+    }
+
 
 }

@@ -22,7 +22,7 @@ class DataFragment : Fragment() {
         dataViewModel =
                 ViewModelProvider(this).get( DataViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_data, container, false)
-        val textView: TextView = root.findViewById(R.id.textview_first)
+        val textView: TextView = root.findViewById(R.id.label_header)
         dataViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
