@@ -38,5 +38,26 @@ class DataFragmentTest {
         onView(withId(R.id.label_header)).check(matches(withText("Agile Software Development")))
     }
 
+    @Test
+    fun testDataFragmentHasOtherLabels() {
+        onView(withId(R.id.navigation_data)).perform(click())
+        onView(withId(R.id.fragment_data_id)).check(matches(isDisplayed()))
+
+        onView(withId(R.id.label_number)).check(matches(isDisplayed()))
+        onView(withId(R.id.label_number)).check(matches(withText("Number")))
+        onView(withId(R.id.label_number_value)).check(matches(isDisplayed()))
+
+        onView(withId(R.id.label_semester)).check(matches(isDisplayed()))
+        onView(withId(R.id.label_semester)).check(matches(withText("Semester")))
+        onView(withId(R.id.label_semester_value)).check(matches(isDisplayed()))
+
+        onView(withId(R.id.label_ects)).check(matches(isDisplayed()))
+        onView(withId(R.id.label_ects)).check(matches(withText("ECTS")))
+        onView(withId(R.id.label_ects_value)).check(matches(isDisplayed()))
+
+        onView(withId(R.id.label_lecturer)).check(matches(isDisplayed()))
+        onView(withId(R.id.label_lecturer)).check(matches(withText("Lecturer")))
+        onView(withId(R.id.label_lecturer_value)).check(matches(isDisplayed()))
+    }
 
 }
