@@ -110,15 +110,15 @@ class DataBusinessLogicTest {
 
     private fun createUrlInvalidResponse() {
         mockWebServer.enqueue(MockResponse().apply {
-            setResponseCode(200)
-            setBody(moshi.adapter(Boolean::class.java).toJson(false))
+            setResponseCode(500)
+            setBody(moshi.adapter(String::class.java).toJson(""))
         })
     }
 
     private fun createUrlValidResponse() {
         mockWebServer.enqueue(MockResponse().apply {
             setResponseCode(200)
-            setBody(moshi.adapter(Boolean::class.java).toJson(true))
+            setBody(moshi.adapter(String::class.java).toJson(""))
         })
     }
 
