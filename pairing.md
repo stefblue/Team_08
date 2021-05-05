@@ -10,11 +10,11 @@
 
 | Syntax     | Fussenegger, Laurenz Caspar | Hofer, Lukas   	  | Lederer, Johannes Raphael   	  | Löbl, Florian Patrick   	  | Porsche, Niklas Daniel   	  | Sartory, Alexander  	  | Wachter, Florian   	  | Ziegler, Kirsten-Stefanie   	  |
 | :---        |    :----:   |    :----:   |    :----:   |    :----:   |    :----:   |    :----:   |    :----:   |    :----:   |
-| Fussenegger, Laurenz Caspar       | 04:00           | HH:MM       | 11:00       | HH:MM       | HH:MM       | HH:MM       | HH:MM       | HH:MM       |
-| Hofer, Lukas      | HH:MM       | X           | HH:MM       | HH:MM       | HH:MM       | 15:00       | HH:MM       | HH:MM       |
-|Lederer, Johannes Raphael       | 11:00       | HH:MM       | 04:00           | HH:MM       | HH:MM       | HH:MM       | HH:MM       | HH:MM       |
-| Löbl, Florian Patrick       | HH:MM       | HH:MM       | HH:MM       | X           | HH:MM       | 01:00       | 15:00       | HH:MM       |
-| Porsche, Niklas Daniel       | HH:MM       | HH:MM       | HH:MM       | HH:MM       | X           | HH:MM       | HH:MM       | 12:00       |
-| Sartory, Alexander       | HH:MM       | 15:00       | HH:MM       | 01:00       | HH:MM       | X           | HH:MM       | HH:MM       |
-| Wachter, Florian       | HH:MM       | HH:MM       | HH:MM       | 15:00       | HH:MM       | HH:MM       | X           | HH:MM       |
-| Ziegler, Kirsten-Stefanie       | HH:MM       | HH:MM       | HH:MM       | HH:MM       | 12:00       | HH:MM       | HH:MM       | X           |
+| Fussenegger, Laurenz Caspar       | 04:00           | HH:MM       | 11:00       | HH:MM       | 06:00       | HH:MM       | HH:MM       | HH:MM       |
+| Hofer, Lukas      | HH:MM       | X           | HH:MM       | HH:MM       | HH:MM       | 15:00       | 06:00       | HH:MM       |
+|Lederer, Johannes Raphael       | 11:00       | HH:MM       | 04:00           | HH:MM       | HH:MM       | HH:MM       | HH:MM       | 06:00       |
+| Löbl, Florian Patrick       | HH:MM       | HH:MM       | HH:MM       | X           | HH:MM       | 07:00       | 15:00       | HH:MM       |
+| Porsche, Niklas Daniel       | 06:00       | HH:MM       | HH:MM       | HH:MM       | X           | HH:MM       | HH:MM       | 12:00       |
+| Sartory, Alexander       | HH:MM       | 15:00       | HH:MM       | 07:00       | HH:MM       | X           | HH:MM       | HH:MM       |
+| Wachter, Florian       | HH:MM       | 06:00       | HH:MM       | 15:00       | HH:MM       | HH:MM       | X           | HH:MM       |
+| Ziegler, Kirsten-Stefanie       | HH:MM       | HH:MM       | 06:00       | HH:MM       | 12:00       | HH:MM       | HH:MM       | X           |
