@@ -13,7 +13,7 @@
         android:layout_height="48dp"
         android:layout_marginStart="156dp"
         android:layout_marginTop="340dp"
-        android:text="@string/scan"
+        android:text="@string/scanBtn"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

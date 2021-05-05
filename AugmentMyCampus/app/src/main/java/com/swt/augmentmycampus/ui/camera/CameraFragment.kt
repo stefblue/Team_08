@@ -82,9 +82,8 @@ class CameraFragment : Fragment() {
             }
             catch (ex: Exception) {
                 Log.e("cannot process qrcode: ", ex.toString());
-                Toast.makeText(context, ex.message, Toast.LENGTH_LONG).show()
+                Toast.makeText(context, ex.toString(), Toast.LENGTH_LONG).show()
             }
-
         } else {
             super.onActivityResult(requestCode, resultCode, data)
         }
