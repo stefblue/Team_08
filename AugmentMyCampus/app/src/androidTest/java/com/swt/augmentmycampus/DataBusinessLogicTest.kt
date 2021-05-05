@@ -4,7 +4,6 @@ import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.IdlingResource
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import com.jakewharton.espresso.OkHttp3IdlingResource
-import com.squareup.moshi.Moshi
 import com.swt.augmentmycampus.businessLogic.*
 import com.swt.augmentmycampus.dependencyInjection.ApplicationModule
 import com.swt.augmentmycampus.dependencyInjection.ConfigurationModule
@@ -92,7 +91,7 @@ class DataBusinessLogicTest {
         val url = "http://www.google.com";
 
         createUrlInvalidResponse()
-        Assert.assertThrows(UrlNotWhitelistedException::class.java) { dataBusinessLogic.getTextFromUrl(url) }
+        Assert.assertThrows(CouldNotReachServerException::class.java) { dataBusinessLogic.getTextFromUrl(url) }
     }
 
     @Test
@@ -111,15 +110,15 @@ class DataBusinessLogicTest {
 
     private fun createUrlInvalidResponse() {
         mockWebServer.enqueue(MockResponse().apply {
-            setResponseCode(200)
-            setBody(moshi.adapter(Boolean::class.java).toJson(false))
+            setResponseCode(500)
+            setBody(moshi.adapter(String::class.java).toJson(""))
         })
     }
 
     private fun createUrlValidResponse() {
         mockWebServer.enqueue(MockResponse().apply {
             setResponseCode(200)
-            setBody(moshi.adapter(Boolean::class.java).toJson(true))
+            setBody(moshi.adapter(String::class.java).toJson(""))
         })
     }
 
