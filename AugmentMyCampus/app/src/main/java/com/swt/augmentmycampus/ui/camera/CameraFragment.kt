@@ -59,9 +59,9 @@ class CameraFragment : Fragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
-        Log.i("scanned: ", result.contents)
 
         if (result != null && result.contents != null) {
+            Log.i("scanned: ", result.contents)
             Toast.makeText(context, getString(R.string.scanned) + " "
                     + result.contents, Toast.LENGTH_SHORT).show()
             try {
@@ -71,9 +71,6 @@ class CameraFragment : Fragment() {
                 requireActivity().findNavController(R.id.nav_host_fragment).navigate(action)
 
             } catch (ex: InvalidUrlException) {
-                Log.e("ex", ex.toString());
-                Toast.makeText(context, getString(R.string.error_invalid_url), Toast.LENGTH_LONG).show()
-            } catch (ex: UrlNotWhitelistedException) {
                 Log.e("ex", ex.toString());
                 Toast.makeText(context, getString(R.string.error_invalid_url), Toast.LENGTH_LONG).show()
             } catch (ex: CouldNotReachServerException) {

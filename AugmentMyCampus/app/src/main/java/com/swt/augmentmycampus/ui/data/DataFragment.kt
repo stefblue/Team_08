@@ -12,7 +12,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.swt.augmentmycampus.R
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DataFragment : Fragment() {
 
     private lateinit var dataViewModel: DataViewModel
