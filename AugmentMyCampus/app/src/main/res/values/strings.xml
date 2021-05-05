@@ -18,17 +18,22 @@
 
     <string name="acknowledge">OK</string>
     <string name="error">Error</string>
-    <string name="qr_code_invalid">"Could not scan QR code."</string>
-
+    <string name="qr_code_invalid">Could not scan QR code</string>
+    <string name="scan_info">scanning for QR-code...</string>
+    <string name="scanned">scanned </string>
 
     <string name="title_camera">Camera</string>
     <string name="title_data">Data</string>
     <string name="title_settings">Settings</string>
-
 
     <string name="placeholder_fragment_settings_user">Username</string>
     <string name="placeholder_fragment_settings_password">Password</string>
     <string name="text_fragment_settings_submit">Login</string>
     <string name="scan">Scan</string>
     <string name="back">Back</string>
+
+    <string name="error_default_msg">an error occurred</string>
+    <string name="error_invalid_url">this qr code is not supported</string>
+    <string name="error_no_connection">no connection to server</string>
+
 </resources>

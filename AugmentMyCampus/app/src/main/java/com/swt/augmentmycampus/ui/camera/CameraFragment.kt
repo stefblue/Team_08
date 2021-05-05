@@ -1,130 +1,93 @@
 package com.swt.augmentmycampus.ui.camera
 
-import android.Manifest
-import android.app.AlertDialog
-import android.content.pm.PackageManager
+import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.sax.RootElement
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
-import com.google.zxing.Result
+import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
+import com.google.zxing.integration.android.IntentIntegrator
 import com.swt.augmentmycampus.R
-import com.swt.augmentmycampus.businessLogic.CouldNotReachServerException
-import com.swt.augmentmycampus.businessLogic.DataBusinessLogic
-import com.swt.augmentmycampus.businessLogic.InvalidUrlException
-import com.swt.augmentmycampus.businessLogic.UrlNotWhitelistedException
+import com.swt.augmentmycampus.businessLogic.*
+import com.swt.augmentmycampus.network.Webservice
 import com.swt.augmentmycampus.ui.data.DataFragment
-import me.dm7.barcodescanner.zxing.ZXingScannerView
-import java.lang.Exception
+import com.swt.augmentmycampus.ui.data.DataFragmentArgs
+import com.swt.augmentmycampus.ui.data.DataViewModel
+import com.swt.augmentmycampus.ui.settings.SettingsFragment
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
+class CameraFragment : Fragment() {
 
-class CameraFragment : Fragment(), ZXingScannerView.ResultHandler {
-
-    /*
-    @Inject
-    lateinit var dataBusinessLogic: DataBusinessLogic
-    */
     private lateinit var cameraViewModel: CameraViewModel
-    private lateinit var mainActivity: FragmentActivity;
-
-    private var mScannerView: ZXingScannerView? = null
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        cameraViewModel =
-                ViewModelProvider(this).get(CameraViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_camera, container, false)
-        mainActivity = requireActivity()
+        cameraViewModel = ViewModelProvider(this).get(CameraViewModel::class.java)
 
         val scanButton: Button = root.findViewById(R.id.scanButton) as Button
         scanButton.setOnClickListener(View.OnClickListener { scanButtonClick() })
-
-        //val backButton: Button = root.findViewById(R.id.backButton) as Button
-        //backButton.setOnClickListener(View.OnClickListener { backButtonClick() })
 
         return root
     }
 
     private fun scanButtonClick() {
         Log.i("MainActivity", "scanButtonClick")
-        if (ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.CAMERA)
-                == PackageManager.PERMISSION_DENIED) {
-            var list = Array(1) { Manifest.permission.CAMERA};
-            ActivityCompat.requestPermissions(mainActivity, list, 0)
-        }
-        mScannerView = ZXingScannerView(mainActivity) // Programmatically initialize the scanner view
-        mainActivity.setContentView(mScannerView) // Set the scanner view as the content view
-        mScannerView!!.setResultHandler(this) // Register ourselves as a handler for scan results.
-        mScannerView!!.startCamera() // Start camera on resume
 
-        val delayedBackButtonAddHandler = Handler()
-        delayedBackButtonAddHandler.postDelayed({ handleBackButton() }, 500)
+        val intentIntegrator = IntentIntegrator.forSupportFragment(this)
+        intentIntegrator.setBeepEnabled(false)
+        intentIntegrator.setCameraId(0)
+        intentIntegrator.setPrompt(getString(R.string.scan_info))
+        intentIntegrator.setBarcodeImageEnabled(false)
+        intentIntegrator.setOrientationLocked(true);
 
-        val delayedCloseCameraViewHandler = Handler()
-        delayedCloseCameraViewHandler.postDelayed({
-            Log.i("MainActivity", "camera timeout")
-
-            val builder = AlertDialog.Builder(mainActivity)
-            with(builder) {
-                setTitle(R.string.error)
-                setMessage(R.string.qr_code_invalid)
-                setNeutralButton(R.string.acknowledge, null)
-                show()
-            }
-        }, 5000)
+        intentIntegrator.initiateScan()
     }
 
-    private fun handleBackButton() {
-        // delay to wait for camera preview View
-        // last added child to FrameLayout is on top
-        // we need to make sure that the back-button is on top
-        val factory = LayoutInflater.from(mainActivity)
-        val myView: View = factory.inflate(R.layout.backbutton, null)
-        mScannerView!!.addView(myView)
-    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
+        Log.i("scanned: ", result.contents)
 
-    override fun handleResult(rawResult: Result?) {
-        mScannerView!!.stopCamera()
-        if (rawResult != null) {
-
-            val fragment: Fragment = DataFragment()
-            val fm: FragmentManager = mainActivity.getSupportFragmentManager()
-            val transaction: FragmentTransaction = fm.beginTransaction()
-            transaction.replace(R.id.fragment_data_id, fragment)
-            transaction.commit()
-
-            Log.i("Scanned QR code data", rawResult.text)
-
+        if (result != null && result.contents != null) {
+            Toast.makeText(context, getString(R.string.scanned) + " "
+                    + result.contents, Toast.LENGTH_SHORT).show()
             try {
-                var resultText = ""//dataBusinessLogic.getTextFromUrl(rawResult.text);
-                var displayDataTextView: TextView = mainActivity.findViewById(R.id.fragment_data_text);
-                displayDataTextView.text = resultText;
-            } catch (ex: Exception) {
-                Log.i("CameraFragment", ex.toString())
-                val builder = AlertDialog.Builder(mainActivity)
-                with(builder) {
-                    setTitle(R.string.error)
-                    setMessage(ex.message)
-                    setNeutralButton(R.string.acknowledge, null)
-                    show()
-                }
+                var resultText = cameraViewModel.getTextData(result.contents); // get data from BL
+
+                val action = CameraFragmentDirections.actionNavigationCameraToNavigationData(resultText)
+                requireActivity().findNavController(R.id.nav_host_fragment).navigate(action)
+
+            } catch (ex: InvalidUrlException) {
+                Log.e("ex", ex.toString());
+                Toast.makeText(context, getString(R.string.error_invalid_url), Toast.LENGTH_LONG).show()
+            } catch (ex: UrlNotWhitelistedException) {
+                Log.e("ex", ex.toString());
+                Toast.makeText(context, getString(R.string.error_invalid_url), Toast.LENGTH_LONG).show()
+            } catch (ex: CouldNotReachServerException) {
+                Log.e("ex", ex.toString());
+                Toast.makeText(context, getString(R.string.error_no_connection), Toast.LENGTH_LONG).show()
             }
+            catch (ex: Exception) {
+                Log.e("cannot process qrcode: ", ex.toString());
+                Toast.makeText(context, ex.message, Toast.LENGTH_LONG).show()
+            }
+
+        } else {
+            super.onActivityResult(requestCode, resultCode, data)
         }
     }
+
 }

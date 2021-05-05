@@ -1,13 +1,11 @@
 package com.swt.augmentmycampus.ui.data
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class DataViewModel : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is data Fragment"
+class DataViewModel : ViewModel() {
+    val dataText: MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
     }
-    val text: LiveData<String> = _text
 }

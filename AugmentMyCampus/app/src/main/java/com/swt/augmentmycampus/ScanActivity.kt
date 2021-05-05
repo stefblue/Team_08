@@ -1,12 +1,14 @@
 package com.swt.augmentmycampus
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -52,12 +54,8 @@ class ScanActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
         // last added child to FrameLayout is on top
         // we need to make sure that the back-button is on top
         val factory = LayoutInflater.from(this)
-        val myView: View = factory.inflate(R.layout.backbutton, null)
-        mScannerView!!.addView(myView)
-    }
-
-    public fun backButtonClick(view: View) {
-        handleResult(null)
+        val view: View = factory.inflate(R.layout.backbutton, null)
+        mScannerView!!.addView(view)
     }
 
     override fun handleResult(rawResult: Result?) {
@@ -68,5 +66,9 @@ class ScanActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
             var textView: TextView = findViewById(R.id.qrCodeText);
             textView.text = rawResult.text;
         }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
     }
 }

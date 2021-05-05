@@ -10,7 +10,7 @@ class UrlNotWhitelistedException() : Exception("Url is not on the whitelist!")
 class CouldNotReachServerException() : Exception("Server could not reached!")
 
 interface DataBusinessLogic {
-    @Throws(InvalidUrlException::class)
+    @Throws(InvalidUrlException::class, UrlNotWhitelistedException::class, CouldNotReachServerException::class)
     fun getTextFromUrl(url: String): String;
 }
 
