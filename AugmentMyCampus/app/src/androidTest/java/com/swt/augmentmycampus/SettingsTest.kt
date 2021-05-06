@@ -8,23 +8,34 @@ import androidx.test.espresso.intent.Intents
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.swt.augmentmycampus.ui.LocaleManager
+import dagger.hilt.android.testing.HiltAndroidRule
+import dagger.hilt.android.testing.HiltAndroidTest
 import org.hamcrest.CoreMatchers.*
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import javax.inject.Inject
 
+@HiltAndroidTest
 @RunWith(AndroidJUnit4::class)
 class SettingsTest {
+    @Inject
+    lateinit var localeManager: LocaleManager
 
-    @get:Rule
+    @get:Rule(order = 0)
+    var hiltRule: HiltAndroidRule = HiltAndroidRule(this)
+
+    @get:Rule(order = 1)
     var mainActivity: ActivityScenarioRule<MainActivity>
             = ActivityScenarioRule(MainActivity::class.java)
 
     @Before
     fun setUp() {
         Intents.init()
+        hiltRule.inject()
         mainActivity
         onView(withId(R.id.navigation_settings)).perform(click())
     }
@@ -72,6 +83,16 @@ class SettingsTest {
     @Test
     fun languageSelectorExists() {
         onView(withId(R.id.fragment_settings_language)).check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun languageLabelExists() {
+        var language = "Language"
+        when (localeManager.language) {
+            "en" -> language = "Language"
+            "ru" -> language = "Язык"
+        }
+        onView(withText(language)).check(matches(isDisplayed()))
     }
 
     @Test
