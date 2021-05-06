@@ -25,6 +25,7 @@
     <string name="placeholder_fragment_settings_password">Password</string>
     <string name="text_fragment_settings_submit">Login</string>
 
+    <string name="settings_language">Language</string>
     <string-array name="availableLanguages">
         <item>English</item>
         <item>Pусский</item>
