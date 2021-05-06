@@ -1,23 +1,25 @@
 package com.swt.amc.configuration;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
+
+import com.swt.amc.api.LectureInformation;
 
 @Configuration
 @ConfigurationProperties("amc")
 public class AmcConfiguration {
 
-	private List<String> urlWhiteList = new ArrayList<String>();
+	private Map<String, LectureInformation> urlWhiteListMap = new HashMap<String, LectureInformation>();
 
-	public List<String> getUrlWhiteList() {
-		return urlWhiteList;
+	public Map<String, LectureInformation> getUrlWhiteListMap() {
+		return urlWhiteListMap;
 	}
 
-	public void setUrlWhiteList(List<String> urlWhiteList) {
-		this.urlWhiteList = urlWhiteList;
+	public void setUrlWhiteListMap(Map<String, LectureInformation> urlWhiteListMap) {
+		this.urlWhiteListMap = urlWhiteListMap;
 	}
 
 }

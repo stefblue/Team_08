@@ -1,5 +1,11 @@
 package com.swt.amc.interfaces;
 
+import com.swt.amc.api.LectureInformation;
+import com.swt.amc.exceptions.AmcException;
+
 public interface IQRCodeLinkVerifier {
-	boolean isInWhiteList(String qrCodeLink);
+
+	String getRedirectLink(String qrCodeLink) throws AmcException;
+
+	LectureInformation getLectureInformation(String qrCodeLink) throws AmcException;
 }

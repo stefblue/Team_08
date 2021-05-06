@@ -34,3 +34,5 @@ can be used as kick start for a desired CO (student) Community.
 * camera scan         [AC-1](https://github.com/sw21-tug/Team_08/issues/1)
 
 ### Sprint 2: 
+* login UI components [AC-16](https://github.com/sw21-tug/Team_08/issues/20)
+* Navigationbar [AC-15](https://github.com/sw21-tug/Team_08/issues/19) 
