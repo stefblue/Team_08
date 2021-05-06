@@ -70,4 +70,17 @@ class SettingsTest {
     fun languageSelectorExists() {
         onView(withId(R.id.fragment_settings_language)).check(matches(isDisplayed()))
     }
+
+    @Test
+    fun languageSelectorHasTwoLanguages() {
+        val english = "English"
+        onView(withId(R.id.fragment_settings_language)).perform(click())
+        onData(allOf(`is`(instanceOf(String::class.java)), `is`(english))).perform(click())
+        onView(withId(R.id.fragment_settings_language)).check(matches(withSpinnerText(english)))
+
+        val russian = "Pусский"
+        onView(withId(R.id.fragment_settings_language)).perform(click())
+        onData(allOf(`is`(instanceOf(String::class.java)), `is`(russian))).perform(click())
+        onView(withId(R.id.fragment_settings_language)).check(matches(withSpinnerText(russian)))
+    }
 }
