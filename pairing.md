@@ -8,13 +8,13 @@
 * Dev 7: Wachter, Florian
 * Dev 8: Ziegler, Kirsten-Stefanie
 
-| Syntax      | Dev 1   	  | Dev 2   	  | Dev 3   	  | Dev 4   	  | Dev 5   	  | Dev 6   	  | Dev 7   	  | Dev 8   	  |
+| Syntax     | Fussenegger, Laurenz Caspar | Hofer, Lukas   	  | Lederer, Johannes Raphael   	  | Löbl, Florian Patrick   	  | Porsche, Niklas Daniel   	  | Sartory, Alexander  	  | Wachter, Florian   	  | Ziegler, Kirsten-Stefanie   	  |
 | :---        |    :----:   |    :----:   |    :----:   |    :----:   |    :----:   |    :----:   |    :----:   |    :----:   |
-| Dev 1       | X           | HH:MM       | HH:MM       | HH:MM       | HH:MM       | HH:MM       | HH:MM       | HH:MM       |
-| Dev 2       | HH:MM       | X           | HH:MM       | HH:MM       | HH:MM       | HH:MM       | HH:MM       | HH:MM       |
-| Dev 3       | HH:MM       | HH:MM       | X           | HH:MM       | HH:MM       | HH:MM       | HH:MM       | HH:MM       |
-| Dev 4       | HH:MM       | HH:MM       | HH:MM       | X           | HH:MM       | HH:MM       | HH:MM       | HH:MM       |
-| Dev 5       | HH:MM       | HH:MM       | HH:MM       | HH:MM       | X           | HH:MM       | HH:MM       | HH:MM       |
-| Dev 6       | HH:MM       | HH:MM       | HH:MM       | HH:MM       | HH:MM       | X           | HH:MM       | HH:MM       |
-| Dev 7       | HH:MM       | HH:MM       | HH:MM       | HH:MM       | HH:MM       | HH:MM       | X           | HH:MM       |
-| Dev 8       | HH:MM       | HH:MM       | HH:MM       | HH:MM       | HH:MM       | HH:MM       | HH:MM       | X           |
+| Fussenegger, Laurenz Caspar       | 04:00           | HH:MM       | 11:00       | HH:MM       | 14:00       | HH:MM       | HH:MM       | HH:MM       |
+| Hofer, Lukas      | HH:MM       | X           | HH:MM       | 08:00       | HH:MM       | 15:00       | 06:00       | HH:MM       |
+|Lederer, Johannes Raphael       | 11:00       | HH:MM       | 04:00           | HH:MM       | HH:MM       | HH:MM       | HH:MM       | 14:00       |
+| Löbl, Florian Patrick       | HH:MM       | 08:00       | HH:MM       | X           | HH:MM       | 07:00       | 15:00       | HH:MM       |
+| Porsche, Niklas Daniel       | 14:00       | HH:MM       | HH:MM       | HH:MM       | X           | HH:MM       | HH:MM       | 12:00       |
+| Sartory, Alexander       | HH:MM       | 15:00       | HH:MM       | 07:00       | HH:MM       | X           | 08:00       | HH:MM       |
+| Wachter, Florian       | HH:MM       | 06:00       | HH:MM       | 15:00       | HH:MM       | 08:00       | X           | HH:MM       |
+| Ziegler, Kirsten-Stefanie       | HH:MM       | HH:MM       | 14:00       | HH:MM       | 12:00       | HH:MM       | HH:MM       | X           |

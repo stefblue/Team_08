@@ -28,4 +28,10 @@
     <string name="error_invalid_url">this qr code is not supported</string>
     <string name="error_no_connection">no connection to server</string>
 
+    <string name="settings_language">Language</string>
+    <string-array name="availableLanguages">
+        <item>English</item>
+        <item>Pусский</item>
+    </string-array>
+
 </resources>
