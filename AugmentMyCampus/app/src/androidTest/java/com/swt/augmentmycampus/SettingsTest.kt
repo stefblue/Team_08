@@ -107,4 +107,28 @@ class SettingsTest {
         onData(allOf(`is`(instanceOf(String::class.java)), `is`(russian))).perform(click())
         onView(withId(R.id.fragment_settings_language)).check(matches(withSpinnerText(russian)))
     }
+
+    @Test
+    fun languageCanSwitchToEnglish() {
+        val languageName = "English"
+        val language = "Language"
+
+        onView(withId(R.id.fragment_settings_language)).perform(click())
+        onData(allOf(`is`(instanceOf(String::class.java)), `is`(languageName))).perform(click())
+        onView(withId(R.id.fragment_settings_language)).check(matches(withSpinnerText(languageName)))
+
+        onView(withId(R.id.settings_language_label)).check(matches(withText(language)))
+    }
+
+    @Test
+    fun languageCanSwitchToRussian() {
+        val languageName = "Pусский"
+        val language = "Язык"
+
+        onView(withId(R.id.fragment_settings_language)).perform(click())
+        onData(allOf(`is`(instanceOf(String::class.java)), `is`(languageName))).perform(click())
+        onView(withId(R.id.fragment_settings_language)).check(matches(withSpinnerText(languageName)))
+
+        onView(withId(R.id.settings_language_label)).check(matches(withText(language)))
+    }
 }
