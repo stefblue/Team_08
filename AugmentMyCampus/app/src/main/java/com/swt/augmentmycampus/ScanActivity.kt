@@ -12,9 +12,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.zxing.Result
+import dagger.hilt.android.AndroidEntryPoint
 import me.dm7.barcodescanner.zxing.ZXingScannerView
 
-class ScanActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
+@AndroidEntryPoint
+class ScanActivity : BaseActivity(), ZXingScannerView.ResultHandler {
 
     private var mScannerView: ZXingScannerView? = null
 
@@ -26,7 +28,7 @@ class ScanActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
     public fun scanButtonClick(view: View) {
         Log.i("MainActivity", "scanButtonClick")
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
-            == PackageManager.PERMISSION_DENIED) {
+                == PackageManager.PERMISSION_DENIED) {
             var list = Array(1) {Manifest.permission.CAMERA};
             ActivityCompat.requestPermissions(this, list, 0);
         }

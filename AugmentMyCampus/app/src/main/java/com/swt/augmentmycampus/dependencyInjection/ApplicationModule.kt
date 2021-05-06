@@ -1,5 +1,7 @@
 package com.swt.augmentmycampus.dependencyInjection
 
+import android.app.Application
+import android.content.Context
 import androidx.viewbinding.BuildConfig
 import com.squareup.moshi.Moshi
 import com.swt.augmentmycampus.ui.LocaleManager
@@ -11,6 +13,7 @@ import com.swt.augmentmycampus.network.Webservice
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -34,11 +37,11 @@ object ApplicationModule {
     @Provides
     fun provideWebservice(okHttpClient: OkHttpClient, moshi: Moshi, webserviceConfiguration: WebserviceConfiguration): Webservice {
         return Retrofit.Builder()
-            .client(okHttpClient)
-            .baseUrl(webserviceConfiguration.baseUrl)
-            .addConverterFactory(MoshiConverterFactory.create(moshi))
-            .build()
-            .create(Webservice::class.java)
+                .client(okHttpClient)
+                .baseUrl(webserviceConfiguration.baseUrl)
+                .addConverterFactory(MoshiConverterFactory.create(moshi))
+                .build()
+                .create(Webservice::class.java)
     }
 
     @Singleton
@@ -61,5 +64,5 @@ object ApplicationModule {
 
     @Singleton
     @Provides
-    fun provideLocalManager(): LocaleManager = LocaleManager()
+    fun provideLocalManager(@ApplicationContext context: Context): LocaleManager = LocaleManager(context)
 }
