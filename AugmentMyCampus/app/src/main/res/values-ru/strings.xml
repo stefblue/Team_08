@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Расширьте мой кампус</string>
+    <string name="action_settings">Настройки</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">Первый фрагмент</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Привет первый фрагмент</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="title_activity_main">MainActivity</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Привет, Square World!</string>
+
+    <string name="title_camera">Camera</string>
+    <string name="title_data">Камера</string>
+    <string name="title_settings">Настройки</string>
+
+
+    <string name="placeholder_fragment_settings_user">Имя пользователя</string>
+    <string name="placeholder_fragment_settings_password">Пароль</string>
+    <string name="text_fragment_settings_submit">Авторизоваться</string>
+
+    <string name="settings_language">Язык</string>
+</resources>
