@@ -6,8 +6,9 @@ public class LectureInformation {
 	private String number;
 	private String semester;
 	private Integer ects;
-	private String Lecturer;
-	private String Content;
+	private String lecturer;
+	private String content;
+	private String link;
 
 	public LectureInformation() {
 
@@ -46,19 +47,27 @@ public class LectureInformation {
 	}
 
 	public String getLecturer() {
-		return Lecturer;
+		return lecturer;
 	}
 
 	public void setLecturer(String lecturer) {
-		Lecturer = lecturer;
+		this.lecturer = lecturer;
 	}
 
 	public String getContent() {
-		return Content;
+		return content;
 	}
 
 	public void setContent(String content) {
-		Content = content;
+		this.content = content;
+	}
+
+	public String getLink() {
+		return link;
+	}
+
+	public void setLink(String link) {
+		this.link = link;
 	}
 
 }

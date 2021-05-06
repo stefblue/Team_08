@@ -59,7 +59,7 @@ public class QRCodeLinkVerifierTests {
 		}
 		int i = 0;
 		for (LectureInformation li : lectureInformations) {
-			assertEquals(i + 1, Integer.parseInt(li.getNumber()));
+			assertEquals(String.format("Number.%d", i + 1), li.getNumber());
 			i++;
 		}
 	}
@@ -70,7 +70,7 @@ public class QRCodeLinkVerifierTests {
 		assertEquals("Content", li.getContent());
 		assertEquals(5, li.getEcts());
 		assertEquals("Dr. Super Lecturer", li.getLecturer());
-		assertEquals("Nummer.42", li.getNumber());
+		assertEquals("Number.1", li.getNumber());
 		assertEquals("SS", li.getSemester());
 		assertEquals("Title", li.getTitle());
 
