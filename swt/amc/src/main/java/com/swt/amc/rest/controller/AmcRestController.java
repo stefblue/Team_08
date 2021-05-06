@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.swt.amc.api.LectureInformation;
 import com.swt.amc.exceptions.AmcException;
 import com.swt.amc.interfaces.IQRCodeLinkVerifier;
 
@@ -20,9 +21,10 @@ public class AmcRestController {
 	private IQRCodeLinkVerifier qrCodeLinkVerifier;
 
 	@GetMapping("/verifyQrCode/{qrCodeLink}")
-	public ResponseEntity<String> verifyQrCodeViaApp(@PathVariable("qrCodeLink") final String qrCodeLink)
+	public ResponseEntity<LectureInformation> verifyQrCodeViaApp(@PathVariable("qrCodeLink") final String qrCodeLink)
 			throws AmcException {
-		return new ResponseEntity<String>(qrCodeLinkVerifier.getRedirectLink(qrCodeLink), HttpStatus.OK);
+		return new ResponseEntity<LectureInformation>(qrCodeLinkVerifier.getLectureInformation(qrCodeLink),
+				HttpStatus.OK);
 	}
 
 	@GetMapping("/verifyQrCodeNoApp/{qrCodeLink}")

@@ -3,6 +3,38 @@ server:
 
 amc:
   urlWhiteListMap:
-    localhost : "localhost"
-    google : "https://google.com"
-    gmail : "https://gmail.com"
+    ags:
+      title: "Agile Software Development"
+      number: "INH.04062UF"
+      semester: "Summer semester 2021"
+      ects: 5
+      lecturer: "Slany, Wolfgang"
+      content: |
+        Successful organization of software development projects with special consideration of knowledge management aspects. The course emphasises agile methods, in particular extreme programming, and their relation to informal techniques in requirements analysis, design, implementation and validation of software.
+
+        The focus of the exercise part is placed on the software development methodology for mobile Android applications, e.g., the technical quality regarding the testability and maintainability of the software. The practical work takes place in teams of 5-8 students, whereas no devices can be made available by the university, and therefore participants need to bring their own hardware.
+      link: "https://online.tugraz.at/tug_online/pl/ui/$ctx/wbLv.wbShowLVDetail?pStpSpNr=235434&pSpracheNr=2"
+    st:
+      title: "Software Technology"
+      number: "INP.33172UF"
+      semester: "Summer semester 2021"
+      ects: 5
+      lecturer: "Slany, Wolfgang & Kutschera, Stefan"
+      content: |  
+        This course covers modern techniques and methods in the software development process. In particular, established techniques are presented that help students in a practical way to overcome the complexity of software development. The course emphasises agile methods, in particular extreme programming, and their relation to informal techniques in requirements analysis, design, implementation, and validation of software.
+
+        The focus of the exercise part is placed on the software development methodology for mobile Android applications, e.g., the technical quality regarding the testability and maintainability of the software. The practical work takes place in teams of 5-8 students. No devices can be made available by the university, and therefore participants need to bring their own hardware.
+      link: "https://online.tugraz.at/tug_online/pl/ui/$ctx/wbLv.wbShowLVDetail?pStpSpNr=236781&pSpracheNr=2"
+    ma:
+      title: "Mobile Applications"
+      number: "INP.32600UF"
+      semester: "Summer semester 2021"
+      ects: 5
+      lecturer: "Slany, Wolfgang & Krnjic, Vesna"
+      content: |
+        The aim of the course is the study of mobile application development for Android smartphones.
+
+        The practical work takes place in teams consisting of 5-8 students. No devices can be made available by the university, and therefore participants need to bring their own hardware.
+
+        The focus of the exercise part is placed on the software development methodology for mobile applications, e.g., the technical quality regarding the testability and maintainability of the software, but also the usability of the applications.
+      link: "https://online.tugraz.at/tug_online/pl/ui/$ctx/wbLv.wbShowLVDetail?pStpSpNr=238227&pSpracheNr=2"
