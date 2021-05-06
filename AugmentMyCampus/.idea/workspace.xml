@@ -42,13 +42,9 @@
   <component name="ChangeListManager">
     <list default="true" id="e730fd7d-d332-4170-873c-a92563bee440" name="Default Changelist" comment="AC-18 added test to check if languages are selectable [FL,PN]">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/swt/augmentmycampus/LinkVerifierActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/swt/augmentmycampus/LinkVerifierActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/swt/augmentmycampus/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/swt/augmentmycampus/MainActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/swt/augmentmycampus/ScanActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/swt/augmentmycampus/ScanActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/swt/augmentmycampus/dependencyInjection/ApplicationModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/swt/augmentmycampus/dependencyInjection/ApplicationModule.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/swt/augmentmycampus/ui/LocaleManager.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/swt/augmentmycampus/ui/LocaleManager.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/swt/augmentmycampus/ui/settings/SettingsFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/swt/augmentmycampus/ui/settings/SettingsFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/androidTest/java/com/swt/augmentmycampus/DataBusinessLogicTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/androidTest/java/com/swt/augmentmycampus/DataBusinessLogicTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/androidTest/java/com/swt/augmentmycampus/NavigationBarTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/androidTest/java/com/swt/augmentmycampus/NavigationBarTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/androidTest/java/com/swt/augmentmycampus/QRCodeScannerTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/androidTest/java/com/swt/augmentmycampus/QRCodeScannerTest.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/test/java/com/swt/augmentmycampus/WebserviceUnitTest.kt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -516,29 +512,29 @@
     </state>
     <state x="741" y="276" key="FileChooserDialogImpl/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1619538805200" />
     <state x="741" y="276" key="FileChooserDialogImpl/0.0.1920.1040/3840.0.1280.680@0.0.1920.1040" timestamp="1618408536787" />
-    <state width="1876" height="309" key="GridCell.Tab.0.bottom" timestamp="1620308364096">
+    <state width="1876" height="309" key="GridCell.Tab.0.bottom" timestamp="1620308686066">
       <screen x="1251" y="-1212" width="1920" height="1160" />
     </state>
     <state width="1877" height="234" key="GridCell.Tab.0.bottom/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1619540641295" />
-    <state width="1876" height="309" key="GridCell.Tab.0.bottom/0.0.1463.783/-669.-1200.1920.1160/1251.-1212.1920.1160@1251.-1212.1920.1160" timestamp="1620308364096" />
+    <state width="1876" height="309" key="GridCell.Tab.0.bottom/0.0.1463.783/-669.-1200.1920.1160/1251.-1212.1920.1160@1251.-1212.1920.1160" timestamp="1620308686066" />
     <state width="1875" height="320" key="GridCell.Tab.0.bottom/0.0.1920.1040/3840.0.1280.680@0.0.1920.1040" timestamp="1618654629982" />
-    <state width="1876" height="309" key="GridCell.Tab.0.center" timestamp="1620308364096">
+    <state width="1876" height="309" key="GridCell.Tab.0.center" timestamp="1620308686066">
       <screen x="1251" y="-1212" width="1920" height="1160" />
     </state>
     <state width="1877" height="234" key="GridCell.Tab.0.center/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1619540641295" />
-    <state width="1876" height="309" key="GridCell.Tab.0.center/0.0.1463.783/-669.-1200.1920.1160/1251.-1212.1920.1160@1251.-1212.1920.1160" timestamp="1620308364096" />
+    <state width="1876" height="309" key="GridCell.Tab.0.center/0.0.1463.783/-669.-1200.1920.1160/1251.-1212.1920.1160@1251.-1212.1920.1160" timestamp="1620308686066" />
     <state width="1875" height="320" key="GridCell.Tab.0.center/0.0.1920.1040/3840.0.1280.680@0.0.1920.1040" timestamp="1618654629982" />
-    <state width="1876" height="309" key="GridCell.Tab.0.left" timestamp="1620308364095">
+    <state width="1876" height="309" key="GridCell.Tab.0.left" timestamp="1620308686065">
       <screen x="1251" y="-1212" width="1920" height="1160" />
     </state>
     <state width="1877" height="234" key="GridCell.Tab.0.left/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1619540641295" />
-    <state width="1876" height="309" key="GridCell.Tab.0.left/0.0.1463.783/-669.-1200.1920.1160/1251.-1212.1920.1160@1251.-1212.1920.1160" timestamp="1620308364095" />
+    <state width="1876" height="309" key="GridCell.Tab.0.left/0.0.1463.783/-669.-1200.1920.1160/1251.-1212.1920.1160@1251.-1212.1920.1160" timestamp="1620308686065" />
     <state width="1875" height="320" key="GridCell.Tab.0.left/0.0.1920.1040/3840.0.1280.680@0.0.1920.1040" timestamp="1618654629981" />
-    <state width="1876" height="309" key="GridCell.Tab.0.right" timestamp="1620308364096">
+    <state width="1876" height="309" key="GridCell.Tab.0.right" timestamp="1620308686066">
       <screen x="1251" y="-1212" width="1920" height="1160" />
     </state>
     <state width="1877" height="234" key="GridCell.Tab.0.right/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1619540641295" />
-    <state width="1876" height="309" key="GridCell.Tab.0.right/0.0.1463.783/-669.-1200.1920.1160/1251.-1212.1920.1160@1251.-1212.1920.1160" timestamp="1620308364096" />
+    <state width="1876" height="309" key="GridCell.Tab.0.right/0.0.1463.783/-669.-1200.1920.1160/1251.-1212.1920.1160@1251.-1212.1920.1160" timestamp="1620308686066" />
     <state width="1875" height="320" key="GridCell.Tab.0.right/0.0.1920.1040/3840.0.1280.680@0.0.1920.1040" timestamp="1618654629982" />
     <state width="1877" height="281" key="GridCell.Tab.1.bottom" timestamp="1619540311154">
       <screen x="0" y="0" width="1920" height="1040" />

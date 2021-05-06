@@ -20,7 +20,7 @@ class DataBusinessLogicImpl @Inject constructor (
 ) : DataBusinessLogic {
 
     override fun getTextFromUrl(url: String): String {
-        //if (!urlBusinessLogic.isValidUrlFormat(url)) throw InvalidUrlException()
+        if (!urlBusinessLogic.isValidUrlFormat(url)) throw InvalidUrlException()
 
         val urlResponse = webservice.isUrlOnWhitelist(url).execute()
         if (!urlResponse.isSuccessful) throw CouldNotReachServerException()
