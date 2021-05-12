@@ -39,7 +39,7 @@ class DataFragment : Fragment() {
 
         var expandableListViewDates = root.findViewById<View>(R.id.expandableListViewDates) as ExpandableListView
         var expandableListDetailDates = HashMap<String, List<String>>()
-        expandableListDetailDates.put("test",  Collections.singletonList("test blablabla \nnew line blABLA"))
+        expandableListDetailDates.put("Dates",  Collections.singletonList("test blablabla \nnew line blABLA"))
         var expandableListTitleDates = ArrayList(expandableListDetailDates!!.keys)
         var expandableListAdapterDates = DatesExpandableListAdapter(requireContext().applicationContext, expandableListTitleDates!!, expandableListDetailDates!!)
         CreateListView(expandableListViewDates, expandableListAdapterDates, expandableListTitleDates, expandableListDetailDates);
