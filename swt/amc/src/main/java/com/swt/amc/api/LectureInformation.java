@@ -8,7 +8,6 @@ import javafx.util.Pair;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class LectureInformation {
