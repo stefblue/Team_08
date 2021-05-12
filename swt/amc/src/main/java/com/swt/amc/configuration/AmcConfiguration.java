@@ -6,17 +6,19 @@ import java.util.Map;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
+import com.swt.amc.api.LectureInformation;
+
 @Configuration
 @ConfigurationProperties("amc")
 public class AmcConfiguration {
 
-	private Map<String, String> urlWhiteListMap = new HashMap<String, String>();
+	private Map<String, LectureInformation> urlWhiteListMap = new HashMap<String, LectureInformation>();
 
-	public Map<String, String> getUrlWhiteListMap() {
+	public Map<String, LectureInformation> getUrlWhiteListMap() {
 		return urlWhiteListMap;
 	}
 
-	public void setUrlWhiteListMap(Map<String, String> urlWhiteListMap) {
+	public void setUrlWhiteListMap(Map<String, LectureInformation> urlWhiteListMap) {
 		this.urlWhiteListMap = urlWhiteListMap;
 	}
 

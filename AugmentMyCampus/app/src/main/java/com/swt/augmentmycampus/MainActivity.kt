@@ -9,13 +9,16 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.swt.augmentmycampus.ui.data.DataFragment
+import dagger.hilt.android.AndroidEntryPoint
 
-class MainActivity : AppCompatActivity() {
+@AndroidEntryPoint
+class MainActivity : BaseActivity() {
+
     var dataFragment: Fragment? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        getSupportActionBar()?.hide()
+        supportActionBar?.hide()
         setContentView(R.layout.main_activity_main)
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
 

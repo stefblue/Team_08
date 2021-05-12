@@ -3,6 +3,27 @@ server:
   
 amc:
   urlWhiteListMap:
-    bla: "https://bla.com"
-    bli: "https://bli.com"
-    blubb: "https://blubb.com"
+    bla:
+      title: "Title"
+      number: "Number.1"
+      semester: "SS"
+      ects: 5
+      lecturer: "Dr. Super Lecturer"
+      content: "Content"
+      link: "https://bla.com"
+    bli:
+      title: "Title2"
+      number: "Number.2"
+      semester: "WS"
+      ects: 1
+      lecturer: "L1"
+      content: "Content2"
+      link: "https://bli.com"
+    blubb:
+      title: "Title3"
+      number: "Number.3"
+      semester: "WS/SS"
+      ects: 1
+      lecturer: "Lecturer3"
+      content: "Content3"
+      link: "https://blubb.com"

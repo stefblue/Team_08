@@ -9,6 +9,8 @@ import androidx.test.espresso.intent.Intents
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import dagger.hilt.android.testing.HiltAndroidRule
+import dagger.hilt.android.testing.HiltAndroidTest
 import org.hamcrest.Matchers
 import org.junit.After
 import org.junit.Before
@@ -16,13 +18,16 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
+@HiltAndroidTest
 @RunWith(AndroidJUnit4::class)
 class NavigationBarTest {
 
     // @Rule
     // var intentsRule: IntentsTestRule<CameraActivity> = IntentsTestRule(CameraActivity::class.java)
+    @get:Rule(order = 0)
+    var hiltRule: HiltAndroidRule = HiltAndroidRule(this)
 
-    @get:Rule
+    @get:Rule(order = 1)
     var mainActivity: ActivityScenarioRule<MainActivity>
             = ActivityScenarioRule(MainActivity::class.java)
 

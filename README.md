@@ -30,9 +30,19 @@ can be used as kick start for a desired CO (student) Community.
 ## Currently implemented Features
 
 ### Sprint 1:
+**mobile application**
 * application startup [AC-14](https://github.com/sw21-tug/Team_08/issues/14)
 * camera scan         [AC-1](https://github.com/sw21-tug/Team_08/issues/1)
 
 ### Sprint 2: 
+**mobile application**
 * login UI components [AC-16](https://github.com/sw21-tug/Team_08/issues/20)
 * Navigationbar [AC-15](https://github.com/sw21-tug/Team_08/issues/19) 
+* russion language support [AC-18](https://github.com/sw21-tug/Team_08/issues/24)
+
+**backend**
+* communication with app [AC-02](https://github.com/sw21-tug/Team_08/issues/2)
+* non application user redirect [AC-03](https://github.com/sw21-tug/Team_08/issues/3)
+
+### Release 1 
+Incorporates all tickets from Sprint 1 & 2 

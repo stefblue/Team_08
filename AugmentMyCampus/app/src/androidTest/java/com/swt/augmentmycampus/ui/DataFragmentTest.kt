@@ -14,14 +14,20 @@ import com.swt.augmentmycampus.MainActivity
 import com.swt.augmentmycampus.R
 import com.swt.augmentmycampus.ScanActivity
 import com.swt.augmentmycampus.ui.data.DataFragment
+import dagger.hilt.android.testing.HiltAndroidRule
+import dagger.hilt.android.testing.HiltAndroidTest
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
+@HiltAndroidTest
 @RunWith(AndroidJUnit4::class)
 class DataFragmentTest {
 
-    @get:Rule
+    @get:Rule(order = 0)
+    var hiltRule: HiltAndroidRule = HiltAndroidRule(this)
+
+    @get:Rule(order = 1)
     var mainActivity: ActivityScenarioRule<MainActivity>
             = ActivityScenarioRule(MainActivity::class.java)
 

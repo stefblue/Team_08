@@ -117,3 +117,10 @@ lint/tmp/
 
 # Android Profiling
 *.hprof
+
+.settings
+.classpath
+.factorypath
+.project
+target
+.eclipse-pmd
