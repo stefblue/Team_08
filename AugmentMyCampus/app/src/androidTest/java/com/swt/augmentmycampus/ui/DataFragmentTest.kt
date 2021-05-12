@@ -61,11 +61,11 @@ class DataFragmentTest {
     }
 
     @Test
-    fun testDataFragmentHasExpandableViewForLecturerInformation() {
+    fun testDataFragmentHasExpandableViewForLecturerInformationContent() {
         onView(withId(R.id.navigation_data)).perform(click())
         onView(withId(R.id.fragment_data_id)).check(matches(isDisplayed()))
 
-        onView(withId(R.id.expandableListView)).check(matches(isDisplayed()))
+        onView(withId(R.id.expandableListViewContent)).check(matches(isDisplayed()))
     }
 
     @Test
@@ -73,9 +73,9 @@ class DataFragmentTest {
         onView(withId(R.id.navigation_data)).perform(click())
         onView(withId(R.id.fragment_data_id)).check(matches(isDisplayed()))
 
-        onView(withId(R.id.expandableListView)).check(matches(isDisplayed()))
-        onView(withId(R.id.listTitle)).check(matches(isDisplayed()))
-        onView(withId(R.id.listTitle)).check(matches(withText("Content")))
+        onView(withId(R.id.expandableListViewContent)).check(matches(isDisplayed()))
+        onView(withId(R.id.listTitleContent)).check(matches(isDisplayed()))
+        onView(withId(R.id.listTitleContent)).check(matches(withText("Content")))
     }
 
     @Test

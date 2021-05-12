@@ -10,8 +10,8 @@ import android.widget.TextView;
 import com.swt.augmentmycampus.R
 
 
-class DataExpandableListAdapter(context: Context, expandableListTitle: List<String>,
-                                expandableListDetail: HashMap<String, List<String>>) : BaseExpandableListAdapter() {
+class ContentExpandableListAdapter(context: Context, expandableListTitle: List<String>,
+                                   expandableListDetail: HashMap<String, List<String>>) : BaseExpandableListAdapter() {
     private val context: Context
     private val expandableListTitle: List<String>
     private val expandableListDetail: HashMap<String, List<String>>
@@ -30,9 +30,9 @@ class DataExpandableListAdapter(context: Context, expandableListTitle: List<Stri
         if (convertView == null) {
             val layoutInflater = context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            convertView = layoutInflater.inflate(R.layout.list_item, null)
+            convertView = layoutInflater.inflate(R.layout.list_item_content, null)
         }
-        val expandedListTextView = convertView!!.findViewById(R.id.expandedListItem) as TextView
+        val expandedListTextView = convertView!!.findViewById(R.id.expandedListItemContent) as TextView
         expandedListTextView.text = expandedListText
         return convertView
     }
@@ -59,9 +59,9 @@ class DataExpandableListAdapter(context: Context, expandableListTitle: List<Stri
         val listTitle = getGroup(listPosition) as String
         if (convertView == null) {
             val layoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            convertView = layoutInflater.inflate(R.layout.list_group, null)
+            convertView = layoutInflater.inflate(R.layout.list_group_content, null)
         }
-        val listTitleTextView = convertView!!.findViewById(R.id.listTitle) as TextView
+        val listTitleTextView = convertView!!.findViewById(R.id.listTitleContent) as TextView
         listTitleTextView.setTypeface(null, Typeface.BOLD)
         listTitleTextView.text = listTitle
         return convertView

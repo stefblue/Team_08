@@ -17,11 +17,6 @@ import java.util.*
 class DataFragment : Fragment() {
 
     private lateinit var dataViewModel: DataViewModel
-    var expandableListView: ExpandableListView? = null
-    var expandableListAdapter: ExpandableListAdapter? = null
-    var expandableListTitle: ArrayList<String>? = null
-    var expandableListDetail: HashMap<String, List<String>>? = null
-
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -35,12 +30,27 @@ class DataFragment : Fragment() {
             textView.text = it
         })
 
+        var expandableListViewContent = root.findViewById<View>(R.id.expandableListViewContent) as ExpandableListView
+        var expandableListDetailContent = HashMap<String, List<String>>()
+        expandableListDetailContent.put("Content",  Collections.singletonList("test blablabla \nnew line blABLA"))
+        var expandableListTitleContent = ArrayList(expandableListDetailContent!!.keys)
+        var expandableListAdapterContent = ContentExpandableListAdapter(requireContext().applicationContext, expandableListTitleContent!!, expandableListDetailContent!!)
+        CreateListView(expandableListViewContent, expandableListAdapterContent, expandableListTitleContent, expandableListDetailContent);
 
-        expandableListView = root.findViewById<View>(R.id.expandableListView) as ExpandableListView
-        expandableListDetail =  HashMap<String, List<String>>()
-        expandableListDetail!!.put("Content",  Collections.singletonList("test blablabla \nnew line blABLA"))
-        expandableListTitle = ArrayList(expandableListDetail!!.keys)
-        expandableListAdapter = DataExpandableListAdapter(requireContext().applicationContext, expandableListTitle!!, expandableListDetail!!)
+        var expandableListViewDates = root.findViewById<View>(R.id.expandableListViewDates) as ExpandableListView
+        var expandableListDetailDates = HashMap<String, List<String>>()
+        expandableListDetailDates.put("test",  Collections.singletonList("test blablabla \nnew line blABLA"))
+        var expandableListTitleDates = ArrayList(expandableListDetailDates!!.keys)
+        var expandableListAdapterDates = DatesExpandableListAdapter(requireContext().applicationContext, expandableListTitleDates!!, expandableListDetailDates!!)
+        CreateListView(expandableListViewDates, expandableListAdapterDates, expandableListTitleDates, expandableListDetailDates);
+
+        return root
+
+    }
+
+    var expandableListViewDates: ExpandableListView? = null
+
+    private fun CreateListView(expandableListView: ExpandableListView, expandableListAdapter: ExpandableListAdapter, expandableListTitle: ArrayList<String>, expandableListDetail: HashMap<String, List<String>>) : ExpandableListView {
         expandableListView!!.setAdapter(expandableListAdapter)
         expandableListView!!.setOnGroupExpandListener { groupPosition ->
             Toast.makeText(requireContext().applicationContext, expandableListTitle!!.get(groupPosition) + " List Expanded.",
@@ -58,11 +68,6 @@ class DataFragment : Fragment() {
             ).show()
             false
         }
-
-
-
-
-        return root
-
+        return expandableListView;
     }
 }
