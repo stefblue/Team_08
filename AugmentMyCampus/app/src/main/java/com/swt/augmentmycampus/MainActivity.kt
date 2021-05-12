@@ -20,6 +20,7 @@ import com.swt.augmentmycampus.ui.data.DataFragment
 import com.swt.augmentmycampus.ui.settings.SettingsFragment
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
+import android.os.StrictMode
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -34,6 +35,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         supportActionBar?.hide()
         setContentView(R.layout.main_activity_main)
+
+        val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
+        StrictMode.setThreadPolicy(policy)
 
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         val navHostFragment = fragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
