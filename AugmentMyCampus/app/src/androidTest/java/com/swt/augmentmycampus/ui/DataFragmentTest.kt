@@ -89,5 +89,17 @@ class DataFragmentTest {
         onView(withId(R.id.registerButton)).check(matches(isDisplayed()))
     }
 
+    @Test
+    fun testDataFragmentRegisterButtonNameAndClick() {
+        onView(withId(R.id.navigation_data)).perform(click())
+        //Here we would need to log in first to see this button later
+        onView(withId(R.id.fragment_data_id)).check(matches(isDisplayed()))
+
+        onView(withId(R.id.registerButton)).check(matches(isDisplayed()))
+        onView(withId(R.id.registerButton)).check(matches(withText("Register")))
+        onView(withId(R.id.registerButton)).perform(click())
+        onView(withId(R.id.registerButton)).check(matches(withText("Unregister")))
+    }
+
 
 }
