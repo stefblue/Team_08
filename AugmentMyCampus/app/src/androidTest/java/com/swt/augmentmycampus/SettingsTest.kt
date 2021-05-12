@@ -91,13 +91,12 @@ class SettingsTest {
 
     @Test
     fun languageLabelExists() {
-        /*
         var language = "Language"
         when (localeManager.language) {
             "en" -> language = "Language"
             "ru" -> language = "Язык"
-        }*/
-        onView(withId(R.id.settings_language_label)).check(matches(isDisplayed()))
+        }
+        onView(withText(language)).check(matches(isDisplayed()))
     }
 
     @Test
@@ -121,6 +120,8 @@ class SettingsTest {
         onView(withId(R.id.fragment_settings_language)).perform(click())
         onData(allOf(`is`(instanceOf(String::class.java)), `is`(languageName))).perform(click())
         onView(withId(R.id.fragment_settings_language)).check(matches(withSpinnerText(languageName)))
+
+        onView(withId(R.id.settings_language_label)).check(matches(withText(language)))
     }
 
     @Test
@@ -131,5 +132,7 @@ class SettingsTest {
         onView(withId(R.id.fragment_settings_language)).perform(click())
         onData(allOf(`is`(instanceOf(String::class.java)), `is`(languageName))).perform(click())
         onView(withId(R.id.fragment_settings_language)).check(matches(withSpinnerText(languageName)))
+
+        onView(withId(R.id.settings_language_label)).check(matches(withText(language)))
     }
 }

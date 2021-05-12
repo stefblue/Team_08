@@ -67,6 +67,7 @@ class CameraFragment : Fragment() {
             try {
                 var resultText = cameraViewModel.getTextData(result.contents); // get data from BL
 
+                //pass data to DataFragment and switch
                 val action = CameraFragmentDirections.actionNavigationCameraToNavigationData(resultText)
                 requireActivity().findNavController(R.id.nav_host_fragment).navigate(action)
 
