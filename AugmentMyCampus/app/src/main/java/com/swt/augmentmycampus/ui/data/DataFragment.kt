@@ -38,7 +38,7 @@ class DataFragment : Fragment() {
 
         expandableListView = root.findViewById<View>(R.id.expandableListView) as ExpandableListView
         expandableListDetail =  HashMap<String, List<String>>()
-        expandableListDetail!!.put("test",  Collections.singletonList("test blablabla \nnew line blABLA"))
+        expandableListDetail!!.put("Content",  Collections.singletonList("test blablabla \nnew line blABLA"))
         expandableListTitle = ArrayList(expandableListDetail!!.keys)
         expandableListAdapter = DataExpandableListAdapter(requireContext().applicationContext, expandableListTitle!!, expandableListDetail!!)
         expandableListView!!.setAdapter(expandableListAdapter)
