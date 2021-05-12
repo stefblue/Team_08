@@ -60,4 +60,12 @@ class DataFragmentTest {
         onView(withId(R.id.label_lecturer_value)).check(matches(isDisplayed()))
     }
 
+    @Test
+    fun testDataFragmentHasExpandeableViewForLecturerInformation() {
+        onView(withId(R.id.navigation_data)).perform(click())
+        onView(withId(R.id.fragment_data_id)).check(matches(isDisplayed()))
+
+        onView(withId(R.id.expandableListView)).check(matches(isDisplayed()))
+    }
+
 }
