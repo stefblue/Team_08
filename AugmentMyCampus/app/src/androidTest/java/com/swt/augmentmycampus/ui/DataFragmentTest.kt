@@ -78,4 +78,12 @@ class DataFragmentTest {
         onView(withId(R.id.listTitle)).check(matches(withText("Content")))
     }
 
+    @Test
+    fun testDataFragmentHasExpandableViewForDates() {
+        onView(withId(R.id.navigation_data)).perform(click())
+        onView(withId(R.id.fragment_data_id)).check(matches(isDisplayed()))
+
+        onView(withId(R.id.expandableListViewDates)).check(matches(isDisplayed()))
+    }
+
 }
