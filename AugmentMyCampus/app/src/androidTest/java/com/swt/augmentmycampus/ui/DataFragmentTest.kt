@@ -66,14 +66,6 @@ class DataFragmentTest {
         onView(withId(R.id.fragment_data_id)).check(matches(isDisplayed()))
 
         onView(withId(R.id.expandableListViewContent)).check(matches(isDisplayed()))
-    }
-
-    @Test
-    fun testDataFragmentHasExpandableViewForLecturerInformationLabelContent() {
-        onView(withId(R.id.navigation_data)).perform(click())
-        onView(withId(R.id.fragment_data_id)).check(matches(isDisplayed()))
-
-        onView(withId(R.id.expandableListViewContent)).check(matches(isDisplayed()))
         onView(withId(R.id.listTitleContent)).check(matches(isDisplayed()))
         onView(withId(R.id.listTitleContent)).check(matches(withText("Content")))
     }
@@ -84,18 +76,9 @@ class DataFragmentTest {
         onView(withId(R.id.fragment_data_id)).check(matches(isDisplayed()))
 
         onView(withId(R.id.expandableListViewDates)).check(matches(isDisplayed()))
-    }
-
-    @Test
-    fun testDataFragmentHasExpandableViewForLecturerInformationLabelDates() {
-        onView(withId(R.id.navigation_data)).perform(click())
-        onView(withId(R.id.fragment_data_id)).check(matches(isDisplayed()))
-
-        onView(withId(R.id.expandableListViewDates)).check(matches(isDisplayed()))
         onView(withId(R.id.listTitleDates)).check(matches(isDisplayed()))
         onView(withId(R.id.listTitleDates)).check(matches(withText("Dates")))
     }
-
 
     @Test
     fun testDataFragmentHasRegisterButton() {
@@ -105,5 +88,6 @@ class DataFragmentTest {
 
         onView(withId(R.id.registerButton)).check(matches(isDisplayed()))
     }
+
 
 }

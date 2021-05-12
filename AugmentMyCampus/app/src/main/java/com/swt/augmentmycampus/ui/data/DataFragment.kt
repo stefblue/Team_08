@@ -45,10 +45,7 @@ class DataFragment : Fragment() {
         CreateListView(expandableListViewDates, expandableListAdapterDates, expandableListTitleDates, expandableListDetailDates);
 
         return root
-
     }
-
-    var expandableListViewDates: ExpandableListView? = null
 
     private fun CreateListView(expandableListView: ExpandableListView, expandableListAdapter: ExpandableListAdapter, expandableListTitle: ArrayList<String>, expandableListDetail: HashMap<String, List<String>>) : ExpandableListView {
         expandableListView!!.setAdapter(expandableListAdapter)
@@ -70,4 +67,9 @@ class DataFragment : Fragment() {
         }
         return expandableListView;
     }
+
+    public fun registerButtonClick(view: View) {
+        //TODO
+    }
+
 }
