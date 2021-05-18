@@ -27,7 +27,10 @@ public class LoginComponent implements ILoginComponent {
 	@Override
 	public UserInformation getUserInformationForUsernameAndPassword(String userName, String password)
 			throws AmcException {
-		return null;
+		if (isValidAuthentication(userName, password)) {
+			return amcConfig.getUserNamePasswordMap().get(userName);
+		}
+		throw new AmcException("Username or password false!");
 	}
 
 }

@@ -11,6 +11,8 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.swt.amc.api.LectureInformation;
+import com.swt.amc.api.UserInformation;
+import com.swt.amc.components.LoginComponent;
 import com.swt.amc.exceptions.AmcException;
 import com.swt.amc.interfaces.IQRCodeLinkVerifier;
 
@@ -19,6 +21,9 @@ public class AmcRestController {
 
 	@Autowired
 	private IQRCodeLinkVerifier qrCodeLinkVerifier;
+
+	@Autowired
+	private LoginComponent loginComponent;
 
 	@GetMapping("/verifyQrCode/{qrCodeLink}")
 	public ResponseEntity<LectureInformation> verifyQrCodeViaApp(@PathVariable("qrCodeLink") final String qrCodeLink)
@@ -32,9 +37,16 @@ public class AmcRestController {
 		return new RedirectView(qrCodeLinkVerifier.getRedirectLink(qrCodeLink));
 	}
 
+	@GetMapping("/login/{userName}/{password}")
+	public ResponseEntity<UserInformation> getUserInfo(@PathVariable("userName") final String userName,
+			@PathVariable("password") final String password) throws AmcException {
+		return new ResponseEntity<UserInformation>(
+				loginComponent.getUserInformationForUsernameAndPassword(userName, password), HttpStatus.OK);
+	}
+
 	@ExceptionHandler({ AmcException.class })
 	public ResponseEntity<String> handleAmcRestException(AmcException ex, WebRequest request) {
 
-		return new ResponseEntity<String>("Given key not in whitelist!", HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
 	}
 }

@@ -38,3 +38,8 @@ amc:
 
         The focus of the exercise part is placed on the software development methodology for mobile applications, e.g., the technical quality regarding the testability and maintainability of the software, but also the usability of the applications.
       link: "https://online.tugraz.at/tug_online/pl/ui/$ctx/wbLv.wbShowLVDetail?pStpSpNr=238227&pSpracheNr=2"
+  userNamePasswordMap:
+    floebl:
+      password: password
+      givenName: Florian Patrick
+      lastName: Löbl
