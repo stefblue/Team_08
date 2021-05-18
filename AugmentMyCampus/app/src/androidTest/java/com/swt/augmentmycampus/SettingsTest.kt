@@ -65,8 +65,7 @@ class SettingsTest {
         mainActivity
         val textToType = "Lorem ipsum dolor sit amet"
         onView(withId(R.id.fragment_settings_user)).perform(typeText(textToType))
-        closeSoftKeyboard();
-        onView(withId(R.id.fragment_settings_submit)).perform(click());
+        closeSoftKeyboard()
         onView(withText(textToType)).check(matches(isDisplayed()))
     }
 
@@ -75,8 +74,7 @@ class SettingsTest {
     {
         val textToType = "Lorem ipsum dolor sit amet"
         onView(withId(R.id.fragment_settings_password)).perform(typeText(textToType))
-        closeSoftKeyboard();
-        onView(withId(R.id.fragment_settings_submit)).perform(click());
+        closeSoftKeyboard()
         onView(withText(textToType)).check(matches(isDisplayed()))
     }
 
