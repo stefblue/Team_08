@@ -46,7 +46,7 @@ public class QRCodeLinkVerifierTests {
 		try {
 			verifier.getRedirectLink("blabb");
 			fail();
-		} catch (AmcException e) {
+		} catch (Exception e) {
 			assertTrue(e instanceof AmcException);
 		}
 	}

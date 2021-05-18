@@ -7,13 +7,14 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 import com.swt.amc.api.LectureInformation;
+import com.swt.amc.api.UserInformation;
 
 @Configuration
 @ConfigurationProperties("amc")
 public class AmcConfiguration {
 
 	private Map<String, LectureInformation> urlWhiteListMap = new HashMap<String, LectureInformation>();
-	private Map<String, String> userNamePasswordMap = new HashMap<String, String>();
+	private Map<String, UserInformation> userNamePasswordMap = new HashMap<String, UserInformation>();
 
 	public Map<String, LectureInformation> getUrlWhiteListMap() {
 		return urlWhiteListMap;
@@ -23,11 +24,11 @@ public class AmcConfiguration {
 		this.urlWhiteListMap = urlWhiteListMap;
 	}
 
-	public Map<String, String> getUserNamePasswordMap() {
+	public Map<String, UserInformation> getUserNamePasswordMap() {
 		return userNamePasswordMap;
 	}
 
-	public void setUserNamePasswordMap(Map<String, String> userNamePasswordMap) {
+	public void setUserNamePasswordMap(Map<String, UserInformation> userNamePasswordMap) {
 		this.userNamePasswordMap = userNamePasswordMap;
 	}
 

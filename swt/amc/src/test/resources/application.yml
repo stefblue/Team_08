@@ -28,4 +28,8 @@ amc:
       content: "Content3"
       link: "https://blubb.com"
   userNamePasswordMap:
-    admin: password
+    admin:
+      password: password
+      givenName: Franz
+      lastName: Bauer
+      
