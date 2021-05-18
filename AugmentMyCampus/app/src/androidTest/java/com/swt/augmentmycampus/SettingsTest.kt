@@ -81,6 +81,23 @@ class SettingsTest {
     }
 
     @Test
+    fun loginFailsWitWrongCredentials() {
+        val textToType = "notauser"
+        onView(withId(R.id.fragment_settings_user)).perform(typeText(textToType))
+        closeSoftKeyboard()
+        onView(withId(R.id.fragment_settings_password)).perform(typeText(textToType))
+        closeSoftKeyboard()
+        onView(withId(R.id.fragment_settings_submit)).perform(click())
+
+        var invalid = "Invalid user or password"
+        when (localeManager.language) {
+            "en" -> invalid = "Invalid user or password"
+            "ru" -> invalid = "Неверный пользователь или пароль"
+        }
+        onView(withText(invalid)).check(matches(isDisplayed()))
+    }
+
+    @Test
     fun languageSelectorExists() {
         onView(withId(R.id.fragment_settings_language)).check(matches(isDisplayed()))
     }
