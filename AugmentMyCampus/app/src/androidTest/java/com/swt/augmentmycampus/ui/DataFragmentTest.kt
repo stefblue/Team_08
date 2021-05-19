@@ -12,7 +12,6 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.swt.augmentmycampus.MainActivity
 import com.swt.augmentmycampus.R
-import com.swt.augmentmycampus.ScanActivity
 import com.swt.augmentmycampus.ui.data.DataFragment
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
