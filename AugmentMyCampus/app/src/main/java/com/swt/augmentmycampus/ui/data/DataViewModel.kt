@@ -1,13 +1,13 @@
 package com.swt.augmentmycampus.ui.data
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class DataViewModel : ViewModel() {
-
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is data Fragment"
+@HiltViewModel
+class DataViewModel @Inject constructor() : ViewModel() {
+    val dataText: MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
     }
-    val text: LiveData<String> = _text
 }

@@ -9,17 +9,27 @@
         android:id="@+id/navigation_camera"
         android:name="com.swt.augmentmycampus.ui.camera.CameraFragment"
         android:label="@string/title_camera"
-        tools:layout="@layout/fragment_camera" />
+        tools:layout="@layout/fragment_camera" >
+        <action
+            android:id="@+id/action_navigation_camera_to_navigation_data"
+            app:destination="@id/navigation_data" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_data"
         android:name="com.swt.augmentmycampus.ui.data.DataFragment"
         android:label="@string/title_data"
-        tools:layout="@layout/fragment_data" />
+        tools:layout="@layout/fragment_data" >
+        <argument
+            android:name="dataText"
+            app:argType="string"
+            android:defaultValue=""/>
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_settings"
         android:name="com.swt.augmentmycampus.ui.settings.SettingsFragment"
         android:label="@string/title_settings"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_settings">
+    </fragment>
 </navigation>

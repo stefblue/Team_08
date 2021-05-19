@@ -1,5 +1,7 @@
 package com.swt.augmentmycampus
 
+import android.content.res.Configuration
+import android.support.test.InstrumentationRegistry.getContext
 import androidx.test.espresso.Espresso.*
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.typeText
@@ -12,11 +14,13 @@ import com.swt.augmentmycampus.ui.LocaleManager
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import org.hamcrest.CoreMatchers.*
+import org.hamcrest.Matchers
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import java.util.*
 import javax.inject.Inject
 
 @HiltAndroidTest
