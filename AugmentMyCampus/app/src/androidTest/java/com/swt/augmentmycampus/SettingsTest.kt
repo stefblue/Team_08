@@ -47,24 +47,24 @@ class SettingsTest {
 
     @Test
     fun textFieldUserNameExists() {
-        onView(withId(R.id.fragment_settings_user)).check(matches(isDisplayed()))
+        onView(withId(R.id.fragment_login_user)).check(matches(isDisplayed()))
     }
 
     @Test
     fun textFieldPasswordExists() {
-        onView(withId(R.id.fragment_settings_password)).check(matches(isDisplayed()))
+        onView(withId(R.id.fragment_login_password)).check(matches(isDisplayed()))
     }
 
     @Test
     fun btnSubmitLoginExists() {
-        onView(withId(R.id.fragment_settings_submit)).check(matches(isDisplayed()))
+        onView(withId(R.id.fragment_login_submit)).check(matches(isDisplayed()))
     }
 
     @Test
     fun canTypeName() {
         mainActivity
         val textToType = "Lorem ipsum dolor sit amet"
-        onView(withId(R.id.fragment_settings_user)).perform(typeText(textToType))
+        onView(withId(R.id.fragment_login_user)).perform(typeText(textToType))
         closeSoftKeyboard()
         onView(withText(textToType)).check(matches(isDisplayed()))
     }
@@ -73,7 +73,7 @@ class SettingsTest {
     fun canTypePassword()
     {
         val textToType = "Lorem ipsum dolor sit amet"
-        onView(withId(R.id.fragment_settings_password)).perform(typeText(textToType))
+        onView(withId(R.id.fragment_login_password)).perform(typeText(textToType))
         closeSoftKeyboard()
         onView(withText(textToType)).check(matches(isDisplayed()))
     }
@@ -81,11 +81,11 @@ class SettingsTest {
     @Test
     fun loginFailsWitWrongCredentials() {
         val textToType = "notauser"
-        onView(withId(R.id.fragment_settings_user)).perform(typeText(textToType))
+        onView(withId(R.id.fragment_login_user)).perform(typeText(textToType))
         closeSoftKeyboard()
-        onView(withId(R.id.fragment_settings_password)).perform(typeText(textToType))
+        onView(withId(R.id.fragment_login_password)).perform(typeText(textToType))
         closeSoftKeyboard()
-        onView(withId(R.id.fragment_settings_submit)).perform(click())
+        onView(withId(R.id.fragment_login_submit)).perform(click())
 
         var invalid = "Invalid user or password"
         when (localeManager.language) {
@@ -93,6 +93,20 @@ class SettingsTest {
             "ru" -> invalid = "Неверный пользователь или пароль"
         }
         onView(withText(invalid)).check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun loginWithRightCredentials() {
+        val username = "john"
+        val password = "123456"
+        onView(withId(R.id.fragment_login_user)).perform(typeText(username))
+        closeSoftKeyboard()
+        onView(withId(R.id.fragment_login_password)).perform(typeText(password))
+        closeSoftKeyboard()
+        onView(withId(R.id.fragment_login_submit)).perform(click())
+
+        onView(withText("John")).check(matches(isDisplayed()))
+        onView(withText("Smith")).check(matches(isDisplayed()))
     }
 
     @Test
