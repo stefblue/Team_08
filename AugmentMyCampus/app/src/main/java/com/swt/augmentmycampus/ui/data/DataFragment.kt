@@ -1,6 +1,8 @@
 package com.swt.augmentmycampus.ui.data
 
 import android.os.Bundle
+import android.support.v4.media.session.MediaSessionCompat.Token.fromBundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,12 +10,18 @@ import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.navArgs
 import com.swt.augmentmycampus.R
 import java.util.*
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DataFragment : Fragment() {
 
     private lateinit var dataViewModel: DataViewModel
+
+    val args: DataFragmentArgs by navArgs()
+
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -24,10 +32,13 @@ class DataFragment : Fragment() {
         val root = inflater.inflate(R.layout.fragment_data, container, false)
         val textView: TextView = root.findViewById(R.id.label_header)
 
+        dataViewModel = ViewModelProvider(this).get(DataViewModel::class.java)
+        dataViewModel.dataText.value = args.dataText
 
-        dataViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
+        val tvDataText: TextView = root.findViewById(R.id.fragment_data_text)
+        dataViewModel.dataText.observe(
+                requireActivity(),
+                Observer { tvDataText.text = it.toString() })
 
         var expandableListViewContent = root.findViewById<View>(R.id.expandableListViewContent) as ExpandableListView
         var expandableListDetailContent = HashMap<String, List<String>>()
