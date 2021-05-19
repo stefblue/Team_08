@@ -47,18 +47,15 @@ class QRCodeScannerTest {
     @Test
     fun testMainActivity() {
         onView(withId(R.id.navigation_camera)).check(matches(isDisplayed()))
-        onView(withId(R.id.scanButton)).check(matches(isDisplayed()))
     }
 
     @Test
     fun testScannerView() {
-        onView(withId(R.id.scanButton)).perform(click())
         onView(withResourceName(Matchers.equalTo(zxingName))).check(matches(isDisplayed()))
     }
 
     @Test
     fun testBackButtonOnCameraView() {
-        onView(withId(R.id.scanButton)).perform(click())
         onView(withClassName(Matchers.containsString(zxingName)))
 
         Espresso.pressBack();
