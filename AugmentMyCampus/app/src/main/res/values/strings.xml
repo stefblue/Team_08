@@ -28,6 +28,11 @@
     <string name="error_invalid_url">this qr code is not supported</string>
     <string name="error_no_connection">no connection to server</string>
 
+    <string name="label_number_text">Number</string>
+    <string name="label_semester_text">Semester</string>
+    <string name="label_ects_text">ECTS</string>
+    <string name="label_lecturer_text">Lecturer</string>
+
     <string name="settings_language">Language</string>
     <string-array name="availableLanguages">
         <item>English</item>

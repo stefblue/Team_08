@@ -5,6 +5,11 @@ import android.os.StrictMode
 import androidx.fragment.app.FragmentManager
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import android.view.View
+import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.swt.augmentmycampus.ui.camera.CameraFragment
@@ -33,5 +38,14 @@ class MainActivity : BaseActivity() {
         val navHostFragment = fragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
         navView.setupWithNavController(navController)
+    }
+
+    fun registerButtonOnClick(view: View) {
+        val registerButton: Button = view.findViewById(R.id.registerButton)
+        if (registerButton.text == "Register") {
+            registerButton.text = "Unregister"
+        } else {
+            registerButton.text = "Register"
+        }
     }
 }
