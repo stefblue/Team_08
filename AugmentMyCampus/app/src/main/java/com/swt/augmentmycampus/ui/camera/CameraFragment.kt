@@ -7,23 +7,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import com.google.zxing.integration.android.IntentIntegrator
 import com.swt.augmentmycampus.R
-import com.swt.augmentmycampus.businessLogic.*
-import com.swt.augmentmycampus.network.Webservice
-import com.swt.augmentmycampus.ui.data.DataFragment
+import com.swt.augmentmycampus.businessLogic.CouldNotReachServerException
+import com.swt.augmentmycampus.businessLogic.InvalidUrlException
 import com.swt.augmentmycampus.ui.data.DataFragmentArgs
-import com.swt.augmentmycampus.ui.data.DataViewModel
-import com.swt.augmentmycampus.ui.settings.SettingsFragment
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
+import org.json.JSONObject
 
 @AndroidEntryPoint
 class CameraFragment : Fragment() {
@@ -66,6 +60,7 @@ class CameraFragment : Fragment() {
                     + result.contents, Toast.LENGTH_SHORT).show()
             try {
                 var resultText = cameraViewModel.getTextData(result.contents); // get data from BL
+                val jsonObj = JSONObject(resultText)
 
                 //pass data to DataFragment and switch
                 val action = CameraFragmentDirections.actionNavigationCameraToNavigationData(resultText)
