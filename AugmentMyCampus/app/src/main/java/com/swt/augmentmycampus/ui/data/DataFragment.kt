@@ -41,6 +41,9 @@ class DataFragment : Fragment() {
         val ectsValueTextView: TextView = root.findViewById(R.id.label_ects_value)
         ectsValueTextView.text = jsonObj.getString("ects")
 
+        val  titleValueTextView: TextView = root.findViewById(R.id.label_header)
+        titleValueTextView.text = jsonObj.getString("title")
+
         val tvDataText: TextView = root.findViewById(R.id.fragment_data_text)
         dataViewModel.dataText.observe(
                 requireActivity(),
