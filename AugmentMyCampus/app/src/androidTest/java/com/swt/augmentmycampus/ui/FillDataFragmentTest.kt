@@ -79,7 +79,7 @@ class FillDataFragmentTest {
     }
 
     @Test
-    fun testSemesterField() {
+    fun testLecturerField() {
         mainActivity.scenario.onActivity { a ->
             a.findNavController(R.id.nav_host_fragment).navigate(R.id.action_navigation_camera_to_navigation_data, bundleOf("dataText" to getDummyData()))
         }
