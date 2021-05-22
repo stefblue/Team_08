@@ -19,7 +19,7 @@ import org.json.JSONObject
 @AndroidEntryPoint
 class DataFragment : Fragment() {
 
-    private lateinit var dataViewModel: DataViewModel
+    //private lateinit var dataViewModel: DataViewModel
 
     val args: DataFragmentArgs by navArgs()
 
@@ -28,26 +28,31 @@ class DataFragment : Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        dataViewModel =
-                ViewModelProvider(this).get( DataViewModel::class.java)
+        //dataViewModel =
+        //        ViewModelProvider(this).get( DataViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_data, container, false)
         val textView: TextView = root.findViewById(R.id.label_header)
 
-        dataViewModel = ViewModelProvider(this).get(DataViewModel::class.java)
+        /*dataViewModel = ViewModelProvider(this).get(DataViewModel::class.java)
+        dataViewModel.dataText.value = jsonObj.getString("ects")*/
 
-        val jsonObj = JSONObject(args.dataText)
-        dataViewModel.dataText.value = jsonObj.getString("ects")
+        if(args.dataText != null && !args.dataText.isEmpty()) {
+            val jsonObj = JSONObject(args.dataText)
 
-        val ectsValueTextView: TextView = root.findViewById(R.id.label_ects_value)
-        ectsValueTextView.text = jsonObj.getString("ects")
+            val ectsValueTextView: TextView = root.findViewById(R.id.label_ects_value)
+            ectsValueTextView.text = jsonObj.getString("ects")
 
-        val  titleValueTextView: TextView = root.findViewById(R.id.label_header)
-        titleValueTextView.text = jsonObj.getString("title")
+            val titleValueTextView: TextView = root.findViewById(R.id.label_header)
+            titleValueTextView.text = jsonObj.getString("title")
 
-        val tvDataText: TextView = root.findViewById(R.id.fragment_data_text)
+            val numberValueTextView: TextView = root.findViewById(R.id.label_number_value)
+            numberValueTextView.text = jsonObj.getString("number")
+        }
+
+        /*val tvDataText: TextView = root.findViewById(R.id.fragment_data_text)
         dataViewModel.dataText.observe(
                 requireActivity(),
-                Observer { tvDataText.text = it.toString() })
+                Observer { tvDataText.text = it.toString() })*/
 
         var expandableListViewContent = root.findViewById<View>(R.id.expandableListViewContent) as ExpandableListView
         var expandableListDetailContent = HashMap<String, List<String>>()
