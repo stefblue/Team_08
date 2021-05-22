@@ -22,15 +22,6 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="50dp">
 
-                <TextView
-                    android:id="@+id/fragment_data_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
 
                 <Button
                     android:id="@+id/registerButton"
@@ -58,7 +49,7 @@
 
                 <TextView
                     android:id="@+id/label_number_value"
-                    android:layout_width="150dp"
+                    android:layout_width="200dp"
                     android:layout_height="40dp"
                     android:layout_marginStart="160dp"
                     android:background="@drawable/rectangle_border"
@@ -69,13 +60,14 @@
                     android:paddingBottom="5px"
                     android:textSize="24sp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/label_number"
-                    app:layout_constraintStart_toStartOf="@+id/label_number" />
+                    app:layout_constraintStart_toStartOf="@+id/label_number"
+                    app:layout_constraintTop_toTopOf="@+id/label_number" />
 
                 <TextView
                     android:id="@+id/label_lecturer_value"
-                    android:layout_width="150dp"
+                    android:layout_width="200dp"
                     android:layout_height="40dp"
+                    android:layout_marginStart="160dp"
                     android:background="@drawable/rectangle_border"
                     android:outlineProvider="background"
                     android:paddingLeft="20px"
@@ -83,15 +75,15 @@
                     android:paddingRight="20px"
                     android:paddingBottom="5px"
                     android:textSize="24sp"
-                    android:layout_marginStart="160dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/label_lecturer"
-                    app:layout_constraintStart_toStartOf="@+id/label_number" />
+                    app:layout_constraintStart_toStartOf="@+id/label_number"
+                    app:layout_constraintTop_toTopOf="@+id/label_lecturer" />
 
                 <TextView
                     android:id="@+id/label_semester_value"
-                    android:layout_width="150dp"
+                    android:layout_width="200dp"
                     android:layout_height="40dp"
+                    android:layout_marginStart="160dp"
                     android:background="@drawable/rectangle_border"
                     android:outlineProvider="background"
                     android:paddingLeft="20px"
@@ -99,10 +91,9 @@
                     android:paddingRight="20px"
                     android:paddingBottom="5px"
                     android:textSize="24sp"
-                    android:layout_marginStart="160dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/label_semester"
-                    app:layout_constraintStart_toStartOf="@+id/label_number" />
+                    app:layout_constraintStart_toStartOf="@+id/label_number"
+                    app:layout_constraintTop_toTopOf="@+id/label_semester" />
 
                 <TextView
                     android:id="@+id/label_lecturer"
@@ -137,8 +128,9 @@
 
                 <TextView
                     android:id="@+id/label_ects_value"
-                    android:layout_width="150dp"
+                    android:layout_width="200dp"
                     android:layout_height="40dp"
+                    android:layout_marginStart="160dp"
                     android:background="@drawable/rectangle_border"
                     android:outlineProvider="background"
                     android:paddingLeft="20px"
@@ -146,10 +138,9 @@
                     android:paddingRight="20px"
                     android:paddingBottom="5px"
                     android:textSize="24sp"
-                    android:layout_marginStart="160dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/label_ects"
-                    app:layout_constraintStart_toStartOf="@+id/label_number" />
+                    app:layout_constraintStart_toStartOf="@+id/label_number"
+                    app:layout_constraintTop_toTopOf="@+id/label_ects" />
 
                 <TextView
                     android:id="@+id/label_number"

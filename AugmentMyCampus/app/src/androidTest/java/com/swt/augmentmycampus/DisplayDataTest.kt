@@ -23,10 +23,7 @@ import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
-import org.junit.After
-import org.junit.Before
-import org.junit.Rule
-import org.junit.Test
+import org.junit.*
 import org.junit.runner.RunWith
 import javax.inject.Inject
 
@@ -77,6 +74,7 @@ class DisplayDataTest {
     }
 
     @Test // Test currently does not mock camera -> needs valid QR code to work
+    @Ignore
     fun scanQRCodeAndDisplayResult() {
         val textToDisplay = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr."
 

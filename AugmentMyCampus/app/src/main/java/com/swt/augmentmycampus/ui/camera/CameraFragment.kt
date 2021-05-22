@@ -18,8 +18,9 @@ import com.journeyapps.barcodescanner.CompoundBarcodeView
 import com.swt.augmentmycampus.R
 import com.swt.augmentmycampus.businessLogic.CouldNotReachServerException
 import com.swt.augmentmycampus.businessLogic.InvalidUrlException
+import com.swt.augmentmycampus.ui.data.DataFragmentArgs
 import dagger.hilt.android.AndroidEntryPoint
-
+import org.json.JSONObject
 
 @AndroidEntryPoint
 class CameraFragment : Fragment() {
@@ -76,7 +77,6 @@ class CameraFragment : Fragment() {
                     + result, Toast.LENGTH_SHORT).show()
             try {
                 var resultText = cameraViewModel.getTextData(result); // get data from BL
-
                 //pass data to DataFragment and switch
                 val action = CameraFragmentDirections.actionNavigationCameraToNavigationData(resultText)
                 requireActivity().findNavController(R.id.nav_host_fragment).navigate(action)

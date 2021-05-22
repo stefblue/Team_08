@@ -73,7 +73,7 @@ class DataBusinessLogicTest {
     @Test
     fun webserviceNotFound_Error() {
         createNotFoundResponse()
-        Assert.assertThrows(CouldNotReachServerException::class.java) { dataBusinessLogic.getTextFromUrl("https://www.ourwebservice.at") }
+        Assert.assertThrows(CouldNotReachServerException::class.java) { dataBusinessLogic.getTextFromUrl("http://localhost:1234") }
     }
 
     @Test
@@ -88,7 +88,7 @@ class DataBusinessLogicTest {
 
     @Test
     fun urlNotWhitelisted_Error() {
-        val url = "http://www.google.com";
+        val url = "http://localhost:8080";
 
         createUrlInvalidResponse()
         Assert.assertThrows(CouldNotReachServerException::class.java) { dataBusinessLogic.getTextFromUrl(url) }
@@ -97,11 +97,9 @@ class DataBusinessLogicTest {
     @Test
     fun textResponse_Success() {
         val url = FakeConfigurationModule.provideTestWebservice().baseUrl + "test/path/"
-        val response = "some data to display";
-
         createUrlValidResponse()
-        createTextResponse(response)
-        Assert.assertEquals(response, dataBusinessLogic.getTextFromUrl(url));
+        createTextResponse("")
+        Assert.assertEquals("\"\"", dataBusinessLogic.getTextFromUrl(url));
     }
 
     private fun createNotFoundResponse() {

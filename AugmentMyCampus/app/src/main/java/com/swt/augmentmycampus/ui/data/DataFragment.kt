@@ -14,42 +14,67 @@ import androidx.navigation.fragment.navArgs
 import com.swt.augmentmycampus.R
 import java.util.*
 import dagger.hilt.android.AndroidEntryPoint
+import org.json.JSONObject
 
 @AndroidEntryPoint
 class DataFragment : Fragment() {
 
-    private lateinit var dataViewModel: DataViewModel
+    //private lateinit var dataViewModel: DataViewModel
 
     val args: DataFragmentArgs by navArgs()
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
-        dataViewModel =
-                ViewModelProvider(this).get( DataViewModel::class.java)
+        //dataViewModel =
+        //        ViewModelProvider(this).get( DataViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_data, container, false)
         val textView: TextView = root.findViewById(R.id.label_header)
 
-        dataViewModel = ViewModelProvider(this).get(DataViewModel::class.java)
-        dataViewModel.dataText.value = args.dataText
+        /*dataViewModel = ViewModelProvider(this).get(DataViewModel::class.java)
+        dataViewModel.dataText.value = jsonObj.getString("ects")*/
 
-        val tvDataText: TextView = root.findViewById(R.id.fragment_data_text)
+        var contentString = "";
+        var datesString = "";
+        if(args.dataText != null && !args.dataText.isEmpty()) {
+            val jsonObj = JSONObject(args.dataText)
+
+            val ectsValueTextView: TextView = root.findViewById(R.id.label_ects_value)
+            ectsValueTextView.text = jsonObj.getString("ects")
+
+            val titleValueTextView: TextView = root.findViewById(R.id.label_header)
+            titleValueTextView.text = jsonObj.getString("title")
+
+            val numberValueTextView: TextView = root.findViewById(R.id.label_number_value)
+            numberValueTextView.text = jsonObj.getString("number")
+
+            val semesterValueTextView: TextView = root.findViewById(R.id.label_semester_value)
+            semesterValueTextView.text= jsonObj.getString("semester")
+
+            val lecturerValueTextView: TextView = root.findViewById(R.id.label_lecturer_value)
+            lecturerValueTextView.text = jsonObj.getString("lecturer")
+
+            contentString = jsonObj.getString("content")
+            datesString = jsonObj.getString("link")
+        }
+
+        /*val tvDataText: TextView = root.findViewById(R.id.fragment_data_text)
         dataViewModel.dataText.observe(
                 requireActivity(),
-                Observer { tvDataText.text = it.toString() })
+                Observer { tvDataText.text = it.toString() })*/
 
         var expandableListViewContent = root.findViewById<View>(R.id.expandableListViewContent) as ExpandableListView
         var expandableListDetailContent = HashMap<String, List<String>>()
-        expandableListDetailContent.put("Content",  Collections.singletonList("test blablabla \nnew line blABLA"))
+        expandableListDetailContent.put("Content",  Collections.singletonList(contentString))
         var expandableListTitleContent = ArrayList(expandableListDetailContent!!.keys)
         var expandableListAdapterContent = ContentExpandableListAdapter(requireContext().applicationContext, expandableListTitleContent!!, expandableListDetailContent!!)
         CreateListView(expandableListViewContent, expandableListAdapterContent, expandableListTitleContent, expandableListDetailContent);
 
         var expandableListViewDates = root.findViewById<View>(R.id.expandableListViewDates) as ExpandableListView
         var expandableListDetailDates = HashMap<String, List<String>>()
-        expandableListDetailDates.put("Dates",  Collections.singletonList("test blablabla \nnew line blABLA"))
+        expandableListDetailDates.put("Dates",  Collections.singletonList(datesString))
         var expandableListTitleDates = ArrayList(expandableListDetailDates!!.keys)
         var expandableListAdapterDates = DatesExpandableListAdapter(requireContext().applicationContext, expandableListTitleDates!!, expandableListDetailDates!!)
         CreateListView(expandableListViewDates, expandableListAdapterDates, expandableListTitleDates, expandableListDetailDates);
