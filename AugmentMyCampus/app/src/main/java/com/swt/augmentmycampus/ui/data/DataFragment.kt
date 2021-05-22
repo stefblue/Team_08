@@ -14,6 +14,7 @@ import androidx.navigation.fragment.navArgs
 import com.swt.augmentmycampus.R
 import java.util.*
 import dagger.hilt.android.AndroidEntryPoint
+import org.json.JSONObject
 
 @AndroidEntryPoint
 class DataFragment : Fragment() {
@@ -33,7 +34,12 @@ class DataFragment : Fragment() {
         val textView: TextView = root.findViewById(R.id.label_header)
 
         dataViewModel = ViewModelProvider(this).get(DataViewModel::class.java)
-        dataViewModel.dataText.value = args.dataText
+
+        val jsonObj = JSONObject(args.dataText)
+        dataViewModel.dataText.value = jsonObj.getString("ects")
+
+        val ectsValueTextView: TextView = root.findViewById(R.id.label_ects_value)
+        ectsValueTextView.text = jsonObj.getString("ects")
 
         val tvDataText: TextView = root.findViewById(R.id.fragment_data_text)
         dataViewModel.dataText.observe(

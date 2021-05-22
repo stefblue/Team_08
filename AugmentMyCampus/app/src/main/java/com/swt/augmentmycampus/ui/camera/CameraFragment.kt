@@ -60,8 +60,6 @@ class CameraFragment : Fragment() {
                     + result.contents, Toast.LENGTH_SHORT).show()
             try {
                 var resultText = cameraViewModel.getTextData(result.contents); // get data from BL
-                val jsonObj = JSONObject(resultText)
-
                 //pass data to DataFragment and switch
                 val action = CameraFragmentDirections.actionNavigationCameraToNavigationData(resultText)
                 requireActivity().findNavController(R.id.nav_host_fragment).navigate(action)
