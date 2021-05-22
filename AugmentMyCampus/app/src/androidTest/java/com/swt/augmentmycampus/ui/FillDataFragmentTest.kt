@@ -96,7 +96,16 @@ class FillDataFragmentTest {
         Espresso.onView(ViewMatchers.withId(R.id.expandedListItemContent)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
         Espresso.onView(ViewMatchers.withId(R.id.expandedListItemContent)).check(ViewAssertions.matches(ViewMatchers.withText("description")))
     }
-
+    
+    @Test
+    fun testDateField() {
+        mainActivity.scenario.onActivity { a ->
+            a.findNavController(R.id.nav_host_fragment).navigate(R.id.action_navigation_camera_to_navigation_data, bundleOf("dataText" to getDummyData()))
+        }
+        Espresso.onView(ViewMatchers.withId(R.id.listTitleDates)).perform(ViewActions.click())
+        Espresso.onView(ViewMatchers.withId(R.id.expandedListItemDates)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        Espresso.onView(ViewMatchers.withId(R.id.expandedListItemDates)).check(ViewAssertions.matches(ViewMatchers.withText("link")))
+    }
 
 
     private fun getDummyData(): String {
