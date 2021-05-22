@@ -43,6 +43,15 @@ class FillDataFragmentTest {
             = ActivityScenarioRule(MainActivity::class.java)
 
     @Test
+    fun testTitleField() {
+        mainActivity.scenario.onActivity { a ->
+            a.findNavController(R.id.nav_host_fragment).navigate(R.id.action_navigation_camera_to_navigation_data, bundleOf("dataText" to getDummyData()))
+        }
+        Espresso.onView(ViewMatchers.withId(R.id.label_header)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        Espresso.onView(ViewMatchers.withId(R.id.label_header)).check(ViewAssertions.matches(ViewMatchers.withText("TestTitle")))
+    }
+
+    @Test
     fun testECTSField() {
         mainActivity.scenario.onActivity { a ->
             a.findNavController(R.id.nav_host_fragment).navigate(R.id.action_navigation_camera_to_navigation_data, bundleOf("dataText" to getDummyData()))
