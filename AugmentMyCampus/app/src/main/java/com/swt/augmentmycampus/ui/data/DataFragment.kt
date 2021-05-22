@@ -47,6 +47,9 @@ class DataFragment : Fragment() {
 
             val numberValueTextView: TextView = root.findViewById(R.id.label_number_value)
             numberValueTextView.text = jsonObj.getString("number")
+
+            val semesterValueTextView: TextView = root.findViewById(R.id.label_semester_value)
+            ectsValueTextView.text = jsonObj.getString("semester")
         }
 
         /*val tvDataText: TextView = root.findViewById(R.id.fragment_data_text)
