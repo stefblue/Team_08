@@ -37,6 +37,7 @@ class DataFragment : Fragment() {
         dataViewModel.dataText.value = jsonObj.getString("ects")*/
 
         var contentString = "";
+        var datesString = "";
         if(args.dataText != null && !args.dataText.isEmpty()) {
             val jsonObj = JSONObject(args.dataText)
 
@@ -56,6 +57,7 @@ class DataFragment : Fragment() {
             lecturerValueTextView.text = jsonObj.getString("lecturer")
 
             contentString = jsonObj.getString("content")
+            datesString = jsonObj.getString("link")
         }
 
         /*val tvDataText: TextView = root.findViewById(R.id.fragment_data_text)
@@ -72,7 +74,7 @@ class DataFragment : Fragment() {
 
         var expandableListViewDates = root.findViewById<View>(R.id.expandableListViewDates) as ExpandableListView
         var expandableListDetailDates = HashMap<String, List<String>>()
-        expandableListDetailDates.put("Dates",  Collections.singletonList("test blablabla \nnew line blABLA"))
+        expandableListDetailDates.put("Dates",  Collections.singletonList(datesString))
         var expandableListTitleDates = ArrayList(expandableListDetailDates!!.keys)
         var expandableListAdapterDates = DatesExpandableListAdapter(requireContext().applicationContext, expandableListTitleDates!!, expandableListDetailDates!!)
         CreateListView(expandableListViewDates, expandableListAdapterDates, expandableListTitleDates, expandableListDetailDates);
