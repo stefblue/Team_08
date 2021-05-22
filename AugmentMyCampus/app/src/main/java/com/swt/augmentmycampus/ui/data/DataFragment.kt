@@ -24,9 +24,9 @@ class DataFragment : Fragment() {
     val args: DataFragmentArgs by navArgs()
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         //dataViewModel =
         //        ViewModelProvider(this).get( DataViewModel::class.java)
@@ -36,6 +36,7 @@ class DataFragment : Fragment() {
         /*dataViewModel = ViewModelProvider(this).get(DataViewModel::class.java)
         dataViewModel.dataText.value = jsonObj.getString("ects")*/
 
+        var contentString = "";
         if(args.dataText != null && !args.dataText.isEmpty()) {
             val jsonObj = JSONObject(args.dataText)
 
@@ -49,10 +50,12 @@ class DataFragment : Fragment() {
             numberValueTextView.text = jsonObj.getString("number")
 
             val semesterValueTextView: TextView = root.findViewById(R.id.label_semester_value)
-            semesterValueTextView.text = jsonObj.getString("semester")
+            semesterValueTextView.text= jsonObj.getString("semester")
 
             val lecturerValueTextView: TextView = root.findViewById(R.id.label_lecturer_value)
             lecturerValueTextView.text = jsonObj.getString("lecturer")
+
+            contentString = jsonObj.getString("content")
         }
 
         /*val tvDataText: TextView = root.findViewById(R.id.fragment_data_text)
@@ -62,7 +65,7 @@ class DataFragment : Fragment() {
 
         var expandableListViewContent = root.findViewById<View>(R.id.expandableListViewContent) as ExpandableListView
         var expandableListDetailContent = HashMap<String, List<String>>()
-        expandableListDetailContent.put("Content",  Collections.singletonList("test blablabla \nnew line blABLA"))
+        expandableListDetailContent.put("Content",  Collections.singletonList(contentString))
         var expandableListTitleContent = ArrayList(expandableListDetailContent!!.keys)
         var expandableListAdapterContent = ContentExpandableListAdapter(requireContext().applicationContext, expandableListTitleContent!!, expandableListDetailContent!!)
         CreateListView(expandableListViewContent, expandableListAdapterContent, expandableListTitleContent, expandableListDetailContent);
