@@ -81,7 +81,6 @@ class DisplayDataTest {
         createUrlValidResponse()
         createTextResponse(textToDisplay)
 
-        onView(ViewMatchers.withId(R.id.scanButton)).perform(ViewActions.click())
         Thread.sleep(15000) // wait for user to scan qr code and app to display result
 
         onView(ViewMatchers.withId(R.id.navigation_data)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))

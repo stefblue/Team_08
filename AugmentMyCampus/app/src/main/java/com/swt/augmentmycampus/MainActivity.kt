@@ -2,16 +2,14 @@ package com.swt.augmentmycampus
 
 import android.os.Bundle
 import android.os.StrictMode
+import android.view.View
+import android.widget.Button
 import androidx.fragment.app.FragmentManager
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import android.view.View
-import android.widget.Button
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.zxing.integration.android.IntentIntegrator
 import com.swt.augmentmycampus.ui.camera.CameraFragment
 import com.swt.augmentmycampus.ui.data.DataFragment
 import com.swt.augmentmycampus.ui.settings.SettingsFragment
@@ -48,4 +46,6 @@ class MainActivity : BaseActivity() {
             registerButton.text = "Register"
         }
     }
+
+
 }
