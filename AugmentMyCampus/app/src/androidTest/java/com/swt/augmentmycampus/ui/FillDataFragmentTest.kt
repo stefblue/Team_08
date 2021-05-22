@@ -78,6 +78,15 @@ class FillDataFragmentTest {
         Espresso.onView(ViewMatchers.withId(R.id.label_semester_value)).check(ViewAssertions.matches(ViewMatchers.withText("Sommer")))
     }
 
+    @Test
+    fun testSemesterField() {
+        mainActivity.scenario.onActivity { a ->
+            a.findNavController(R.id.nav_host_fragment).navigate(R.id.action_navigation_camera_to_navigation_data, bundleOf("dataText" to getDummyData()))
+        }
+        Espresso.onView(ViewMatchers.withId(R.id.label_lecturer_value)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        Espresso.onView(ViewMatchers.withId(R.id.label_lecturer_value)).check(ViewAssertions.matches(ViewMatchers.withText("Lecturer A")))
+    }
+
     private fun getDummyData(): String {
         return "{\"title\":\"TestTitle\",\"number\":\"123\",\"semester\":\"Sommer\",\"ects\":5,\"lecturer\":\"Lecturer A\",\"content\":\"description\",\"link\":\"link\"}";
     }
