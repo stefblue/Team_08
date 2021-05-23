@@ -3,6 +3,7 @@ package com.swt.augmentmycampus
 import androidx.test.espresso.Espresso.*
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.typeText
+import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.intent.Intents
 import androidx.test.espresso.matcher.ViewMatchers.*
@@ -107,6 +108,16 @@ class SettingsTest {
 
         onView(withText("John")).check(matches(isDisplayed()))
         onView(withText("Smith")).check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun logoutIsWorking() {
+        loginWithRightCredentials()
+        val logoutButton = onView(withText("Logout"))
+
+        onView(withId(R.id.fragment_settings_logout)).perform(click())
+
+        logoutButton.check(doesNotExist())
     }
 
     @Test
