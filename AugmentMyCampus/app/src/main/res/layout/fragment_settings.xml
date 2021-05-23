@@ -7,54 +7,6 @@
     tools:context=".ui.settings.SettingsFragment"
     android:id="@+id/fragment_settings_id">
 
-    <EditText
-        android:id="@+id/fragment_settings_user"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="96dp"
-        android:layout_marginEnd="24dp"
-        android:autofillHints="@string/placeholder_fragment_settings_user"
-        android:hint="@string/placeholder_fragment_settings_user"
-        android:inputType="textEmailAddress"
-        android:selectAllOnFocus="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/fragment_settings_password"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="24dp"
-        android:autofillHints="@string/placeholder_fragment_settings_user"
-        android:hint="@string/placeholder_fragment_settings_password"
-        android:imeActionLabel="@string/placeholder_fragment_settings_password"
-        android:imeOptions="actionDone"
-        android:inputType="textPassword"
-        android:selectAllOnFocus="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_settings_user" />
-
-    <Button
-        android:id="@+id/fragment_settings_submit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="48dp"
-        android:layout_marginBottom="32dp"
-        android:text="@string/text_fragment_settings_submit"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_settings_password"
-        app:layout_constraintVertical_bias="0.2" />
-
     <Spinner
         android:id="@+id/fragment_settings_language"
         android:layout_width="match_parent"
@@ -73,10 +25,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:text="@string/settings_language"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_settings_submit" />
+        app:layout_constraintTop_toBottomOf="@+id/fragment_settings_user_container" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment_settings_user_container"
+        android:name="com.swt.augmentmycampus.ui.settings.LoginFragment"
+        android:layout_width="415dp"
+        android:layout_height="352dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -27,15 +27,6 @@ class SettingsFragment : Fragment() {
                 ViewModelProvider(this).get(SettingsViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_settings, container, false)
 
-        val loginButton = root.findViewById<Button>(R.id.fragment_settings_submit)
-
-        loginButton.setOnClickListener {
-            val builder = AlertDialog.Builder(requireContext())
-            builder.setMessage(R.string.invalid_credentials)
-            builder.setPositiveButton(R.string.ok, null)
-            builder.show()
-        }
-
         val spinner: Spinner = root.findViewById(R.id.fragment_settings_language)
         spinner.setSelection(getCurrentLanguage())
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {

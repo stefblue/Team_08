@@ -41,11 +41,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e730fd7d-d332-4170-873c-a92563bee440" name="Default Changelist" comment="AC-18 added test to check if languages are selectable [FL,PN]">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/swt/augmentmycampus/ui/settings/LoginFragment.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/swt/augmentmycampus/ui/settings/LoginViewModel.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/swt/augmentmycampus/ui/settings/UserInformationFragment.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/swt/augmentmycampus/ui/settings/UserInformationViewModel.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_baseline_account_circle_24.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_login.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_user_information.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/app/Augment_My_Campus.app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/app/Augment_My_Campus.app.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/androidTest/java/com/swt/augmentmycampus/DataBusinessLogicTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/androidTest/java/com/swt/augmentmycampus/DataBusinessLogicTest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/androidTest/java/com/swt/augmentmycampus/NavigationBarTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/androidTest/java/com/swt/augmentmycampus/NavigationBarTest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/androidTest/java/com/swt/augmentmycampus/QRCodeScannerTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/androidTest/java/com/swt/augmentmycampus/QRCodeScannerTest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/test/java/com/swt/augmentmycampus/WebserviceUnitTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/swt/augmentmycampus/ui/settings/SettingsFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/swt/augmentmycampus/ui/settings/SettingsFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_settings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values-en/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values-en/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values-ru/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values-ru/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,8 +110,11 @@
     <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
       <recent name="com.swt.augmentmycampus" />
     </key>
+    <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
+      <recent name="com.swt.augmentmycampus.ui.settings" />
+    </key>
   </component>
-  <component name="RunManager" selected="Android Instrumented Tests.Tests in 'com.swt.augmentmycampus'">
+  <component name="RunManager" selected="Android App.app">
     <configuration name="All in Augment_My_Campus.app" type="AndroidJUnit" factoryName="Android JUnit" nameIsGenerated="true">
       <module name="Augment_My_Campus.app" />
       <option name="PACKAGE_NAME" value="" />
@@ -495,6 +507,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="691" y="268" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040/3840.0.1280.680@0.0.1920.1040" timestamp="1618410596193" />
+    <state x="1967" y="-841" key="#org.jetbrains.kotlin.idea.refactoring.move.moveDeclarations.ui.MoveKotlinTopLevelDeclarationsDialog" timestamp="1621775536091">
+      <screen x="1251" y="-1212" width="1920" height="1160" />
+    </state>
+    <state x="1967" y="-841" key="#org.jetbrains.kotlin.idea.refactoring.move.moveDeclarations.ui.MoveKotlinTopLevelDeclarationsDialog/0.0.1463.783/-669.-1200.1920.1160/1251.-1212.1920.1160@1251.-1212.1920.1160" timestamp="1621775536091" />
     <state x="94" y="94" width="1733" height="853" key="AVDManager" timestamp="1618409615841">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -503,6 +519,14 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="696" y="470" key="AndroidCreateResourceFileDialog/0.0.1920.1040/3840.0.1280.680@0.0.1920.1040" timestamp="1618410600213" />
+    <state x="2055" y="-842" key="AndroidCreateXmlResourceDialog" timestamp="1621776929484">
+      <screen x="1251" y="-1212" width="1920" height="1160" />
+    </state>
+    <state x="2055" y="-842" key="AndroidCreateXmlResourceDialog/0.0.1463.783/-669.-1200.1920.1160/1251.-1212.1920.1160@1251.-1212.1920.1160" timestamp="1621776929484" />
+    <state width="448" height="466" key="DebuggerActiveHint" timestamp="1621781556989">
+      <screen x="1251" y="-1212" width="1920" height="1160" />
+    </state>
+    <state width="448" height="466" key="DebuggerActiveHint/0.0.1463.783/-669.-1200.1920.1160/1251.-1212.1920.1160@1251.-1212.1920.1160" timestamp="1621781556989" />
     <state x="92" y="92" width="1736" height="856" key="DiffContextDialog" timestamp="1619539504104">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -512,46 +536,50 @@
     </state>
     <state x="741" y="276" key="FileChooserDialogImpl/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1619538805200" />
     <state x="741" y="276" key="FileChooserDialogImpl/0.0.1920.1040/3840.0.1280.680@0.0.1920.1040" timestamp="1618408536787" />
-    <state width="1876" height="309" key="GridCell.Tab.0.bottom" timestamp="1620308686066">
+    <state width="1876" height="220" key="GridCell.Tab.0.bottom" timestamp="1621781501610">
       <screen x="1251" y="-1212" width="1920" height="1160" />
     </state>
     <state width="1877" height="234" key="GridCell.Tab.0.bottom/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1619540641295" />
-    <state width="1876" height="309" key="GridCell.Tab.0.bottom/0.0.1463.783/-669.-1200.1920.1160/1251.-1212.1920.1160@1251.-1212.1920.1160" timestamp="1620308686066" />
+    <state width="1876" height="220" key="GridCell.Tab.0.bottom/0.0.1463.783/-669.-1200.1920.1160/1251.-1212.1920.1160@1251.-1212.1920.1160" timestamp="1621781501610" />
     <state width="1875" height="320" key="GridCell.Tab.0.bottom/0.0.1920.1040/3840.0.1280.680@0.0.1920.1040" timestamp="1618654629982" />
-    <state width="1876" height="309" key="GridCell.Tab.0.center" timestamp="1620308686066">
+    <state width="1876" height="220" key="GridCell.Tab.0.center" timestamp="1621781501609">
       <screen x="1251" y="-1212" width="1920" height="1160" />
     </state>
     <state width="1877" height="234" key="GridCell.Tab.0.center/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1619540641295" />
-    <state width="1876" height="309" key="GridCell.Tab.0.center/0.0.1463.783/-669.-1200.1920.1160/1251.-1212.1920.1160@1251.-1212.1920.1160" timestamp="1620308686066" />
+    <state width="1876" height="220" key="GridCell.Tab.0.center/0.0.1463.783/-669.-1200.1920.1160/1251.-1212.1920.1160@1251.-1212.1920.1160" timestamp="1621781501609" />
     <state width="1875" height="320" key="GridCell.Tab.0.center/0.0.1920.1040/3840.0.1280.680@0.0.1920.1040" timestamp="1618654629982" />
-    <state width="1876" height="309" key="GridCell.Tab.0.left" timestamp="1620308686065">
+    <state width="1876" height="220" key="GridCell.Tab.0.left" timestamp="1621781501609">
       <screen x="1251" y="-1212" width="1920" height="1160" />
     </state>
     <state width="1877" height="234" key="GridCell.Tab.0.left/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1619540641295" />
-    <state width="1876" height="309" key="GridCell.Tab.0.left/0.0.1463.783/-669.-1200.1920.1160/1251.-1212.1920.1160@1251.-1212.1920.1160" timestamp="1620308686065" />
+    <state width="1876" height="220" key="GridCell.Tab.0.left/0.0.1463.783/-669.-1200.1920.1160/1251.-1212.1920.1160@1251.-1212.1920.1160" timestamp="1621781501609" />
     <state width="1875" height="320" key="GridCell.Tab.0.left/0.0.1920.1040/3840.0.1280.680@0.0.1920.1040" timestamp="1618654629981" />
-    <state width="1876" height="309" key="GridCell.Tab.0.right" timestamp="1620308686066">
+    <state width="1876" height="220" key="GridCell.Tab.0.right" timestamp="1621781501609">
       <screen x="1251" y="-1212" width="1920" height="1160" />
     </state>
     <state width="1877" height="234" key="GridCell.Tab.0.right/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1619540641295" />
-    <state width="1876" height="309" key="GridCell.Tab.0.right/0.0.1463.783/-669.-1200.1920.1160/1251.-1212.1920.1160@1251.-1212.1920.1160" timestamp="1620308686066" />
+    <state width="1876" height="220" key="GridCell.Tab.0.right/0.0.1463.783/-669.-1200.1920.1160/1251.-1212.1920.1160@1251.-1212.1920.1160" timestamp="1621781501609" />
     <state width="1875" height="320" key="GridCell.Tab.0.right/0.0.1920.1040/3840.0.1280.680@0.0.1920.1040" timestamp="1618654629982" />
-    <state width="1877" height="281" key="GridCell.Tab.1.bottom" timestamp="1619540311154">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1876" height="220" key="GridCell.Tab.1.bottom" timestamp="1621781540979">
+      <screen x="1251" y="-1212" width="1920" height="1160" />
     </state>
     <state width="1877" height="281" key="GridCell.Tab.1.bottom/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1619540311154" />
-    <state width="1877" height="281" key="GridCell.Tab.1.center" timestamp="1619540311154">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1876" height="220" key="GridCell.Tab.1.bottom/0.0.1463.783/-669.-1200.1920.1160/1251.-1212.1920.1160@1251.-1212.1920.1160" timestamp="1621781540979" />
+    <state width="1876" height="220" key="GridCell.Tab.1.center" timestamp="1621781540978">
+      <screen x="1251" y="-1212" width="1920" height="1160" />
     </state>
     <state width="1877" height="281" key="GridCell.Tab.1.center/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1619540311154" />
-    <state width="1877" height="281" key="GridCell.Tab.1.left" timestamp="1619540311154">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1876" height="220" key="GridCell.Tab.1.center/0.0.1463.783/-669.-1200.1920.1160/1251.-1212.1920.1160@1251.-1212.1920.1160" timestamp="1621781540978" />
+    <state width="1876" height="220" key="GridCell.Tab.1.left" timestamp="1621781540978">
+      <screen x="1251" y="-1212" width="1920" height="1160" />
     </state>
     <state width="1877" height="281" key="GridCell.Tab.1.left/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1619540311154" />
-    <state width="1877" height="281" key="GridCell.Tab.1.right" timestamp="1619540311154">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1876" height="220" key="GridCell.Tab.1.left/0.0.1463.783/-669.-1200.1920.1160/1251.-1212.1920.1160@1251.-1212.1920.1160" timestamp="1621781540978" />
+    <state width="1876" height="220" key="GridCell.Tab.1.right" timestamp="1621781540978">
+      <screen x="1251" y="-1212" width="1920" height="1160" />
     </state>
     <state width="1877" height="281" key="GridCell.Tab.1.right/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1619540311154" />
+    <state width="1876" height="220" key="GridCell.Tab.1.right/0.0.1463.783/-669.-1200.1920.1160/1251.-1212.1920.1160@1251.-1212.1920.1160" timestamp="1621781540978" />
     <state x="646" y="222" key="RollbackChangesDialog" timestamp="1619538120653">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -572,6 +600,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="94" y="94" width="1733" height="853" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1920.1040/3840.0.1280.680@0.0.1920.1040" timestamp="1618409615842" />
+    <state x="2020" y="-718" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1621781256901">
+      <screen x="1251" y="-1212" width="1920" height="1160" />
+    </state>
+    <state x="2020" y="-718" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1463.783/-669.-1200.1920.1160/1251.-1212.1920.1160@1251.-1212.1920.1160" timestamp="1621781256901" />
     <state width="577" height="535" key="javadoc.popup.new" timestamp="1618654602950">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -589,6 +621,11 @@
           <url>file://$PROJECT_DIR$/app/src/main/java/com/swt/augmentmycampus/businessLogic/DataBusinessLogic.kt</url>
           <line>24</line>
           <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/swt/augmentmycampus/ui/settings/LoginFragment.kt</url>
+          <line>31</line>
+          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
