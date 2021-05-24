@@ -1,5 +1,6 @@
 package com.swt.augmentmycampus.ui.settings
 
+import android.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -22,6 +23,14 @@ class UserInformationFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.fragment_user_information, container, false)
+
+        val button = root.findViewById(R.id.fragment_settings_logout) as Button
+        button.setOnClickListener {
+            requireActivity().supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.fragment_settings_user_container, LoginFragment())
+                .commit()
+        }
 
         return root
     }
