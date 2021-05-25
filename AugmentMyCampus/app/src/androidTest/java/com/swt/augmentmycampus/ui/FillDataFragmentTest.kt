@@ -100,12 +100,12 @@ class FillDataFragmentTest {
         // We only test for the first 3 entries because we can't scroll to the bottom without
         // disabling animations on all of our programmers devices. We no only perform a swipeUp
         // which gives us the 3rd date/time as well.
-        Espresso.onView(ViewMatchers.withText("24.05.2021 10:00")).perform(ViewActions.scrollTo()).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
-        Espresso.onView(ViewMatchers.withText("25.05.2021 10:00")).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        Espresso.onView(ViewMatchers.withText("24.05.2021 10:00 for 2:00:00")).perform(ViewActions.scrollTo()).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        Espresso.onView(ViewMatchers.withText("25.05.2021 10:00 for 2:00:00")).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
         Espresso.onView(ViewMatchers.withId(R.id.listTitleDates)).perform(ViewActions.swipeUp())
-        Espresso.onView(ViewMatchers.withText("25.05.2021 14:00")).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
-        //Espresso.onView(ViewMatchers.withText("25.05.2021 18:00")).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
-        //Espresso.onView(ViewMatchers.withText("26.05.2021 10:00")).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        Espresso.onView(ViewMatchers.withText("25.05.2021 14:00 for 2:00:00")).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        //Espresso.onView(ViewMatchers.withText("25.05.2021 18:00 for 2:00:00")).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        //Espresso.onView(ViewMatchers.withText("26.05.2021 10:00 for 2:00:00")).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
 
 
