@@ -18,6 +18,7 @@ import java.time.Duration
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
+import kotlin.collections.HashMap
 
 @AndroidEntryPoint
 class DataFragment : Fragment() {
@@ -92,16 +93,29 @@ class DataFragment : Fragment() {
         expandableListDetailContent.put("Content",  Collections.singletonList(contentString))
         var expandableListTitleContent = ArrayList(expandableListDetailContent!!.keys)
         var expandableListAdapterContent = ContentExpandableListAdapter(requireContext().applicationContext, expandableListTitleContent!!, expandableListDetailContent!!)
-        CreateListView(expandableListViewContent, expandableListAdapterContent, expandableListTitleContent, expandableListDetailContent);
+        CreateListView(expandableListViewContent, expandableListAdapterContent)
 
         var expandableListViewDates = root.findViewById<View>(R.id.expandableListViewDates) as ExpandableListView
-        var expandableListDetailDates = HashMap<String, List<String>>()
-        expandableListDetailDates.put("Dates", listOfDates)
+        var expandableListDetailDates = HashMap<String, List<Pair<String, Boolean>>>()
+        var appointments = ArrayList<Pair<String, Boolean>>()
+        if (listOfDates.size >= 2) {
+            for(i in 0 until 1)
+                appointments.add(Pair(listOfDates[i], true))
+            for(i in 1 until listOfDates.size)
+                appointments.add(Pair(listOfDates[i], false))
+        }
+        expandableListDetailDates.put("Dates",  appointments)
         var expandableListTitleDates = ArrayList(expandableListDetailDates!!.keys)
         var expandableListAdapterDates = DatesExpandableListAdapter(requireContext().applicationContext, expandableListTitleDates!!, expandableListDetailDates!!)
-        CreateListView(expandableListViewDates, expandableListAdapterDates, expandableListTitleDates, expandableListDetailDates);
+        CreateListView(expandableListViewDates, expandableListAdapterDates)
 
         return root
+    }
+
+    private fun CreateListView(expandableListView: ExpandableListView, expandableListAdapter: ExpandableListAdapter) : ExpandableListView {
+        expandableListView!!.setAdapter(expandableListAdapter)
+
+        return expandableListView;
     }
 
     private fun CreateListView(expandableListView: ExpandableListView, expandableListAdapter: ExpandableListAdapter, expandableListTitle: ArrayList<String>, expandableListDetail: HashMap<String, List<String>>) : ExpandableListView {
