@@ -14,7 +14,6 @@ public class LoginComponent implements IValidateCredentialsComponent {
 	@Autowired
 	private AmcConfiguration amcConfig;
 
-	@Override
 	public boolean isValidAuthentication(String userName, String password) {
 
 		if (amcConfig.getUserNamePasswordMap().containsKey(userName)) {

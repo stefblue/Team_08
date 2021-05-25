@@ -12,9 +12,9 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.swt.amc.api.LectureInformation;
 import com.swt.amc.api.UserInformation;
-import com.swt.amc.components.LoginComponent;
 import com.swt.amc.exceptions.AmcException;
 import com.swt.amc.interfaces.IQRCodeLinkVerifier;
+import com.swt.amc.interfaces.IValidateCredentialsComponent;
 
 @RestController
 public class AmcRestController {
@@ -23,7 +23,7 @@ public class AmcRestController {
 	private IQRCodeLinkVerifier qrCodeLinkVerifier;
 
 	@Autowired
-	private LoginComponent loginComponent;
+	private IValidateCredentialsComponent validateCredentialsComponent;
 
 	@GetMapping("/verifyQrCode/{qrCodeLink}")
 	public ResponseEntity<LectureInformation> verifyQrCodeViaApp(@PathVariable("qrCodeLink") final String qrCodeLink)
@@ -41,7 +41,8 @@ public class AmcRestController {
 	public ResponseEntity<UserInformation> getUserInfo(@PathVariable("userName") final String userName,
 			@PathVariable("password") final String password) throws AmcException {
 		return new ResponseEntity<UserInformation>(
-				loginComponent.getUserInformationForUsernameAndPassword(userName, password), HttpStatus.OK);
+				validateCredentialsComponent.getUserInformationForUsernameAndPassword(userName, password),
+				HttpStatus.OK);
 	}
 
 	@ExceptionHandler({ AmcException.class })
