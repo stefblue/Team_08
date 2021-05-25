@@ -6,10 +6,10 @@ import org.springframework.stereotype.Component;
 import com.swt.amc.api.UserInformation;
 import com.swt.amc.configuration.AmcConfiguration;
 import com.swt.amc.exceptions.AmcException;
-import com.swt.amc.interfaces.ILoginComponent;
+import com.swt.amc.interfaces.IValidateCredentialsComponent;
 
 @Component
-public class LoginComponent implements ILoginComponent {
+public class LoginComponent implements IValidateCredentialsComponent {
 
 	@Autowired
 	private AmcConfiguration amcConfig;

@@ -26,10 +26,4 @@ amc:
       ects: 1
       lecturer: "Lecturer3"
       content: "Content3"
-      link: "https://blubb.com"
-  userNamePasswordMap:
-    admin:
-      password: password
-      givenName: Franz
-      lastName: Bauer
-      
+      link: "https://blubb.com" 

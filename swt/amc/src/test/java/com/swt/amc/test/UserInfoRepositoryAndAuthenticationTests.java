@@ -1,33 +1,43 @@
 package com.swt.amc.test;
 
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.swt.amc.api.UserInformation;
 import com.swt.amc.exceptions.AmcException;
 import com.swt.amc.interfaces.IValidateCredentialsComponent;
+import com.swt.amc.repositories.IUserInformationRepository;
 
-@SpringBootTest
-public class AuthenticationTests {
+@SpringBootTest()
+@TestInstance(Lifecycle.PER_CLASS)
+public class UserInfoRepositoryAndAuthenticationTests {
 
 	@Autowired
+	private IUserInformationRepository repository;
+
+	@Autowired
+	@Qualifier("validateCredentialsComponent")
 	private IValidateCredentialsComponent loginComponent;
 
-	@Test
-	public void authenticationTest() {
-		assertTrue(loginComponent.isValidAuthentication("admin", "password"));
-	}
-
-	@Test
-	public void authenticationFailureTest() {
-		assertFalse(loginComponent.isValidAuthentication("notUser", "somePassword"));
+	@BeforeAll
+	public void setUpRepo() {
+		repository.deleteAll();
+		UserInformation userInformation = new UserInformation();
+		userInformation.setUserName("admin");
+		userInformation.setGivenName("Franz");
+		userInformation.setLastName("Bauer");
+		userInformation.setPassword("password");
+		repository.save(userInformation);
 	}
 
 	@Test
