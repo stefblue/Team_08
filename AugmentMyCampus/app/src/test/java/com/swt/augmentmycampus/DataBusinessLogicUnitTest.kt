@@ -22,7 +22,7 @@ class DataBusinessLogicUnitTest {
     fun `test webservice response type`() {
         try {
         var response = businessLogic.performRestCall("http://test.com");
-        assertThat(response.body(), instanceOf(String::class.java))
+        assertThat(response, instanceOf(String::class.java))
         } catch (e: Exception) {
             fail();
         }

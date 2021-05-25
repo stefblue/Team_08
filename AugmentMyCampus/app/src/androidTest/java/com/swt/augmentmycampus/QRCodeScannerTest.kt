@@ -1,5 +1,6 @@
 package com.swt.augmentmycampus
 
+import androidx.test.espresso.Espresso
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
@@ -17,22 +18,25 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
+
 @HiltAndroidTest
 @RunWith(AndroidJUnit4::class)
 class QRCodeScannerTest {
-
-    // @Rule
-    // var intentsRule: IntentsTestRule<CameraActivity> = IntentsTestRule(CameraActivity::class.java)
+    
     @get:Rule(order = 0)
     var hiltRule: HiltAndroidRule = HiltAndroidRule(this)
 
     @get:Rule(order = 1)
-    var mainActivity: ActivityScenarioRule<ScanActivity>
-            = ActivityScenarioRule(ScanActivity::class.java)
+    var mainActivity: ActivityScenarioRule<MainActivity>
+            = ActivityScenarioRule(MainActivity::class.java)
+
+    val zxingName = "zxing_barcode_scanner"
 
     @Before
     fun setUp() {
         Intents.init()
+        mainActivity
+        onView(withId(R.id.navigation_camera)).perform(click())
     }
 
     @After
@@ -42,51 +46,11 @@ class QRCodeScannerTest {
 
     @Test
     fun testMainActivity() {
-        mainActivity
-        onView(withId(R.id.scanButton)).check(matches(isDisplayed()))
-        onView(withId(R.id.scanButton)).check(matches(withText("Scan")))
-        onView(withId(R.id.qrCodeText)).check(matches(isDisplayed()))
-        onView(withId(R.id.qrCodeText)).check(matches(withText("Press 'Scan' below")))
+        onView(withId(R.id.navigation_camera)).check(matches(isDisplayed()))
     }
 
     @Test
     fun testScannerView() {
-        mainActivity
-        onView(withId(R.id.scanButton)).perform(click())
-        onView(withClassName(Matchers.containsString("ZXingScannerView"))).check(matches(isDisplayed()))
-    }
-
-    @Test
-    fun testCameraView() {
-        mainActivity
-        onView(withId(R.id.qrCodeText)).check(matches(isDisplayed()))
-        onView(withText("Press 'Scan' below")).check(matches(isDisplayed()))
-        onView(withId(R.id.scanButton)).perform(click())
-        onView(withClassName(Matchers.containsString("ZXingScannerView")))
-
-        // Wait for user to scan qr-code (5000ms)
-        // result can be either user scanned qr.code
-        // or the timeout
-        // both return to mainactivity
-        Thread.sleep(5500);
-
-        onView(withClassName(Matchers.containsString("ZXingScannerView"))).check(doesNotExist())
-        onView(withText("Press 'Scan' below")).check(doesNotExist())
-    }
-
-    @Test
-    fun testBackButtonOnCameraView() {
-        mainActivity
-        onView(withId(R.id.qrCodeText)).check(matches(isDisplayed()))
-        onView(withText("Press 'Scan' below")).check(matches(isDisplayed()))
-        onView(withId(R.id.scanButton)).perform(click())
-        onView(withClassName(Matchers.containsString("ZXingScannerView")))
-
-        // Wait for button to be available (500ms)
-        Thread.sleep(1000);
-        onView(withId(R.id.backButton)).perform(click())
-
-        onView(withClassName(Matchers.containsString("ZXingScannerView"))).check(doesNotExist())
-        onView(withText("Press 'Scan' below")).check(matches(isDisplayed()))
+        onView(withId(R.id.barcode_scanner)).check(matches(isDisplayed()))
     }
 }
