@@ -1,5 +1,8 @@
 package com.swt.augmentmycampus.ui
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import androidx.test.espresso.Espresso
@@ -15,6 +18,7 @@ import dagger.hilt.android.testing.HiltAndroidTest
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import java.lang.Exception
 
 @HiltAndroidTest
 @RunWith(AndroidJUnit4::class)
@@ -100,12 +104,26 @@ class FillDataFragmentTest {
         // We only test for the first 3 entries because we can't scroll to the bottom without
         // disabling animations on all of our programmers devices. We no only perform a swipeUp
         // which gives us the 3rd date/time as well.
-        Espresso.onView(ViewMatchers.withText("24.05.2021 10:00 for 2:00:00")).perform(ViewActions.scrollTo()).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        Espresso.onView(ViewMatchers.withText("24.05.2021 10:00 for 2:00:00")).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
         Espresso.onView(ViewMatchers.withText("25.05.2021 10:00 for 2:00:00")).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
         Espresso.onView(ViewMatchers.withId(R.id.listTitleDates)).perform(ViewActions.swipeUp())
         Espresso.onView(ViewMatchers.withText("25.05.2021 14:00 for 2:00:00")).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
         //Espresso.onView(ViewMatchers.withText("25.05.2021 18:00 for 2:00:00")).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
         //Espresso.onView(ViewMatchers.withText("26.05.2021 10:00 for 2:00:00")).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+    }
+
+    @Test
+    fun testDateFieldColor() {
+        mainActivity.scenario.onActivity { a ->
+            a.findNavController(R.id.nav_host_fragment).navigate(R.id.action_navigation_camera_to_navigation_data, bundleOf("dataText" to getDummyData()))
+        }
+        Espresso.onView(ViewMatchers.withId(R.id.listTitleDates)).perform(ViewActions.click())
+        Espresso.onView(ViewMatchers.withId(R.id.listTitleDates)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+
+        Espresso.onView(ViewMatchers.withText("24.05.2021 10:00 for 2:00:00")).check { v, _ -> assert(((v as TextView).background as ColorDrawable).color == Color.GREEN) }
+        Espresso.onView(ViewMatchers.withText("25.05.2021 10:00 for 2:00:00")).check { v, _ -> assert(((v as TextView).background as ColorDrawable).color == Color.RED) }
+        Espresso.onView(ViewMatchers.withId(R.id.listTitleDates)).perform(ViewActions.swipeUp())
+        Espresso.onView(ViewMatchers.withText("25.05.2021 14:00 for 2:00:00")).check { v, _ -> assert(((v as TextView).background as ColorDrawable).color == Color.RED) }
     }
 
 
