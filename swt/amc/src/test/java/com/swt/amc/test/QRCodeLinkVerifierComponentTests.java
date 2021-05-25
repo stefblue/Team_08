@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.Assert;
@@ -54,10 +55,9 @@ public class QRCodeLinkVerifierComponentTests {
 		lectureInformation.setNumber(number);
 		lectureInformation.setSemester(semester);
 		lectureInformation.setEcts(ects);
-		lectureInformation.setLecturer(lecturer);
+		lectureInformation.setLecturer(Collections.singletonList(lecturer));
 		lectureInformation.setContent(content);
 		lectureInformation.setLink(link);
-
 		lectureInformationRepo.save(lectureInformation);
 	}
 
@@ -105,7 +105,7 @@ public class QRCodeLinkVerifierComponentTests {
 		LectureInformation li = verifier.getLectureInformation("bla");
 		assertEquals("Content", li.getContent());
 		assertEquals(5, li.getEcts());
-		assertEquals("Dr. Super Lecturer", li.getLecturer());
+		assertEquals("Dr. Super Lecturer", li.getLecturer().get(0));
 		assertEquals("Number.1", li.getNumber());
 		assertEquals("SS", li.getSemester());
 		assertEquals("Title", li.getTitle());

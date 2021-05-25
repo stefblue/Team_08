@@ -1,1 +1,0 @@
-INSERT INTO user_information (id, user_name, password, given_name, last_name) VALUES (nextval('hibernate_sequence'), 'floebl','password', 'Florian Patrick', 'Löbl');

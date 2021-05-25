@@ -1,6 +1,12 @@
 package com.swt.amc.api;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,25 +18,22 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity(name = "lecture_information")
 public class LectureInformation {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@JsonIgnore
 	private Long id;
-	@JsonIgnore
 	private String tag;
 	private String title;
 	private String number;
 	private String semester;
 	private Integer ects;
-	private String lecturer;
-	@Type(type = "text")
+	private List<String> lecturer = new ArrayList<String>();
 	private String content;
-	@JsonIgnore
 	private String link;
 
 	public LectureInformation() {
 	}
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@JsonIgnore
 	public Long getId() {
 		return id;
 	}
@@ -39,6 +42,8 @@ public class LectureInformation {
 		this.id = id;
 	}
 
+	@JsonIgnore
+	@Column(nullable = false, unique = true)
 	public String getTag() {
 		return tag;
 	}
@@ -47,6 +52,7 @@ public class LectureInformation {
 		this.tag = tag;
 	}
 
+	@Column(nullable = false, unique = true)
 	public String getTitle() {
 		return title;
 	}
@@ -55,6 +61,7 @@ public class LectureInformation {
 		this.title = title;
 	}
 
+	@Column(nullable = false, unique = true)
 	public String getNumber() {
 		return number;
 	}
@@ -63,6 +70,7 @@ public class LectureInformation {
 		this.number = number;
 	}
 
+	@Column(nullable = false)
 	public String getSemester() {
 		return semester;
 	}
@@ -71,6 +79,7 @@ public class LectureInformation {
 		this.semester = semester;
 	}
 
+	@Column(nullable = false)
 	public Integer getEcts() {
 		return ects;
 	}
@@ -79,14 +88,18 @@ public class LectureInformation {
 		this.ects = ects;
 	}
 
-	public String getLecturer() {
+	@ElementCollection(fetch = FetchType.EAGER)
+	@Column(nullable = false)
+	public List<String> getLecturer() {
 		return lecturer;
 	}
 
-	public void setLecturer(String lecturer) {
+	public void setLecturer(List<String> lecturer) {
 		this.lecturer = lecturer;
 	}
 
+	@Type(type = "text")
+	@Column(nullable = false)
 	public String getContent() {
 		return content;
 	}
@@ -95,6 +108,8 @@ public class LectureInformation {
 		this.content = content;
 	}
 
+	@JsonIgnore
+	@Column(nullable = false, unique = true)
 	public String getLink() {
 		return link;
 	}
