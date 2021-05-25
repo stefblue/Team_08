@@ -1,20 +1,23 @@
 package com.swt.augmentmycampus.ui.data
 
+import android.os.Build
 import android.os.Bundle
-import android.support.v4.media.session.MediaSessionCompat.Token.fromBundle
-import android.util.Log
+import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.swt.augmentmycampus.R
-import java.util.*
 import dagger.hilt.android.AndroidEntryPoint
+import org.json.JSONArray
 import org.json.JSONObject
+import java.time.Duration
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 @AndroidEntryPoint
 class DataFragment : Fragment() {
@@ -23,6 +26,7 @@ class DataFragment : Fragment() {
 
     val args: DataFragmentArgs by navArgs()
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -36,8 +40,8 @@ class DataFragment : Fragment() {
         /*dataViewModel = ViewModelProvider(this).get(DataViewModel::class.java)
         dataViewModel.dataText.value = jsonObj.getString("ects")*/
 
-        var contentString = "";
-        var datesString = "";
+        var contentString = ""
+        var listOfDates : MutableList<String> = ArrayList()
         if(args.dataText != null && !args.dataText.isEmpty()) {
             val jsonObj = JSONObject(args.dataText)
 
@@ -57,7 +61,25 @@ class DataFragment : Fragment() {
             lecturerValueTextView.text = jsonObj.getString("lecturer")
 
             contentString = jsonObj.getString("content")
-            datesString = jsonObj.getString("link")
+
+            var jArray : JSONArray = jsonObj.getJSONArray("dates")
+
+            if (jArray != null) {
+                for(i in 0 until jArray.length()) {
+                    val tmpObject : JSONObject = jArray.getJSONObject(i)
+
+                    val startDateTime : LocalDateTime = LocalDateTime.parse(tmpObject.getString("key"), DateTimeFormatter.ISO_LOCAL_DATE_TIME)
+                    val duration : Duration = Duration.parse(tmpObject.getString("value"))
+
+                    val formatter : DateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")
+                    val tmpString : String = startDateTime.format(formatter).plus(" for ").plus(DateUtils.formatElapsedTime(duration.seconds))
+
+                    listOfDates.add(tmpString)
+                }
+            }
+            else {
+                throw Exception("Backend didn't send any date information.")
+            }
         }
 
         /*val tvDataText: TextView = root.findViewById(R.id.fragment_data_text)
@@ -74,7 +96,7 @@ class DataFragment : Fragment() {
 
         var expandableListViewDates = root.findViewById<View>(R.id.expandableListViewDates) as ExpandableListView
         var expandableListDetailDates = HashMap<String, List<String>>()
-        expandableListDetailDates.put("Dates",  Collections.singletonList(datesString))
+        expandableListDetailDates.put("Dates", listOfDates)
         var expandableListTitleDates = ArrayList(expandableListDetailDates!!.keys)
         var expandableListAdapterDates = DatesExpandableListAdapter(requireContext().applicationContext, expandableListTitleDates!!, expandableListDetailDates!!)
         CreateListView(expandableListViewDates, expandableListAdapterDates, expandableListTitleDates, expandableListDetailDates);
