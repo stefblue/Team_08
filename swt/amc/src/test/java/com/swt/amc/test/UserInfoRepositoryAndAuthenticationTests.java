@@ -1,6 +1,5 @@
 package com.swt.amc.test;
 
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -14,6 +13,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.swt.amc.api.UserInformation;
+import com.swt.amc.api.UserInformationResponse;
 import com.swt.amc.exceptions.AmcException;
 import com.swt.amc.interfaces.IValidateCredentialsComponent;
 import com.swt.amc.repositories.IUserInformationRepository;
@@ -33,7 +33,7 @@ public class UserInfoRepositoryAndAuthenticationTests {
 	public void setUpRepo() {
 		repository.deleteAll();
 		UserInformation userInformation = new UserInformation();
-		userInformation.setUserName("admin");
+		userInformation.setUsername("admin");
 		userInformation.setGivenName("Franz");
 		userInformation.setLastName("Bauer");
 		userInformation.setPassword("password");
@@ -42,10 +42,10 @@ public class UserInfoRepositoryAndAuthenticationTests {
 
 	@Test
 	public void getUserNameAndPasswordTest() throws AmcException {
-		UserInformation userInfo = loginComponent.getUserInformationForUsernameAndPassword("admin", "password");
-		assertNotNull(userInfo);
-		assertEquals(userInfo.getGivenName(), "Franz");
-		assertEquals(userInfo.getLastName(), "Bauer");
+		UserInformationResponse userInfoResponse = loginComponent.getUserInformationForUsernameAndPassword("admin",
+				"password");
+		assertEquals(userInfoResponse.getGivenName(), "Franz");
+		assertEquals(userInfoResponse.getLastName(), "Bauer");
 	}
 
 	@Test()

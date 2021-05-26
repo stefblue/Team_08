@@ -9,10 +9,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
+import com.swt.augmentmycampus.AsyncRequest
 import com.swt.augmentmycampus.R
+import com.swt.augmentmycampus.network.LoginRequest
+import com.swt.augmentmycampus.network.UserInformationResponse
+import com.swt.augmentmycampus.network.Webservice
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class LoginFragment : Fragment() {
+
+    @Inject
+    lateinit var webService: Webservice;
 
     companion object {
         fun newInstance() = LoginFragment()
@@ -29,10 +38,13 @@ class LoginFragment : Fragment() {
 
         val button = root.findViewById(R.id.fragment_login_submit) as Button
         button.setOnClickListener {
-            if (username.text.toString() == "john" && password.text.toString() == "123456") {
+
+            val loginResponse = AsyncRequest<UserInformationResponse>().execute(webService.login(LoginRequest(username.text.toString(),password.text.toString())))
+
+            if (loginResponse.get() != null) {
                 requireActivity().supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.fragment_settings_user_container, UserInformationFragment())
+                    .replace(R.id.fragment_settings_user_container, UserInformationFragment(loginResponse.get()?.givenName!!, loginResponse.get()?.lastName!!))
                     .commit()
             } else {
                 val builder = AlertDialog.Builder(requireContext())

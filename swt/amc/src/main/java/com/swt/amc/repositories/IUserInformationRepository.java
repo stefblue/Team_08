@@ -6,6 +6,6 @@ import com.swt.amc.api.UserInformation;
 
 public interface IUserInformationRepository extends JpaRepository<UserInformation, Long> {
 
-	UserInformation findByUserName(String userName);
+	UserInformation findByUsername(String username);
 
 }

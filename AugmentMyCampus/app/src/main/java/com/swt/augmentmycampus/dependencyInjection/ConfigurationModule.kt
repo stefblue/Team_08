@@ -13,5 +13,5 @@ object ConfigurationModule {
     @Singleton
     @Provides
     fun provideWebserviceConfiguration(): WebserviceConfiguration =
-        WebserviceConfiguration("http://10.0.2.2:8082")
+        WebserviceConfiguration("http://192.168.1.172:8082")
 }

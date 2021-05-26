@@ -3,6 +3,8 @@ package com.swt.augmentmycampus
 import com.swt.augmentmycampus.businessLogic.DataBusinessLogic
 import com.swt.augmentmycampus.businessLogic.DataBusinessLogicImpl
 import com.swt.augmentmycampus.businessLogic.UrlBusinessLogicImpl
+import com.swt.augmentmycampus.network.LoginRequest
+import com.swt.augmentmycampus.network.UserInformationResponse
 import com.swt.augmentmycampus.network.Webservice
 import junit.framework.Assert.fail
 import okhttp3.OkHttp
@@ -68,6 +70,10 @@ class MockWebservice : Webservice {
     }
 
     override fun getTextResponse(url: String): Call<String> {
+        TODO("Not yet implemented")
+    }
+
+    override fun login(userInfo: LoginRequest): Call<UserInformationResponse> {
         TODO("Not yet implemented")
     }
 }
