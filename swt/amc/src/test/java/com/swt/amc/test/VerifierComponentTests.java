@@ -23,9 +23,9 @@ import com.swt.amc.exceptions.AmcException;
 import com.swt.amc.interfaces.IQRCodeLinkVerifier;
 import com.swt.amc.repositories.ILectureInformationRepository;
 
-@SpringBootTest
+@SpringBootTest()
 @TestInstance(Lifecycle.PER_CLASS)
-public class QRCodeLinkVerifierComponentTests {
+public class VerifierComponentTests {
 
 	@Autowired
 	@Qualifier("qrCodeLinkVerifierComponent")
@@ -40,25 +40,12 @@ public class QRCodeLinkVerifierComponentTests {
 	public void setUpRepo() {
 		lectureInformationRepo.deleteAll();
 
-		createLectureInformation("bla", "Title", "Number.1", "SS", 5, "Dr. Super Lecturer", "Content",
-				"https://bla.com");
-		createLectureInformation("bli", "Title2", "Number.2", "WS", 1, "L1", "Content2", "https://bli.com");
-		createLectureInformation("blubb", "Title3", "Number.3", "WS/SS", 1, "Lecturer3", "Content3",
-				"https://blubb.com");
-	}
-
-	private void createLectureInformation(String tag, String title, String number, String semester, Integer ects,
-			String lecturer, String content, String link) {
-		LectureInformation lectureInformation = new LectureInformation();
-		lectureInformation.setTag(tag);
-		lectureInformation.setTitle(title);
-		lectureInformation.setNumber(number);
-		lectureInformation.setSemester(semester);
-		lectureInformation.setEcts(ects);
-		lectureInformation.setLecturer(Collections.singletonList(lecturer));
-		lectureInformation.setContent(content);
-		lectureInformation.setLink(link);
-		lectureInformationRepo.save(lectureInformation);
+		lectureInformationRepo.save(new LectureInformation("bla", "Title", "Number.1", "SS", 5,
+				Collections.singletonList("Dr. Super Lecturer"), "Content", "https://bla.com"));
+		lectureInformationRepo.save(new LectureInformation("bli", "Title2", "Number.2", "WS", 1,
+				Collections.singletonList("L1"), "Content2", "https://bli.com"));
+		lectureInformationRepo.save(new LectureInformation("blubb", "Title3", "Number.3", "WS/SS", 1,
+				Collections.singletonList("Lecturer3"), "Content3", "https://blubb.com"));
 	}
 
 	@Test

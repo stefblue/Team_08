@@ -1,6 +1,9 @@
 package com.swt.amc.api;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -10,8 +13,10 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Type;
+import org.springframework.data.util.Pair;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -27,8 +32,21 @@ public class LectureInformation {
 	private List<String> lecturer = new ArrayList<String>();
 	private String content;
 	private String link;
+	private LinkedList<Pair<LocalDateTime, Duration>> dates = new LinkedList<Pair<LocalDateTime, Duration>>();
 
 	public LectureInformation() {
+	}
+
+	public LectureInformation(String tag, String title, String number, String semester, Integer ects,
+			List<String> lecturer, String content, String link) {
+		this.tag = tag;
+		this.title = title;
+		this.number = number;
+		this.semester = semester;
+		this.ects = ects;
+		this.lecturer = lecturer;
+		this.content = content;
+		this.link = link;
 	}
 
 	@Id
@@ -116,6 +134,15 @@ public class LectureInformation {
 
 	public void setLink(String link) {
 		this.link = link;
+	}
+
+	@Transient
+	public LinkedList<Pair<LocalDateTime, Duration>> getDates() {
+		return dates;
+	}
+
+	public void addDate(Pair<LocalDateTime, Duration> date) {
+		dates.add(date);
 	}
 
 }

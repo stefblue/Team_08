@@ -1,12 +1,12 @@
 package com.swt.augmentmycampus.businessLogic
 
 import com.swt.augmentmycampus.network.Webservice
-import retrofit2.Call
+import okhttp3.OkHttpClient
+import okhttp3.Request
 import retrofit2.Response
-import java.lang.IllegalStateException
-import java.net.URL
+import retrofit2.Retrofit
 import javax.inject.Inject
-import kotlin.jvm.Throws
+
 
 class InvalidUrlException() : Exception("Url not valid!")
 class CouldNotReachServerException() : Exception("Server could not reached!")
@@ -16,7 +16,7 @@ interface DataBusinessLogic {
     fun getTextFromUrl(url: String): String;
 
     @Throws(InvalidUrlException::class)
-    fun performRestCall(url: String): Response<String>;
+    fun performRestCall(url: String): String;
 }
 
 class DataBusinessLogicImpl @Inject constructor (
@@ -24,22 +24,28 @@ class DataBusinessLogicImpl @Inject constructor (
     private val webservice: Webservice
 ) : DataBusinessLogic {
 
-    override fun performRestCall(url: String): Response<String> {
-        return webservice.isUrlOnWhitelist(url).execute();
+    override fun performRestCall(url: String): String {
+        var ws : Webservice;
+
+        val request: Request = Request.Builder()
+            .url(url)
+            .build()
+
+        val client = OkHttpClient()
+        try {
+            client.newCall(request).execute().use { response ->
+                if(!response.isSuccessful) {
+                    throw CouldNotReachServerException();
+                }
+                return response.body!!.string()
+            }
+        } catch(e : Exception) {
+            throw CouldNotReachServerException();
+        }
     }
 
     override fun getTextFromUrl(url: String): String {
         if (!urlBusinessLogic.isValidUrlFormat(url)) throw InvalidUrlException()
-
-        val urlResponse = performRestCall(url);
-        if (!urlResponse.isSuccessful) throw CouldNotReachServerException()
-
-        val textResponse = webservice.getTextResponse(url).execute()
-        if (!textResponse.isSuccessful) throw CouldNotReachServerException()
-
-        val body = textResponse.body()
-        if (body is String) return body
-
-        return ""
+        return  performRestCall(url);
     }
 }

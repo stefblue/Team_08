@@ -1,8 +1,12 @@
 package com.swt.amc.rest.controller;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.util.Pair;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -35,8 +39,13 @@ public class AmcRestController {
 	@GetMapping("/verifyQrCode/{qrCodeLink}")
 	public ResponseEntity<LectureInformation> verifyQrCodeViaApp(@PathVariable("qrCodeLink") final String qrCodeLink)
 			throws AmcException {
-		return new ResponseEntity<LectureInformation>(qrCodeLinkVerifier.getLectureInformation(qrCodeLink),
-				HttpStatus.OK);
+		LectureInformation lecture = qrCodeLinkVerifier.getLectureInformation(qrCodeLink);
+		lecture.addDate(Pair.of(LocalDateTime.now().minus(Duration.ofHours(24)), Duration.ofHours(2)));
+		lecture.addDate(Pair.of(LocalDateTime.now().minus(Duration.ofHours(3)), Duration.ofHours(2)));
+		lecture.addDate(Pair.of(LocalDateTime.now(), Duration.ofHours(2)));
+		lecture.addDate(Pair.of(LocalDateTime.now().plus(Duration.ofHours(5)), Duration.ofHours(2)));
+		lecture.addDate(Pair.of(LocalDateTime.now().plus(Duration.ofHours(7)), Duration.ofHours(2)));
+		return new ResponseEntity<LectureInformation>(lecture, HttpStatus.OK);
 	}
 
 	@GetMapping("/verifyQrCodeNoApp/{qrCodeLink}")

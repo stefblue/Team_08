@@ -3,14 +3,14 @@
     <string name="app_name">Augment My Campus</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
+
     <string name="next">Next</string>
     <string name="previous">Previous</string>
-
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="title_activity_main">MainActivity</string>
+
+    <string name="scanBtn">Scan</string>
+    <string name="scan_info">scanning for QR-code...</string>
+    <string name="scanned">scanned </string>
     <!--
     This string is used for square devices and overridden by hello_world in
     values-round/strings.xml for round devices.
@@ -21,6 +21,9 @@
     <string name="title_data">Data</string>
     <string name="title_settings">Settings</string>
 
+    <string name="error_default_msg">an error occurred</string>
+    <string name="error_invalid_url">this qr code is not supported</string>
+    <string name="error_no_connection">no connection to server</string>
 
     <string name="placeholder_fragment_settings_user">Username</string>
     <string name="placeholder_fragment_settings_password">Password</string>
@@ -28,6 +31,12 @@
     <string name="text_fragment_settings_logout">Logout</string>
     <string name="invalid_credentials">Invalid user or password</string>
     <string name="ok">OK</string>
+
+    <string name="label_number_text">Number</string>
+    <string name="label_semester_text">Semester</string>
+    <string name="label_ects_text">ECTS</string>
+    <string name="label_lecturer_text">Lecturer</string>
+
 
     <string name="settings_language">Language</string>
 </resources>

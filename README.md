@@ -46,3 +46,11 @@ can be used as kick start for a desired CO (student) Community.
 
 ### Release 1 
 Incorporates all tickets from Sprint 1 & 2 
+
+### Sprint 3: 
+**mobile application** 
+* display of lecture information [AC-12](https://github.com/sw21-tug/Team_08/issues/12)
+* integration of QR code scanner [AC-17](https://github.com/sw21-tug/Team_08/issues/23)
+
+**backend**
+* lecture information [AC-12.1](https://github.com/sw21-tug/Team_08/issues/28)

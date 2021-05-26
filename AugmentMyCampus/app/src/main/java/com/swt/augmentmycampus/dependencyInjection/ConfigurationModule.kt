@@ -14,4 +14,5 @@ object ConfigurationModule {
     @Provides
     fun provideWebserviceConfiguration(): WebserviceConfiguration =
         WebserviceConfiguration("http://192.168.1.172:8082")
+
 }

@@ -23,14 +23,12 @@ class DataBusinessLogicUnitTest {
     @Test
     fun `test webservice response type`() {
         try {
-        var response = businessLogic.performRestCall("http://test.com");
-        assertThat(response.body(), instanceOf(String::class.java))
+        var response = businessLogic.performRestCall("http://neverssl.com/");
+        assertThat(response, instanceOf(String::class.java))
         } catch (e: Exception) {
             fail();
         }
     }
-
-
 }
 
 class MockCall : Call<String> {
