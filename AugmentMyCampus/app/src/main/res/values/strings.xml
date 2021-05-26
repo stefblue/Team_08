@@ -34,6 +34,7 @@
     <string name="label_lecturer_text">Lecturer</string>
 
     <string name="settings_language">Language</string>
+    <string name="title_search">Search</string>
     <string-array name="availableLanguages">
         <item>English</item>
         <item>Pусский</item>

@@ -32,4 +32,14 @@
         android:label="@string/title_settings"
         tools:layout="@layout/fragment_settings">
     </fragment>
+
+    <fragment
+        android:id="@+id/navigation_search"
+        android:name="com.swt.augmentmycampus.ui.search.SearchFragment"
+        android:label="Search"
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/action_navigation_search_to_navigation_data"
+            app:destination="@id/navigation_data" />
+    </fragment>
 </navigation>
