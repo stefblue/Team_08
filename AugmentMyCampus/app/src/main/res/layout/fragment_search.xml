@@ -7,4 +7,16 @@
     tools:context=".ui.camera.CameraFragment"
     android:id="@+id/fragment_search">
 
+    <SearchView
+        android:id="@+id/search_field"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:queryHint="search"
+        android:inputType="textNoSuggestions"
+        android:iconifiedByDefault="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.177" />
 </androidx.constraintlayout.widget.ConstraintLayout>
