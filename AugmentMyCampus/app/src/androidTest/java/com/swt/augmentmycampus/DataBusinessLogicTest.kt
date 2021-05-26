@@ -4,7 +4,8 @@ import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.IdlingResource
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import com.jakewharton.espresso.OkHttp3IdlingResource
-import com.swt.augmentmycampus.api.SearchResultItem
+import com.swt.augmentmycampus.api.model.SearchResponse
+import com.swt.augmentmycampus.api.model.SearchResultItem
 import com.swt.augmentmycampus.businessLogic.*
 import com.swt.augmentmycampus.dependencyInjection.ApplicationModule
 import com.swt.augmentmycampus.dependencyInjection.ConfigurationModule
@@ -23,7 +24,6 @@ import org.hamcrest.CoreMatchers
 import org.hamcrest.MatcherAssert
 import org.junit.*
 import org.junit.runner.RunWith
-import java.util.*
 import javax.inject.Inject
 
 
@@ -109,11 +109,11 @@ class DataBusinessLogicTest {
     @Test
     fun testSearchResult() {
         try {
-            var i1 = SearchResultItem("lec1", "link1");
-            var i2 = SearchResultItem("lec2", "link2");
-            var list : List<SearchResultItem> = listOf(i1,i2);
-            createSearchResonse(list);
-            var response = dataBusinessLogic.getResultsForSearchQuery("searchstring");
+            val i1 = SearchResultItem("lec1", "link1");
+            val i2 = SearchResultItem("lec2", "link2");
+            val list : List<SearchResultItem> = listOf(i1,i2);
+            createSearchResponse(list);
+            val response = dataBusinessLogic.getResultsForSearchQuery("searchstring");
             MatcherAssert.assertThat(response, CoreMatchers.instanceOf(List::class.java))
             Assert.assertEquals(response.size, 2)
         } catch (e: Exception) {
@@ -121,10 +121,12 @@ class DataBusinessLogicTest {
         }
     }
 
-    private fun createSearchResonse(list : List<SearchResultItem>) {
+    private fun createSearchResponse(list : List<SearchResultItem>) {
+        var searchResponse = SearchResponse(list)
+
         mockWebServer.enqueue(MockResponse().apply {
             setResponseCode(200)
-            setBody(moshi.adapter(List::class.java).toJson(list))
+            setBody(moshi.adapter(SearchResponse::class.java).toJson(searchResponse))
         })
     }
 

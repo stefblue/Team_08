@@ -1,6 +1,6 @@
 package com.swt.augmentmycampus.businessLogic
 
-import com.swt.augmentmycampus.api.SearchResultItem
+import com.swt.augmentmycampus.api.model.SearchResultItem
 import com.swt.augmentmycampus.network.Webservice
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -55,7 +55,10 @@ class DataBusinessLogicImpl @Inject constructor (
     }
 
     override fun getResultsForSearchQuery(query: String): List<SearchResultItem> {
-        //stub
-        return Collections.emptyList()
+        val response = webservice.getSearchResult(query).execute();
+
+        if(!response.isSuccessful) throw java.lang.Exception(response.errorBody().toString())
+
+        return response.body()!!.data
     }
 }
