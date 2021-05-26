@@ -4,6 +4,7 @@ import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.IdlingResource
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import com.jakewharton.espresso.OkHttp3IdlingResource
+import com.swt.augmentmycampus.api.SearchResultItem
 import com.swt.augmentmycampus.businessLogic.*
 import com.swt.augmentmycampus.dependencyInjection.ApplicationModule
 import com.swt.augmentmycampus.dependencyInjection.ConfigurationModule
@@ -18,8 +19,11 @@ import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
+import org.hamcrest.CoreMatchers
+import org.hamcrest.MatcherAssert
 import org.junit.*
 import org.junit.runner.RunWith
+import java.util.*
 import javax.inject.Inject
 
 
@@ -102,6 +106,28 @@ class DataBusinessLogicTest {
         Assert.assertEquals("\"\"", dataBusinessLogic.getTextFromUrl(url));
     }
 
+    @Test
+    fun testSearchResult() {
+        try {
+            var i1 = SearchResultItem("lec1", "link1");
+            var i2 = SearchResultItem("lec2", "link2");
+            var list : List<SearchResultItem> = listOf(i1,i2);
+            createSearchResonse(list);
+            var response = dataBusinessLogic.getResultsForSearchQuery("searchstring");
+            MatcherAssert.assertThat(response, CoreMatchers.instanceOf(List::class.java))
+            Assert.assertEquals(response.size, 2)
+        } catch (e: Exception) {
+            junit.framework.Assert.fail();
+        }
+    }
+
+    private fun createSearchResonse(list : List<SearchResultItem>) {
+        mockWebServer.enqueue(MockResponse().apply {
+            setResponseCode(200)
+            setBody(moshi.adapter(List::class.java).toJson(list))
+        })
+    }
+
     private fun createNotFoundResponse() {
         mockWebServer.enqueue(MockResponse().apply { setResponseCode(404) })
     }
@@ -126,5 +152,7 @@ class DataBusinessLogicTest {
             setBody(moshi.adapter(String::class.java).toJson(text))
         })
     }
+
+
 
 }

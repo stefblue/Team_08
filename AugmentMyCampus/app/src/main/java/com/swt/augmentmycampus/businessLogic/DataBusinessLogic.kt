@@ -1,10 +1,12 @@
 package com.swt.augmentmycampus.businessLogic
 
+import com.swt.augmentmycampus.api.SearchResultItem
 import com.swt.augmentmycampus.network.Webservice
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import retrofit2.Response
 import retrofit2.Retrofit
+import java.util.*
 import javax.inject.Inject
 
 
@@ -15,8 +17,11 @@ interface DataBusinessLogic {
     @Throws(InvalidUrlException::class)
     fun getTextFromUrl(url: String): String;
 
+    fun getResultsForSearchQuery(query: String): List<SearchResultItem>;
+
     @Throws(InvalidUrlException::class)
     fun performRestCall(url: String): String;
+
 }
 
 class DataBusinessLogicImpl @Inject constructor (
@@ -47,5 +52,10 @@ class DataBusinessLogicImpl @Inject constructor (
     override fun getTextFromUrl(url: String): String {
         if (!urlBusinessLogic.isValidUrlFormat(url)) throw InvalidUrlException()
         return  performRestCall(url);
+    }
+
+    override fun getResultsForSearchQuery(query: String): List<SearchResultItem> {
+        //stub
+        return Collections.emptyList()
     }
 }
