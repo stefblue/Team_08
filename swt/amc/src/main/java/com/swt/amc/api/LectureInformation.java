@@ -1,5 +1,15 @@
 package com.swt.amc.api;
 
+
+
+
+
+import javafx.util.Pair;
+
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.util.LinkedList;
+
 public class LectureInformation {
 
 	private String title;
@@ -9,9 +19,9 @@ public class LectureInformation {
 	private String lecturer;
 	private String content;
 	private String link;
+	private LinkedList<Pair<LocalDateTime, Duration>> dates = new LinkedList();
 
 	public LectureInformation() {
-
 	}
 
 	public String getTitle() {
@@ -69,5 +79,9 @@ public class LectureInformation {
 	public void setLink(String link) {
 		this.link = link;
 	}
+
+	public LinkedList<Pair<LocalDateTime, Duration>> getDates() { return dates; }
+
+	public void addDate(Pair<LocalDateTime, Duration> date) { dates.add(date); }
 
 }

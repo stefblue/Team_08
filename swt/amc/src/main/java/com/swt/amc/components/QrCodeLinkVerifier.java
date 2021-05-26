@@ -11,18 +11,18 @@ import com.swt.amc.interfaces.IQRCodeLinkVerifier;
 @Component
 public class QrCodeLinkVerifier implements IQRCodeLinkVerifier {
 
-	@Autowired
-	private AmcConfiguration amcConfig;
+    @Autowired
+	private AmcConfiguration configuration;
 
 	private boolean isInWhiteList(String qrCodeLink) {
-		return amcConfig.getUrlWhiteListMap().containsKey(qrCodeLink);
+		return configuration.getUrlWhiteListMap().containsKey(qrCodeLink);
 	}
 
 	@Override
 	public String getRedirectLink(String qrCodeLink) throws AmcException {
 
 		if (isInWhiteList(qrCodeLink)) {
-			return amcConfig.getUrlWhiteListMap().get(qrCodeLink).getLink();
+			return configuration.getUrlWhiteListMap().get(qrCodeLink).getLink();
 		} else {
 			throw new AmcException("No mapping found for the given key!");
 		}
@@ -31,7 +31,7 @@ public class QrCodeLinkVerifier implements IQRCodeLinkVerifier {
 	@Override
 	public LectureInformation getLectureInformation(String qrCodeLink) throws AmcException {
 		if (isInWhiteList(qrCodeLink)) {
-			return amcConfig.getUrlWhiteListMap().get(qrCodeLink);
+			return configuration.getUrlWhiteListMap().get(qrCodeLink);
 		} else {
 			throw new AmcException("No mapping found for the given key!");
 		}

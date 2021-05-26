@@ -1,6 +1,7 @@
 package com.swt.augmentmycampus.ui.data
 
 import android.content.Context;
+import android.graphics.Color
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,10 +12,12 @@ import com.swt.augmentmycampus.R
 
 
 class DatesExpandableListAdapter(context: Context, expandableListTitle: List<String>,
-                                 expandableListDetail: HashMap<String, List<String>>) : BaseExpandableListAdapter() {
-    private val context: Context
-    private val expandableListTitle: List<String>
-    private val expandableListDetail: HashMap<String, List<String>>
+                                 expandableListDetail: HashMap<String, List<Pair<String, Boolean>>>) : BaseExpandableListAdapter() {
+    private val context: Context = context
+    private val expandableListTitle: List<String> = expandableListTitle
+    private val expandableListDetail: HashMap<String, List<Pair<String, Boolean>>> =
+        expandableListDetail
+
     override fun getChild(listPosition: Int, expandedListPosition: Int): Any {
         return expandableListDetail[expandableListTitle[listPosition]]!![expandedListPosition]
     }
@@ -26,14 +29,21 @@ class DatesExpandableListAdapter(context: Context, expandableListTitle: List<Str
     override fun getChildView(listPosition: Int, expandedListPosition: Int,
                               isLastChild: Boolean, convertView: View?, parent: ViewGroup?): View? {
         var convertView: View? = convertView
-        val expandedListText = getChild(listPosition, expandedListPosition) as String
+        //val appointment = getChild(listPosition, expandedListPosition) as java.util.Map.Entry<String, Boolean>
+        val appointment = getChild(listPosition, expandedListPosition) as Pair<String, Boolean>
+        val date = appointment.first
+        val wasAttended = appointment.second
         if (convertView == null) {
             val layoutInflater = context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
             convertView = layoutInflater.inflate(R.layout.list_item_dates, null)
         }
         val expandedListTextView = convertView!!.findViewById(R.id.expandedListItemDates) as TextView
-        expandedListTextView.text = expandedListText
+        expandedListTextView.text = date
+        if(wasAttended)
+            expandedListTextView.setBackgroundColor(Color.GREEN)
+        else
+            expandedListTextView.setBackgroundColor(Color.RED)
         return convertView
     }
 
@@ -75,9 +85,4 @@ class DatesExpandableListAdapter(context: Context, expandableListTitle: List<Str
         return true
     }
 
-    init {
-        this.context = context
-        this.expandableListTitle = expandableListTitle
-        this.expandableListDetail = expandableListDetail
-    }
 }
