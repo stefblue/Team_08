@@ -24,24 +24,24 @@ class DataBusinessLogicImpl @Inject constructor (
     private val webservice: Webservice
 ) : DataBusinessLogic {
 
-            override fun performRestCall(url: String): String {
-                var ws : Webservice;
+    override fun performRestCall(url: String): String {
+        var ws : Webservice;
 
-                val request: Request = Request.Builder()
-                        .url(url)
-                        .build()
+        val request: Request = Request.Builder()
+            .url(url)
+            .build()
 
-                val client = OkHttpClient()
-                try {
-                    client.newCall(request).execute().use { response ->
-                        if(!response.isSuccessful) {
-                            throw CouldNotReachServerException();
-                        }
-                        return response.body!!.string()
-                    }
-                } catch(e : Exception) {
+        val client = OkHttpClient()
+        try {
+            client.newCall(request).execute().use { response ->
+                if(!response.isSuccessful) {
                     throw CouldNotReachServerException();
                 }
+                return response.body!!.string()
+            }
+        } catch(e : Exception) {
+            throw CouldNotReachServerException();
+        }
     }
 
     override fun getTextFromUrl(url: String): String {
