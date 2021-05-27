@@ -6,24 +6,47 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.Assert;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.swt.amc.api.LectureInformation;
 import com.swt.amc.exceptions.AmcException;
 import com.swt.amc.interfaces.IQRCodeLinkVerifier;
+import com.swt.amc.repositories.ILectureInformationRepository;
 
-@SpringBootTest
-public class QRCodeLinkVerifierTests {
+@SpringBootTest()
+@TestInstance(Lifecycle.PER_CLASS)
+public class VerifierComponentTests {
 
 	@Autowired
+	@Qualifier("qrCodeLinkVerifierComponent")
 	private IQRCodeLinkVerifier verifier;
 
+	@Autowired
+	private ILectureInformationRepository lectureInformationRepo;
+
 	private List<String> testEntries = Arrays.asList("bla", "bli", "blubb");
+
+	@BeforeAll
+	public void setUpRepo() {
+		lectureInformationRepo.deleteAll();
+
+		lectureInformationRepo.save(new LectureInformation("bla", "Title", "Number.1", "SS", 5,
+				Collections.singletonList("Dr. Super Lecturer"), "Content", "https://bla.com"));
+		lectureInformationRepo.save(new LectureInformation("bli", "Title2", "Number.2", "WS", 1,
+				Collections.singletonList("L1"), "Content2", "https://bli.com"));
+		lectureInformationRepo.save(new LectureInformation("blubb", "Title3", "Number.3", "WS/SS", 1,
+				Collections.singletonList("Lecturer3"), "Content3", "https://blubb.com"));
+	}
 
 	@Test
 	public void getLinkTest() throws AmcException {
@@ -46,7 +69,7 @@ public class QRCodeLinkVerifierTests {
 		try {
 			verifier.getRedirectLink("blabb");
 			fail();
-		} catch (AmcException e) {
+		} catch (Exception e) {
 			assertTrue(e instanceof AmcException);
 		}
 	}
@@ -69,7 +92,7 @@ public class QRCodeLinkVerifierTests {
 		LectureInformation li = verifier.getLectureInformation("bla");
 		assertEquals("Content", li.getContent());
 		assertEquals(5, li.getEcts());
-		assertEquals("Dr. Super Lecturer", li.getLecturer());
+		assertEquals("Dr. Super Lecturer", li.getLecturer().get(0));
 		assertEquals("Number.1", li.getNumber());
 		assertEquals("SS", li.getSemester());
 		assertEquals("Title", li.getTitle());

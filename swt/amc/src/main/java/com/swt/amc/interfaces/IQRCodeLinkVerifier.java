@@ -7,5 +7,5 @@ public interface IQRCodeLinkVerifier {
 
 	String getRedirectLink(String qrCodeLink) throws AmcException;
 
-	LectureInformation getLectureInformation(String qrCodeLink) throws AmcException;
+	LectureInformation getLectureInformation(String qrCodeTag) throws AmcException;
 }
