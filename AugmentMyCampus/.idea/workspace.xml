@@ -41,18 +41,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e730fd7d-d332-4170-873c-a92563bee440" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/rectangle_border.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/androidTest/java/com/swt/augmentmycampus/ui/DataFragmentTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/androidTest/java/com/swt/augmentmycampus/ui/DataFragmentTest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/swt/augmentmycampus/ui/data/DataViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/swt/augmentmycampus/ui/data/DataViewModel.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_data.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_data.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/androidTest/java/com/swt/augmentmycampus/QRCodeScannerTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/androidTest/java/com/swt/augmentmycampus/QRCodeScannerTest.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[ZY2243JP2Q]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[Pixel_3a_API_29]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -102,7 +99,7 @@
       <recent name="com.swt.augmentmycampus" />
     </key>
   </component>
-  <component name="RunManager" selected="Android Instrumented Tests.DataFragmentTest">
+  <component name="RunManager" selected="Android Instrumented Tests.Tests in 'com.swt.augmentmycampus'">
     <configuration name="All in Augment_My_Campus.app" type="AndroidJUnit" factoryName="Android JUnit" nameIsGenerated="true">
       <module name="Augment_My_Campus.app" />
       <option name="PACKAGE_NAME" value="" />
@@ -328,9 +325,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Android Instrumented Tests.Tests in 'com.swt.augmentmycampus'" />
         <item itemvalue="Android Instrumented Tests.DataFragmentTest" />
         <item itemvalue="Android JUnit.com.swt.augmentmycampus in Augment_My_Campus.app" />
-        <item itemvalue="Android Instrumented Tests.Tests in 'com.swt.augmentmycampus'" />
         <item itemvalue="Android JUnit.DataBusinessLogicTest" />
         <item itemvalue="Android JUnit.DataBusinessLogicTest.urlNotWhitelisted_Error" />
       </list>
@@ -477,16 +474,5 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="502" height="485" key="javadoc.popup.new/0.0.1920.1040/3840.0.1280.680@0.0.1920.1040" timestamp="1620203321450" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/swt/augmentmycampus/FirstFragment.kt</url>
-          <line>35</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
