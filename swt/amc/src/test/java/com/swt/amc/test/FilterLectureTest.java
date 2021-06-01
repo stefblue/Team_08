@@ -38,7 +38,7 @@ public class FilterLectureTest {
 	@Test
 	public void testFilter() {
 		assertTrue(filterLectureComponent.isPresent());
-		LectureInformation filteredLecture = filterLectureComponent.get().filterLectureWithTitle("Title");
+		LectureInformation filteredLecture = filterLectureComponent.get().filterLectureByTitle("Title");
 		assertNotNull(filteredLecture);
 		assertEquals(filteredLecture.getContent(), "Content");
 		assertEquals(filteredLecture.getTitle(), "Title");
