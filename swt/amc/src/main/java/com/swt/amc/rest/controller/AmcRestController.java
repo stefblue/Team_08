@@ -22,6 +22,7 @@ import com.swt.amc.api.LectureInformation;
 import com.swt.amc.api.UserInformationResponse;
 import com.swt.amc.api.UsernamePasswordInformation;
 import com.swt.amc.exceptions.AmcException;
+import com.swt.amc.interfaces.IFilterLectureComponent;
 import com.swt.amc.interfaces.IQRCodeLinkVerifier;
 import com.swt.amc.interfaces.IValidateCredentialsComponent;
 
@@ -33,6 +34,9 @@ public class AmcRestController {
 
 	@Autowired
 	private IValidateCredentialsComponent validateCredentialsComponent;
+
+	@Autowired
+	private IFilterLectureComponent filterLectureComponent;
 
 	private static final Logger log = LoggerFactory.getLogger(AmcRestController.class);
 
@@ -56,7 +60,13 @@ public class AmcRestController {
 	@GetMapping("/filterLectureInformation/{title}")
 	public ResponseEntity<LectureInformation> getFilteredLectureInformation(@PathVariable("title") final String title)
 			throws AmcException {
-		return new ResponseEntity<LectureInformation>(HttpStatus.BAD_REQUEST);
+
+		LectureInformation lectureInformation = filterLectureComponent.filterLectureByTitle(title);
+		if (lectureInformation != null) {
+			return new ResponseEntity<LectureInformation>(lectureInformation, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<LectureInformation>(HttpStatus.BAD_REQUEST);
+		}
 	}
 
 	@PostMapping("/login")
