@@ -53,6 +53,12 @@ public class AmcRestController {
 		return new RedirectView(qrCodeLinkVerifier.getRedirectLink(qrCodeLink));
 	}
 
+	@GetMapping("/filterLectureInformation/{title}")
+	public ResponseEntity<LectureInformation> getFilteredLectureInformation(@PathVariable("title") final String title)
+			throws AmcException {
+		return new ResponseEntity<LectureInformation>(HttpStatus.BAD_REQUEST);
+	}
+
 	@PostMapping("/login")
 	public ResponseEntity<UserInformationResponse> getUserInfo(
 			@RequestBody UsernamePasswordInformation usernameAndPassword) throws AmcException {

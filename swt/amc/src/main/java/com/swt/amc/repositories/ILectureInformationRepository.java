@@ -8,4 +8,6 @@ public interface ILectureInformationRepository extends JpaRepository<LectureInfo
 
 	LectureInformation findByTag(String tag);
 
+	LectureInformation findByTitle(String title);
+
 }
