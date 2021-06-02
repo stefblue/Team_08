@@ -1,11 +1,13 @@
 package com.swt.augmentmycampus.ui.camera
 
 import android.content.Intent
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -29,6 +31,9 @@ class CameraFragment : Fragment() {
     private lateinit var cameraViewModel: CameraViewModel
     private lateinit var barcodeView: CompoundBarcodeView
     private var lastText: String? = null
+
+    var isFlashOn: Boolean = false;
+
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -43,6 +48,23 @@ class CameraFragment : Fragment() {
         barcodeView.decodeContinuous(callback);
         barcodeView.resume()
         return root
+    }
+
+    fun toggleFlash(view :View)
+    {
+        val flashButton: Button = view.findViewById(R.id.flash_button)
+        if(isFlashOn)
+        {
+            flashButton.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_baseline_flash_on_24,0,0,0)
+            barcodeView.setTorchOff()
+            isFlashOn = false
+        }
+        else
+        {
+            flashButton.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_baseline_flash_off_24,0,0,0)
+            barcodeView.setTorchOn()
+            isFlashOn = true
+        }
     }
 
     override fun onResume() {
