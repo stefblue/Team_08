@@ -1,5 +1,6 @@
 package com.swt.augmentmycampus.ui
 
+import android.widget.ListView
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.assertion.ViewAssertions
@@ -13,6 +14,7 @@ import dagger.hilt.android.testing.HiltAndroidTest
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import java.util.regex.Matcher
 
 @HiltAndroidTest
 @RunWith(AndroidJUnit4::class)
@@ -38,6 +40,15 @@ class SearchFragmentTest {
         Espresso.onView(ViewMatchers.withId(R.id.fragment_search))
             .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
         Espresso.onView(ViewMatchers.withId(R.id.search_field))
+            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+    }
+
+    @Test
+    fun testResultListExists() {
+        Espresso.onView(ViewMatchers.withId(R.id.navigation_search)).perform(ViewActions.click())
+        Espresso.onView(ViewMatchers.withId(R.id.fragment_search))
+            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        Espresso.onView(ViewMatchers.withId(android.R.id.list))
             .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
 }
