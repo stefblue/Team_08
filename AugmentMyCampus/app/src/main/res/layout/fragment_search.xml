@@ -1,22 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.camera.CameraFragment"
-    android:id="@+id/fragment_search">
+    android:id="@+id/fragment_search"
+    android:paddingLeft="2dp"
+    android:paddingRight="2dp"
+    android:paddingTop="80dp">
 
     <SearchView
         android:id="@+id/search_field"
-        android:layout_width="250dp"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:queryHint="search"
-        android:inputType="textNoSuggestions"
         android:iconifiedByDefault="false"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.177" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:inputType="textNoSuggestions"
+        android:queryHint="search" />
+
+    <ListView android:id="@android:id/list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:background="@color/white"
+        android:layout_weight="1"
+        android:drawSelectorOnTop="false"/>
+
+    <TextView android:id="@android:id/empty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:background="@color/white"
+        android:paddingTop="10dp"
+        android:text="@string/no_data_text"/>
+</LinearLayout>
+
+
+

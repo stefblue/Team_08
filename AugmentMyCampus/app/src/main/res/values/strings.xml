@@ -35,6 +35,7 @@
 
     <string name="settings_language">Language</string>
     <string name="title_search">Search</string>
+    <string name="no_data_text">No data</string>
     <string-array name="availableLanguages">
         <item>English</item>
         <item>Pусский</item>
