@@ -128,6 +128,6 @@ class FillDataFragmentTest {
 
 
     private fun getDummyData(): String {
-        return "{\"title\":\"TestTitle\",\"number\":\"123\",\"semester\":\"Sommer\",\"ects\":5,\"lecturer\":\"Lecturer A\",\"content\":\"description\",\"link\":\"link\",\"dates\":[{\"key\":\"2021-05-24T10:00:00.000000\",\"value\":\"PT2H\"},{\"key\":\"2021-05-25T10:00:00.000000\",\"value\":\"PT2H\"},{\"key\":\"2021-05-25T14:00:00.000000\",\"value\":\"PT2H\"},{\"key\":\"2021-05-25T18:00:00.000000\",\"value\":\"PT2H\"},{\"key\":\"2021-05-26T10:00:00.000000\",\"value\":\"PT2H\"}]}";
+        return "{\"title\":\"TestTitle\",\"number\":\"123\",\"semester\":\"Sommer\",\"ects\":5,\"lecturer\":[\"Lecturer A\"],\"content\":\"description\",\"link\":\"link\",\"dates\":[{\"first\":\"2021-05-24T10:00:00.000000\",\"second\":\"PT2H\"},{\"first\":\"2021-05-25T10:00:00.000000\",\"second\":\"PT2H\"},{\"first\":\"2021-05-25T14:00:00.000000\",\"second\":\"PT2H\"},{\"first\":\"2021-05-25T18:00:00.000000\",\"second\":\"PT2H\"},{\"first\":\"2021-05-26T10:00:00.000000\",\"second\":\"PT2H\"}]}";
     }
 }
