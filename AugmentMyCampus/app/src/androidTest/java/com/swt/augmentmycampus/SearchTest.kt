@@ -116,7 +116,7 @@ class SearchTest {
 
         onView(withText(i1.lectureName)).perform(click())
         onView(withId(R.id.navigation_data)).check(matches(isDisplayed()))
-        onView(withText(textToDisplay)).check(matches(isDisplayed()))
+        onView(withText("TestTitle")).check(matches(isDisplayed()))
     }
 
     private fun getDummyData(): String {
@@ -141,7 +141,7 @@ class SearchTest {
     private fun createTextResponse(text: String) {
         mockWebServer.enqueue(MockResponse().apply {
             setResponseCode(200)
-            setBody(moshi.adapter(String::class.java).toJson(text))
+            setBody(text)
         })
     }
 }
