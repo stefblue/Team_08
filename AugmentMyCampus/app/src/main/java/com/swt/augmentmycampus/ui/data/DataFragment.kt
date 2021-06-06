@@ -3,6 +3,7 @@ package com.swt.augmentmycampus.ui.data
 import android.os.Build
 import android.os.Bundle
 import android.text.format.DateUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -59,27 +60,37 @@ class DataFragment : Fragment() {
             semesterValueTextView.text= jsonObj.getString("semester")
 
             val lecturerValueTextView: TextView = root.findViewById(R.id.label_lecturer_value)
-            lecturerValueTextView.text = jsonObj.getString("lecturer")
+
+            var lecturerText = "";
+            for(i in 1..jsonObj.getJSONArray("lecturer").length()) {
+                lecturerText += jsonObj.getJSONArray("lecturer").getString(i-1);
+            }
+            lecturerValueTextView.text = lecturerText;
 
             contentString = jsonObj.getString("content")
 
-            var jArray : JSONArray = jsonObj.getJSONArray("dates")
+            if(jsonObj.has("dates")) {
+                var jArray: JSONArray = jsonObj.getJSONArray("dates")
+                if (jArray != null) {
+                    for (i in 0 until jArray.length()) {
+                        val tmpObject: JSONObject = jArray.getJSONObject(i)
 
-            if (jArray != null) {
-                for(i in 0 until jArray.length()) {
-                    val tmpObject : JSONObject = jArray.getJSONObject(i)
+                        val startDateTime: LocalDateTime = LocalDateTime.parse(
+                            tmpObject.getString("first"),
+                            DateTimeFormatter.ISO_LOCAL_DATE_TIME
+                        )
+                        val duration: Duration = Duration.parse(tmpObject.getString("second"))
 
-                    val startDateTime : LocalDateTime = LocalDateTime.parse(tmpObject.getString("key"), DateTimeFormatter.ISO_LOCAL_DATE_TIME)
-                    val duration : Duration = Duration.parse(tmpObject.getString("value"))
+                        val formatter: DateTimeFormatter =
+                            DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")
+                        val tmpString: String = startDateTime.format(formatter).plus(" for ")
+                            .plus(DateUtils.formatElapsedTime(duration.seconds))
 
-                    val formatter : DateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")
-                    val tmpString : String = startDateTime.format(formatter).plus(" for ").plus(DateUtils.formatElapsedTime(duration.seconds))
-
-                    listOfDates.add(tmpString)
+                        listOfDates.add(tmpString)
+                    }
+                } else {
+                    throw Exception("Backend didn't send any date information.")
                 }
-            }
-            else {
-                throw Exception("Backend didn't send any date information.")
             }
         }
 
@@ -92,7 +103,7 @@ class DataFragment : Fragment() {
         var expandableListDetailContent = HashMap<String, List<String>>()
         expandableListDetailContent.put("Content",  Collections.singletonList(contentString))
         var expandableListTitleContent = ArrayList(expandableListDetailContent!!.keys)
-        var expandableListAdapterContent = ContentExpandableListAdapter(requireContext().applicationContext, expandableListTitleContent!!, expandableListDetailContent!!)
+        var expandableListAdapterContent = ContentExpandableListAdapter(expandableListViewContent, requireContext().applicationContext, expandableListTitleContent!!, expandableListDetailContent!!)
         CreateListView(expandableListViewContent, expandableListAdapterContent)
 
         var expandableListViewDates = root.findViewById<View>(R.id.expandableListViewDates) as ExpandableListView
@@ -106,7 +117,7 @@ class DataFragment : Fragment() {
         }
         expandableListDetailDates.put("Dates",  appointments)
         var expandableListTitleDates = ArrayList(expandableListDetailDates!!.keys)
-        var expandableListAdapterDates = DatesExpandableListAdapter(requireContext().applicationContext, expandableListTitleDates!!, expandableListDetailDates!!)
+        var expandableListAdapterDates = DatesExpandableListAdapter(expandableListViewDates, requireContext().applicationContext, expandableListTitleDates!!, expandableListDetailDates!!)
         CreateListView(expandableListViewDates, expandableListAdapterDates)
 
         return root
@@ -121,10 +132,12 @@ class DataFragment : Fragment() {
     private fun CreateListView(expandableListView: ExpandableListView, expandableListAdapter: ExpandableListAdapter, expandableListTitle: ArrayList<String>, expandableListDetail: HashMap<String, List<String>>) : ExpandableListView {
         expandableListView!!.setAdapter(expandableListAdapter)
         expandableListView!!.setOnGroupExpandListener { groupPosition ->
+            expandableListView.layoutParams.height
             Toast.makeText(requireContext().applicationContext, expandableListTitle!!.get(groupPosition) + " List Expanded.",
                     Toast.LENGTH_SHORT).show()
         }
         expandableListView!!.setOnGroupCollapseListener { groupPosition ->
+            expandableListView.layoutParams.height = 50;
             Toast.makeText(requireContext().applicationContext, expandableListTitle!!.get(groupPosition) + " List Collapsed.",
                     Toast.LENGTH_SHORT).show()
         }

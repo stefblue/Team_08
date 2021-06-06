@@ -1,5 +1,6 @@
 package com.swt.augmentmycampus
 
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.os.StrictMode
 import android.view.View
@@ -26,6 +27,7 @@ class MainActivity : BaseActivity() {
     val searchFragment : SearchFragment = SearchFragment()
     val fragmentManager : FragmentManager = supportFragmentManager;
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportActionBar?.hide()
@@ -47,6 +49,13 @@ class MainActivity : BaseActivity() {
         } else {
             registerButton.text = "Register"
         }
+    }
+
+    fun flashButtonOnClick(view: View)
+    {
+        var nav: NavHostFragment =(fragmentManager.findFragmentById(R.id.nav_host_fragment)) as NavHostFragment
+        var frag: CameraFragment = nav.childFragmentManager.primaryNavigationFragment as CameraFragment
+        frag.toggleFlash(view)
     }
 
 
