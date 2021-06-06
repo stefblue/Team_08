@@ -44,11 +44,11 @@ class SearchFragmentTest {
     }
 
     @Test
-    fun testResultListExists() {
+    fun testEmptyResultListExists() {
         Espresso.onView(ViewMatchers.withId(R.id.navigation_search)).perform(ViewActions.click())
         Espresso.onView(ViewMatchers.withId(R.id.fragment_search))
             .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
-        Espresso.onView(ViewMatchers.withId(android.R.id.list))
+        Espresso.onView(ViewMatchers.withId(android.R.id.empty))
             .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
 }
