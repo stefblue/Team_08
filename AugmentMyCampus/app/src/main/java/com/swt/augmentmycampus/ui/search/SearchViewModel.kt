@@ -14,6 +14,7 @@ class SearchViewModel @Inject constructor(
     fun getSearchResults(queryString: String): List<SearchResultItem> {
         return dataBusinessLogic.getResultsForSearchQuery(queryString.trim())
     }
-
-
+    fun getTextData(url: String): String {
+        return dataBusinessLogic.getTextFromUrl(url)
+    }
 }

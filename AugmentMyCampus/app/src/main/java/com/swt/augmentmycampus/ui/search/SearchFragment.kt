@@ -62,4 +62,27 @@ class SearchFragment : ListFragment() {
 
         listAdapter = ArrayAdapter(this.requireContext(), android.R.layout.simple_list_item_1, resultList)
     }
+
+    override fun onListItemClick(l: ListView, v: View, position: Int, id: Long) {
+        if(position < 0) return
+        Log.i("clicked", v.toString())
+
+        val item = resultList[position];
+
+        try {
+            val resultText = searchViewModel.getTextData(item.dataLink); // get data from BL
+            //pass data to DataFragment and switch
+            val action = SearchFragmentDirections.actionNavigationSearchToNavigationData(resultText)
+            requireActivity().findNavController(R.id.nav_host_fragment).navigate(action)
+
+        } catch (ex: InvalidUrlException) {
+            Log.e("ex", ex.toString());
+            Toast.makeText(context, getString(R.string.error_invalid_url), Toast.LENGTH_LONG).show()
+        } catch (ex: CouldNotReachServerException) {
+            Log.e("ex", ex.toString());
+            Toast.makeText(context, getString(R.string.error_no_connection), Toast.LENGTH_LONG).show()
+        } catch (ex: Exception) {
+            Toast.makeText(context, ex.message, Toast.LENGTH_LONG).show()
+        }
+    }
 }

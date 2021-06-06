@@ -101,7 +101,7 @@ class SearchTest {
 
     @Test
     fun displaySearchResultsDetails() {
-        val textToDisplay = "test"
+        val textToDisplay = getDummyData()
 
         val i1 = SearchResultItem("lec1", "http://localhost:8080/test1");
         val i2 = SearchResultItem("lec2", "http://localhost:8080/test2");
@@ -112,12 +112,15 @@ class SearchTest {
                 .perform(typeText("some query"))
                 .perform(pressKey(KeyEvent.KEYCODE_ENTER))
 
-        createUrlValidResponse()
         createTextResponse(textToDisplay)
 
         onView(withText(i1.lectureName)).perform(click())
         onView(withId(R.id.navigation_data)).check(matches(isDisplayed()))
         onView(withText(textToDisplay)).check(matches(isDisplayed()))
+    }
+
+    private fun getDummyData(): String {
+        return "{\"title\":\"TestTitle\",\"number\":\"123\",\"semester\":\"Sommer\",\"ects\":5,\"lecturer\":[\"Lecturer A\"],\"content\":\"description\",\"link\":\"link\",\"dates\":[{\"first\":\"2021-05-24T10:00:00.000000\",\"second\":\"PT2H\"},{\"first\":\"2021-05-25T10:00:00.000000\",\"second\":\"PT2H\"},{\"first\":\"2021-05-25T14:00:00.000000\",\"second\":\"PT2H\"},{\"first\":\"2021-05-25T18:00:00.000000\",\"second\":\"PT2H\"},{\"first\":\"2021-05-26T10:00:00.000000\",\"second\":\"PT2H\"}]}";
     }
 
     private fun createSearchResponse(list : List<SearchResultItem>) {
