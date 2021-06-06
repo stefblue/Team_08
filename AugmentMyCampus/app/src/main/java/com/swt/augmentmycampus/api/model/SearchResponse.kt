@@ -10,3 +10,8 @@ data class SearchResponse(
 
 @JsonClass(generateAdapter = true)
 data class SearchResultItem(val lectureName: String, var dataLink: String)
+{
+    override fun toString(): String {
+        return this.lectureName
+    }
+}

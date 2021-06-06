@@ -1,18 +1,16 @@
 package com.swt.augmentmycampus
 
 import android.view.KeyEvent
-import android.view.inputmethod.EditorInfo
+import androidx.test.espresso.Espresso.onData
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.IdlingResource
-import androidx.test.espresso.ViewAssertion
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.action.ViewActions.*
-import androidx.test.espresso.assertion.ViewAssertions
+import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.intent.Intents
 import androidx.test.espresso.matcher.ViewMatchers
-import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
-import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import com.jakewharton.espresso.OkHttp3IdlingResource
@@ -29,13 +27,14 @@ import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.UninstallModules
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
-import okhttp3.internal.wait
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
+import org.hamcrest.CoreMatchers.anything
+import org.hamcrest.CoreMatchers.containsString
 import org.hamcrest.Matcher
+import org.hamcrest.Matchers.equalTo
 import org.junit.*
 import org.junit.runner.RunWith
-import java.util.regex.Pattern.matches
 import javax.inject.Inject
 
 @RunWith(AndroidJUnit4ClassRunner::class)
@@ -52,7 +51,7 @@ class SearchTest {
 
     private lateinit var mockWebServer: MockWebServer
 
-    @get:Rule (order = 0)
+    @get:Rule(order = 0)
     var hiltRule: HiltAndroidRule = HiltAndroidRule(this)
 
     @get:Rule(order = 1)
@@ -67,7 +66,6 @@ class SearchTest {
     @Before
     fun init() {
         hiltRule.inject()
-
         Intents.init()
         val idlingResource: IdlingResource = OkHttp3IdlingResource.create("OkHttp", okHttpClient)
         IdlingRegistry.getInstance().register(idlingResource)
@@ -86,23 +84,38 @@ class SearchTest {
 
     @Test
     fun displaySearchResults() {
-        val i1 = SearchResultItem("lec1", "link1");
-        val i2 = SearchResultItem("lec2", "link2");
+        val i1 = SearchResultItem("lec1", "http://localhost:8080/test1");
+        val i2 = SearchResultItem("lec2", "http://localhost:8080/test2");
         val list : List<SearchResultItem> = listOf(i1,i2);
-
         createSearchResponse(list);
 
-        onView(withId(R.id.search_field)).perform(click());
-        onView(withId(R.id.search_field)).perform(typeText("some query"), pressKey(KeyEvent.KEYCODE_ENTER))
+        onView(withId(R.id.search_field)).perform(click())
+            .perform(typeText("some query"))
+            .perform(pressKey(KeyEvent.KEYCODE_ENTER))
 
-        for (item in list) onView(ViewMatchers.withText(item.lectureName)).check(ViewAssertions.matches(isDisplayed()));
+        onView(withText(i1.lectureName)).check(matches(isDisplayed()))
+        onView(withText(i2.lectureName)).check(matches(isDisplayed()))
     }
 
     private fun createSearchResponse(list : List<SearchResultItem>) {
-        var searchResponse = SearchResponse(list)
+        val searchResponse = SearchResponse(list)
 
         mockWebServer.enqueue(MockResponse().apply {
             setBody(moshi.adapter(SearchResponse::class.java).toJson(searchResponse))
+        })
+    }
+
+    private fun createUrlValidResponse() {
+        mockWebServer.enqueue(MockResponse().apply {
+            setResponseCode(200)
+            setBody(moshi.adapter(String::class.java).toJson(""))
+        })
+    }
+
+    private fun createTextResponse(text: String) {
+        mockWebServer.enqueue(MockResponse().apply {
+            setResponseCode(200)
+            setBody(moshi.adapter(String::class.java).toJson(text))
         })
     }
 }
