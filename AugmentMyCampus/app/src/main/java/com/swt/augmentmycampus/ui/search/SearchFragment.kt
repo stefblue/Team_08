@@ -44,7 +44,8 @@ class SearchFragment : ListFragment() {
             override fun onQueryTextSubmit(query: String): Boolean {
                 Log.i("search",query);
                 onSearch(query)
-                return true
+                searchField.clearFocus();
+                return false
             }
         })
         return root

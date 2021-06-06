@@ -93,14 +93,15 @@ class SearchTest {
             .perform(typeText("some query"))
             .perform(pressKey(KeyEvent.KEYCODE_ENTER))
 
+        onView(withId(android.R.id.list)).check(matches(hasChildCount(2)))
         onView(withText(i1.lectureName)).check(matches(isDisplayed()))
         onView(withText(i2.lectureName)).check(matches(isDisplayed()))
     }
 
     private fun createSearchResponse(list : List<SearchResultItem>) {
         val searchResponse = SearchResponse(list)
-
         mockWebServer.enqueue(MockResponse().apply {
+            setResponseCode(200)
             setBody(moshi.adapter(SearchResponse::class.java).toJson(searchResponse))
         })
     }
