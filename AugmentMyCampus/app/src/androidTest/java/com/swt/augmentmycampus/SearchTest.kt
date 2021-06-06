@@ -7,6 +7,7 @@ import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.IdlingResource
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.action.ViewActions.*
+import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.intent.Intents
 import androidx.test.espresso.matcher.ViewMatchers
@@ -96,6 +97,27 @@ class SearchTest {
         onView(withId(android.R.id.list)).check(matches(hasChildCount(2)))
         onView(withText(i1.lectureName)).check(matches(isDisplayed()))
         onView(withText(i2.lectureName)).check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun displaySearchResultsDetails() {
+        val textToDisplay = "test"
+
+        val i1 = SearchResultItem("lec1", "http://localhost:8080/test1");
+        val i2 = SearchResultItem("lec2", "http://localhost:8080/test2");
+        val list : List<SearchResultItem> = listOf(i1,i2);
+        createSearchResponse(list);
+
+        onView(withId(R.id.search_field)).perform(click())
+                .perform(typeText("some query"))
+                .perform(pressKey(KeyEvent.KEYCODE_ENTER))
+
+        createUrlValidResponse()
+        createTextResponse(textToDisplay)
+
+        onView(withText(i1.lectureName)).perform(click())
+        onView(withId(R.id.navigation_data)).check(matches(isDisplayed()))
+        onView(withText(textToDisplay)).check(matches(isDisplayed()))
     }
 
     private fun createSearchResponse(list : List<SearchResultItem>) {
