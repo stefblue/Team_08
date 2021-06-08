@@ -18,12 +18,14 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.google.gson.Gson;
 import com.swt.amc.api.LectureInformation;
 import com.swt.amc.api.UserInformationResponse;
 import com.swt.amc.api.UsernamePasswordInformation;
 import com.swt.amc.exceptions.AmcException;
 import com.swt.amc.interfaces.IFilterLectureComponent;
 import com.swt.amc.interfaces.IQRCodeLinkVerifier;
+import com.swt.amc.interfaces.ISearchLecturesComponent;
 import com.swt.amc.interfaces.IValidateCredentialsComponent;
 
 @RestController
@@ -37,6 +39,9 @@ public class AmcRestController {
 
 	@Autowired
 	private IFilterLectureComponent filterLectureComponent;
+
+	@Autowired
+	private ISearchLecturesComponent searchLecturesComponent;
 
 	private static final Logger log = LoggerFactory.getLogger(AmcRestController.class);
 
@@ -55,6 +60,13 @@ public class AmcRestController {
 	@GetMapping("/verifyQrCodeNoApp/{qrCodeLink}")
 	public RedirectView verifyQrCode(@PathVariable("qrCodeLink") final String qrCodeLink) throws AmcException {
 		return new RedirectView(qrCodeLinkVerifier.getRedirectLink(qrCodeLink));
+	}
+
+	@GetMapping("/search/{searchString}")
+	public ResponseEntity<String> search(@PathVariable("searchString") final String searchString)
+			throws AmcException {
+		return new ResponseEntity<String>(
+				new Gson().toJson(searchLecturesComponent.findLecturesBySearchString(searchString)), HttpStatus.OK);
 	}
 
 	@GetMapping("/filterLectureInformation/{title}")

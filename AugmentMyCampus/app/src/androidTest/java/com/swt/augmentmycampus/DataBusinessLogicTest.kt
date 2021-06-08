@@ -33,16 +33,16 @@ import javax.inject.Inject
 @UninstallModules(ConfigurationModule::class)
 class DataBusinessLogicTest {
 
-    @Module
-    @InstallIn(SingletonComponent::class)
-    object FakeConfigurationModule {
-        @Provides
-        fun provideTestWebservice() = WebserviceConfiguration("http://localhost:8080/")
-    }
+            @Module
+            @InstallIn(SingletonComponent::class)
+            object FakeConfigurationModule {
+                @Provides
+                fun provideTestWebservice() = WebserviceConfiguration("http://localhost:8080/")
+            }
 
-    private lateinit var mockWebServer: MockWebServer
+                    private lateinit var mockWebServer: MockWebServer
 
-    private lateinit var dataBusinessLogic: DataBusinessLogic
+            private lateinit var dataBusinessLogic: DataBusinessLogic
 
     @get:Rule
     var hiltRule: HiltAndroidRule = HiltAndroidRule(this)
@@ -104,30 +104,6 @@ class DataBusinessLogicTest {
         createUrlValidResponse()
         createTextResponse("")
         Assert.assertEquals("\"\"", dataBusinessLogic.getTextFromUrl(url));
-    }
-
-    @Test
-    fun testSearchResult() {
-        try {
-            val i1 = SearchResultItem("lec1", "link1");
-            val i2 = SearchResultItem("lec2", "link2");
-            val list : List<SearchResultItem> = listOf(i1,i2);
-            createSearchResponse(list);
-            val response = dataBusinessLogic.getResultsForSearchQuery("searchstring");
-            MatcherAssert.assertThat(response, CoreMatchers.instanceOf(List::class.java))
-            Assert.assertEquals(response.size, 2)
-        } catch (e: Exception) {
-            junit.framework.Assert.fail();
-        }
-    }
-
-    private fun createSearchResponse(list : List<SearchResultItem>) {
-        var searchResponse = SearchResponse(list)
-
-        mockWebServer.enqueue(MockResponse().apply {
-            setResponseCode(200)
-            setBody(moshi.adapter(SearchResponse::class.java).toJson(searchResponse))
-        })
     }
 
     private fun createNotFoundResponse() {

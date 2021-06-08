@@ -11,10 +11,10 @@ class SearchViewModel @Inject constructor(
     private val dataBusinessLogic: DataBusinessLogic
 ) : ViewModel() {
 
-    fun getSearchResults(queryString: String): List<SearchResultItem> {
+    fun getSearchResults(queryString: String): List<String> {
         return dataBusinessLogic.getResultsForSearchQuery(queryString.trim())
     }
     fun getTextData(url: String): String {
-        return dataBusinessLogic.getTextFromUrl(url)
+        return dataBusinessLogic.getTextFromTag(url)
     }
 }

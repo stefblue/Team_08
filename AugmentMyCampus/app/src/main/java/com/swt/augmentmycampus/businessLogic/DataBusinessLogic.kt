@@ -1,11 +1,11 @@
 package com.swt.augmentmycampus.businessLogic
 
-import com.swt.augmentmycampus.api.model.SearchResultItem
+import android.util.Log
+import com.swt.augmentmycampus.dependencyInjection.ConfigurationModule
 import com.swt.augmentmycampus.network.Webservice
 import okhttp3.OkHttpClient
 import okhttp3.Request
-import retrofit2.Response
-import retrofit2.Retrofit
+import org.json.JSONArray
 import java.util.*
 import javax.inject.Inject
 
@@ -17,7 +17,10 @@ interface DataBusinessLogic {
     @Throws(InvalidUrlException::class)
     fun getTextFromUrl(url: String): String;
 
-    fun getResultsForSearchQuery(query: String): List<SearchResultItem>;
+    @Throws(InvalidUrlException::class)
+    fun getTextFromTag(tag: String): String;
+
+    fun getResultsForSearchQuery(query: String): List<String>;
 
     @Throws(InvalidUrlException::class)
     fun performRestCall(url: String): String;
@@ -54,11 +57,20 @@ class DataBusinessLogicImpl @Inject constructor (
         return  performRestCall(url);
     }
 
-    override fun getResultsForSearchQuery(query: String): List<SearchResultItem> {
-        val response = webservice.getSearchResult(query).execute();
+    override fun getTextFromTag(tag: String): String {
+        if (!urlBusinessLogic.isValidUrlFormat(ConfigurationModule.endpoint + "/verifyQrCode/" + tag)) throw InvalidUrlException()
+        return  performRestCall(ConfigurationModule.endpoint + "/verifyQrCode/" + tag);
+    }
 
-        if(!response.isSuccessful) throw java.lang.Exception(response.errorBody().toString())
-
-        return response.body()!!.data
+    override fun getResultsForSearchQuery(query: String): List<String> {
+        val response = performRestCall(ConfigurationModule.endpoint +  "/search/" + query);
+        val listdata = ArrayList<String>()
+        val jArray = JSONArray(response)
+        if (jArray != null) {
+            for (i in 0 until jArray.length()) {
+                listdata.add(jArray.getString(i))
+            }
+        }
+        return listdata
     }
 }

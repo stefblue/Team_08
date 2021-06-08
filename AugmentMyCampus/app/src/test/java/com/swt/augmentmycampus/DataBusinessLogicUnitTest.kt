@@ -71,6 +71,10 @@ class MockWebservice : Webservice {
         TODO("Not yet implemented")
     }
 
+    override fun getSearchResult(query: String): Call<String> {
+        TODO("Not yet implemented")
+    }
+
     override fun login(userInfo: LoginRequest): Call<UserInformationResponse> {
         TODO("Not yet implemented")
     }

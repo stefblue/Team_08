@@ -3,6 +3,8 @@ package com.swt.augmentmycampus.network
 import com.google.gson.annotations.SerializedName
 import com.squareup.moshi.JsonClass
 import com.swt.augmentmycampus.api.model.SearchResponse
+import org.json.JSONArray
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -30,8 +32,8 @@ interface Webservice {
     @GET
     fun getTextResponse(@Url url: String): Call<String>
 
-    @GET("/search")
-    fun getSearchResult(@Query("query") query : String): Call<SearchResponse>
+    @GET("/search/{searchString}")
+    fun getSearchResult(@Path("searchString") query : String): Call<Object>
 
     @POST("/login")
     @Headers("Content-Type: application/json")
