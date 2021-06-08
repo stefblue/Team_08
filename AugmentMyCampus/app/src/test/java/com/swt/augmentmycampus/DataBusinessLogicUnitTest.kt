@@ -71,7 +71,7 @@ class MockWebservice : Webservice {
         TODO("Not yet implemented")
     }
 
-    override fun getSearchResult(query: String): Call<String> {
+    override fun getSearchResult(query: String): Call<Object> {
         TODO("Not yet implemented")
     }
 

@@ -8,6 +8,7 @@ import okhttp3.Request
 import org.json.JSONArray
 import java.util.*
 import javax.inject.Inject
+import kotlin.jvm.Throws
 
 
 class InvalidUrlException() : Exception("Url not valid!")
