@@ -5,10 +5,10 @@ import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.Duration;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.Assert;
@@ -27,7 +27,7 @@ import com.swt.amc.repositories.ILectureInformationRepository;
 
 @SpringBootTest()
 @TestInstance(Lifecycle.PER_CLASS)
-public class VerifierComponentTests {
+public class VerifierComponentTests extends AbstractTest {
 
 	@Autowired
 	private IAmcComponent amcComponent;
@@ -41,15 +41,17 @@ public class VerifierComponentTests {
 	public void setUpRepo() {
 		lectureInformationRepo.deleteAll();
 
+		Date date = new Date();
+
 		lectureInformationRepo.save(new LectureInformation("bla", "Title", "Number.1", "SS", 5,
-				Collections.singleton("Dr. Super Lecturer"), "Content", "https://bla.com", Collections.singletonList(
-						new LectureDate(LocalDateTime.now().minus(Duration.ofHours(24)), Duration.ofHours(2)))));
+				Collections.singleton("Dr. Super Lecturer"), "Content", "https://bla.com",
+				Collections.singletonList(new LectureDate(addHoursToDate(date, -24), Duration.ofHours(2)))));
 		lectureInformationRepo.save(new LectureInformation("bli", "Title2", "Number.2", "WS", 1,
-				Collections.singleton("L1"), "Content2", "https://bli.com", Collections.singletonList(
-						new LectureDate(LocalDateTime.now().minus(Duration.ofHours(24)), Duration.ofHours(2)))));
+				Collections.singleton("L1"), "Content2", "https://bli.com",
+				Collections.singletonList(new LectureDate(addHoursToDate(date, -24), Duration.ofHours(2)))));
 		lectureInformationRepo.save(new LectureInformation("blubb", "Title3", "Number.3", "WS/SS", 1,
-				Collections.singleton("Lecturer3"), "Content3", "https://blubb.com", Collections.singletonList(
-						new LectureDate(LocalDateTime.now().minus(Duration.ofHours(24)), Duration.ofHours(2)))));
+				Collections.singleton("Lecturer3"), "Content3", "https://blubb.com",
+				Collections.singletonList(new LectureDate(addHoursToDate(date, -24), Duration.ofHours(2)))));
 	}
 
 	@Test

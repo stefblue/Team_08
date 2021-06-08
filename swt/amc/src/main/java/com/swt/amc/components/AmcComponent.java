@@ -1,10 +1,15 @@
 package com.swt.amc.components;
 
+import java.awt.image.BufferedImage;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.WriterException;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.qrcode.QRCodeWriter;
 import com.swt.amc.api.LectureInformation;
 import com.swt.amc.api.UserInformation;
 import com.swt.amc.api.UserInformationResponse;
@@ -62,5 +67,15 @@ public class AmcComponent implements IAmcComponent {
 		}
 
 		throw new AmcException("Invalid username or password!");
+	}
+
+	@Override
+	public BufferedImage generateQrCode(String qrCodeContent) throws AmcException {
+		QRCodeWriter writer = new QRCodeWriter();
+		try {
+			return MatrixToImageWriter.toBufferedImage(writer.encode(qrCodeContent, BarcodeFormat.QR_CODE, 200, 200));
+		} catch (WriterException e) {
+			throw new AmcException("Error while generating qr-code!");
+		}
 	}
 }

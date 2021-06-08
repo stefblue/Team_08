@@ -1,7 +1,7 @@
 package com.swt.amc.api;
 
 import java.time.Duration;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,14 +14,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class LectureDate {
 
 	private Long id;
-	private LocalDateTime time;
+	private Date time;
 	private Duration duration;
 
 	public LectureDate() {
 
 	}
 
-	public LectureDate(LocalDateTime time, Duration duration) {
+	public LectureDate(Date time, Duration duration) {
 		this.time = time;
 		this.duration = duration;
 	}
@@ -37,11 +37,11 @@ public class LectureDate {
 		this.id = id;
 	}
 
-	public LocalDateTime getTime() {
+	public Date getTime() {
 		return time;
 	}
 
-	public void setTime(LocalDateTime time) {
+	public void setTime(Date time) {
 		this.time = time;
 	}
 

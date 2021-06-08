@@ -17,10 +17,10 @@ spring:
       hbm2ddl: auto
   datasource:
 #-------------------for postgres --------------
-#    url: jdbc:postgresql://127.0.0.1:5432/amc
-#    platform: postgresql
+    url: jdbc:postgresql://127.0.0.1:5432/amc
+    platform: postgresql
 #-------------------for h2 --------------------
-    url: jdbc:h2:./amc
-    platform: h2
+#    url: jdbc:h2:./amc
+#    platform: h2
     username: amc
     password: amc

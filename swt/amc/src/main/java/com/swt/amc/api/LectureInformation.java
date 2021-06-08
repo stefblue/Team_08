@@ -36,7 +36,6 @@ public class LectureInformation {
 	public LectureInformation() {
 	}
 
-	// TODO FIXME FL!
 	public LectureInformation(String tag, String title, String number, String semester, Integer ects,
 			Set<String> lecturer, String content, String link, List<LectureDate> dates) {
 		this.tag = tag;
@@ -136,7 +135,7 @@ public class LectureInformation {
 		this.link = link;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@Column(nullable = false)
 	public List<LectureDate> getDates() {
 		return dates;

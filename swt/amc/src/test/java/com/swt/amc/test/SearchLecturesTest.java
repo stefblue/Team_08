@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.Duration;
-import java.time.LocalDateTime;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,7 +24,7 @@ import com.swt.amc.repositories.ILectureInformationRepository;
 
 @SpringBootTest
 @TestInstance(Lifecycle.PER_CLASS)
-public class SearchLecturesTest {
+public class SearchLecturesTest extends AbstractTest {
 
 	@Autowired
 	private ILectureInformationRepository lectureInformationRepo;
@@ -35,18 +35,19 @@ public class SearchLecturesTest {
 	@BeforeAll
 	public void setUpRepo() {
 		lectureInformationRepo.deleteAll();
+		Date date = new Date();
 		lectureInformationRepo.save(new LectureInformation("bla", "bla", "Number.1", "SS", 5,
-				Collections.singleton("Dr. Super Lecturer"), "Content", "https://bla1.com", Collections.singletonList(
-						new LectureDate(LocalDateTime.now().minus(Duration.ofHours(24)), Duration.ofHours(2)))));
+				Collections.singleton("Dr. Super Lecturer"), "Content", "https://bla1.com",
+				Collections.singletonList(new LectureDate(addHoursToDate(date, -24), Duration.ofHours(2)))));
 		lectureInformationRepo.save(new LectureInformation("blo", "blo", "Number.2", "SS", 5,
-				Collections.singleton("Dr. Super Lecturer"), "Content", "https://bla2.com", Collections.singletonList(
-						new LectureDate(LocalDateTime.now().minus(Duration.ofHours(24)), Duration.ofHours(2)))));
+				Collections.singleton("Dr. Super Lecturer"), "Content", "https://bla2.com",
+				Collections.singletonList(new LectureDate(addHoursToDate(date, -24), Duration.ofHours(2)))));
 		lectureInformationRepo.save(new LectureInformation("blu", "blu", "Number.3", "SS", 5,
-				Collections.singleton("Dr. Super Lecturer"), "Content", "https://bla3.com", Collections.singletonList(
-						new LectureDate(LocalDateTime.now().minus(Duration.ofHours(24)), Duration.ofHours(2)))));
+				Collections.singleton("Dr. Super Lecturer"), "Content", "https://bla3.com",
+				Collections.singletonList(new LectureDate(addHoursToDate(date, -24), Duration.ofHours(2)))));
 		lectureInformationRepo.save(new LectureInformation("all", "all", "Number.4", "SS", 5,
-				Collections.singleton("Dr. Super Lecturer"), "Content", "https://bla4.com", Collections.singletonList(
-						new LectureDate(LocalDateTime.now().minus(Duration.ofHours(24)), Duration.ofHours(2)))));
+				Collections.singleton("Dr. Super Lecturer"), "Content", "https://bla4.com",
+				Collections.singletonList(new LectureDate(addHoursToDate(date, -24), Duration.ofHours(2)))));
 	}
 
 	@Test

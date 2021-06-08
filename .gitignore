@@ -126,3 +126,4 @@ target
 .eclipse-pmd
 .metadata
 
+*.db

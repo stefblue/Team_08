@@ -1,5 +1,6 @@
 package com.swt.amc.interfaces;
 
+import java.awt.image.BufferedImage;
 import java.util.List;
 
 import com.swt.amc.api.LectureInformation;
@@ -18,5 +19,7 @@ public interface IAmcComponent {
 
 	UserInformationResponse getUserInformationForUsernameAndPassword(String username, String password)
 			throws AmcException;
+
+	BufferedImage generateQrCode(String qrCodeContent) throws AmcException;
 
 }
