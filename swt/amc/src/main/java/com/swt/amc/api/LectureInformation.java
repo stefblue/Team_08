@@ -60,7 +60,6 @@ public class LectureInformation {
 		this.id = id;
 	}
 
-	@JsonIgnore
 	@Column(nullable = false, unique = true)
 	public String getTag() {
 		return tag;

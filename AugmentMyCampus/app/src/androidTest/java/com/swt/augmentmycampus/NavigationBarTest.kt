@@ -47,6 +47,7 @@ class NavigationBarTest {
 
         // Each sub-option of the bar
         onView(withId(R.id.navigation_camera)).check(matches(isDisplayed()))
+        onView(withId(R.id.navigation_search)).check(matches(isDisplayed()))
         onView(withId(R.id.navigation_data)).check(matches(isDisplayed()))
         onView(withId(R.id.navigation_settings)).check(matches(isDisplayed()))
     }

@@ -1,11 +1,16 @@
 package com.swt.augmentmycampus.businessLogic
 
+import android.util.Log
+import com.squareup.moshi.Json
+import com.swt.augmentmycampus.api.model.LectureInformation
+import com.swt.augmentmycampus.dependencyInjection.ConfigurationModule
 import com.swt.augmentmycampus.network.Webservice
 import okhttp3.OkHttpClient
 import okhttp3.Request
-import retrofit2.Response
-import retrofit2.Retrofit
+import org.json.JSONArray
+import java.util.*
 import javax.inject.Inject
+import kotlin.jvm.Throws
 
 
 class InvalidUrlException() : Exception("Url not valid!")
@@ -16,7 +21,13 @@ interface DataBusinessLogic {
     fun getTextFromUrl(url: String): String;
 
     @Throws(InvalidUrlException::class)
+    fun getLectureInformationFromTag(tag: String): LectureInformation;
+
+    fun getResultsForSearchQuery(query: String): List<LectureInformation>;
+
+    @Throws(InvalidUrlException::class)
     fun performRestCall(url: String): String;
+
 }
 
 class DataBusinessLogicImpl @Inject constructor (
@@ -47,5 +58,17 @@ class DataBusinessLogicImpl @Inject constructor (
     override fun getTextFromUrl(url: String): String {
         if (!urlBusinessLogic.isValidUrlFormat(url)) throw InvalidUrlException()
         return  performRestCall(url);
+    }
+
+    override fun getLectureInformationFromTag(tag: String): LectureInformation {
+        val response = webservice.getLectureInformationForTag(tag).execute()
+        if(!response.isSuccessful) throw java.lang.Exception(response.errorBody().toString())
+        return response.body()!!
+    }
+
+    override fun getResultsForSearchQuery(query: String): List<LectureInformation> {
+        val response = webservice.getSearchResult(query).execute()
+        if(!response.isSuccessful) throw java.lang.Exception(response.errorBody().toString())
+        return response.body()!!
     }
 }

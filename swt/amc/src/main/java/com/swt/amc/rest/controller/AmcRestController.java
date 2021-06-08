@@ -4,6 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 
@@ -29,6 +30,7 @@ import com.swt.amc.api.UsernamePasswordInformation;
 import com.swt.amc.exceptions.AmcException;
 import com.swt.amc.interfaces.IFilterLectureComponent;
 import com.swt.amc.interfaces.IQRCodeLinkVerifier;
+import com.swt.amc.interfaces.ISearchLecturesComponent;
 import com.swt.amc.interfaces.IQrCodeGenerator;
 import com.swt.amc.interfaces.IValidateCredentialsComponent;
 
@@ -47,6 +49,9 @@ public class AmcRestController {
 	@Autowired
 	private IQrCodeGenerator qrCodeGenerator;
 
+	@Autowired
+	private ISearchLecturesComponent searchLecturesComponent;
+
 	private static final Logger log = LoggerFactory.getLogger(AmcRestController.class);
 
 	@GetMapping("/verifyQrCode/{qrCodeLink}")
@@ -64,6 +69,13 @@ public class AmcRestController {
 	@GetMapping("/verifyQrCodeNoApp/{qrCodeLink}")
 	public RedirectView verifyQrCode(@PathVariable("qrCodeLink") final String qrCodeLink) throws AmcException {
 		return new RedirectView(qrCodeLinkVerifier.getRedirectLink(qrCodeLink));
+	}
+
+	@GetMapping("/search/{searchString}")
+	public ResponseEntity<List<LectureInformation>> search(@PathVariable("searchString") final String searchString)
+			throws AmcException {
+		return new ResponseEntity<List<LectureInformation>>(
+				searchLecturesComponent.findLecturesBySearchString(searchString), HttpStatus.OK);
 	}
 
 	@GetMapping("/filterLectureInformation/{title}")
