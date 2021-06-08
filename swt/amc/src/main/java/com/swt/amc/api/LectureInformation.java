@@ -1,11 +1,11 @@
 package com.swt.amc.api;
 
-import java.time.Duration;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -13,10 +13,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.Type;
-import org.springframework.data.util.Pair;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -29,16 +28,17 @@ public class LectureInformation {
 	private String number;
 	private String semester;
 	private Integer ects;
-	private List<String> lecturer = new ArrayList<String>();
+	private Set<String> lecturer = new HashSet<String>();
 	private String content;
 	private String link;
-	private LinkedList<Pair<LocalDateTime, Duration>> dates = new LinkedList<Pair<LocalDateTime, Duration>>();
+	private List<LectureDate> dates = new ArrayList<LectureDate>();
 
 	public LectureInformation() {
 	}
 
+	// TODO FIXME FL!
 	public LectureInformation(String tag, String title, String number, String semester, Integer ects,
-			List<String> lecturer, String content, String link) {
+			Set<String> lecturer, String content, String link, List<LectureDate> dates) {
 		this.tag = tag;
 		this.title = title;
 		this.number = number;
@@ -47,6 +47,7 @@ public class LectureInformation {
 		this.lecturer = lecturer;
 		this.content = content;
 		this.link = link;
+		this.dates = dates;
 	}
 
 	@Id
@@ -107,11 +108,11 @@ public class LectureInformation {
 
 	@ElementCollection(fetch = FetchType.EAGER)
 	@Column(nullable = false)
-	public List<String> getLecturer() {
+	public Set<String> getLecturer() {
 		return lecturer;
 	}
 
-	public void setLecturer(List<String> lecturer) {
+	public void setLecturer(Set<String> lecturer) {
 		this.lecturer = lecturer;
 	}
 
@@ -135,13 +136,14 @@ public class LectureInformation {
 		this.link = link;
 	}
 
-	@Transient
-	public LinkedList<Pair<LocalDateTime, Duration>> getDates() {
+	@OneToMany(cascade = CascadeType.ALL)
+	@Column(nullable = false)
+	public List<LectureDate> getDates() {
 		return dates;
 	}
 
-	public void addDate(Pair<LocalDateTime, Duration> date) {
-		dates.add(date);
+	public void setDates(List<LectureDate> dates) {
+		this.dates = dates;
 	}
 
 }

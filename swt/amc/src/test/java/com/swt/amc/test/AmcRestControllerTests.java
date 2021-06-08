@@ -14,7 +14,6 @@ import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.util.Pair;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -25,6 +24,7 @@ import org.springframework.web.context.WebApplicationContext;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.swt.amc.Amc;
+import com.swt.amc.api.LectureDate;
 import com.swt.amc.api.LectureInformation;
 import com.swt.amc.exceptions.AmcException;
 import com.swt.amc.repositories.ILectureInformationRepository;
@@ -50,7 +50,8 @@ public class AmcRestControllerTests {
 	public void setUpTestClass() {
 		lectureInformationRepo.deleteAll();
 		lectureInformationRepo.save(new LectureInformation("bla", "Title", "Number.1", "SS", 5,
-				Collections.singletonList("Dr. Super Lecturer"), "Content", "https://bla.com"));
+				Collections.singleton("Dr. Super Lecturer"), "Content", "https://bla.com", Collections.singletonList(
+						new LectureDate(LocalDateTime.now().minus(Duration.ofHours(24)), Duration.ofHours(2)))));
 		mockService = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 	}
 
@@ -65,9 +66,8 @@ public class AmcRestControllerTests {
 	public void verifyQrCodeViaApp_elementsAreDates() throws AmcException {
 		LectureInformation lecture = rest.verifyQrCodeViaApp("bla").getBody();
 
-		Assert.assertTrue(lecture.getDates().getFirst() instanceof Pair);
-		Assert.assertTrue(lecture.getDates().getFirst().getFirst() instanceof LocalDateTime);
-		Assert.assertTrue(lecture.getDates().getFirst().getSecond() instanceof Duration);
+		Assert.assertTrue(lecture.getDates().get(0).getTime() instanceof LocalDateTime);
+		Assert.assertTrue(lecture.getDates().get(0).getDuration() instanceof Duration);
 	}
 
 	@Test
@@ -83,7 +83,7 @@ public class AmcRestControllerTests {
 		assertEquals(lectureInformationResponse.getNumber(), "Number.1");
 		assertEquals(lectureInformationResponse.getSemester(), "SS");
 		assertEquals(lectureInformationResponse.getEcts(), 5);
-		assertEquals(lectureInformationResponse.getLecturer().get(0), "Dr. Super Lecturer");
+		assertEquals(lectureInformationResponse.getLecturer().iterator().next(), "Dr. Super Lecturer");
 		assertEquals(lectureInformationResponse.getContent(), "Content");
 	}
 }

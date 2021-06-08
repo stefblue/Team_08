@@ -9,13 +9,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.swt.amc.api.UserInformation;
 import com.swt.amc.api.UserInformationResponse;
 import com.swt.amc.exceptions.AmcException;
-import com.swt.amc.interfaces.IValidateCredentialsComponent;
+import com.swt.amc.interfaces.IAmcComponent;
 import com.swt.amc.repositories.IUserInformationRepository;
 
 @SpringBootTest()
@@ -26,8 +25,7 @@ public class UserInfoRepositoryAndAuthenticationTests {
 	private IUserInformationRepository repository;
 
 	@Autowired
-	@Qualifier("validateCredentialsComponent")
-	private IValidateCredentialsComponent loginComponent;
+	private IAmcComponent amcComponent;
 
 	@BeforeAll
 	public void setUpRepo() {
@@ -42,7 +40,7 @@ public class UserInfoRepositoryAndAuthenticationTests {
 
 	@Test
 	public void getUserNameAndPasswordTest() throws AmcException {
-		UserInformationResponse userInfoResponse = loginComponent.getUserInformationForUsernameAndPassword("admin",
+		UserInformationResponse userInfoResponse = amcComponent.getUserInformationForUsernameAndPassword("admin",
 				"password");
 		assertEquals(userInfoResponse.getGivenName(), "Franz");
 		assertEquals(userInfoResponse.getLastName(), "Bauer");
@@ -51,7 +49,7 @@ public class UserInfoRepositoryAndAuthenticationTests {
 	@Test()
 	public void getNoLinkTest() {
 		try {
-			loginComponent.getUserInformationForUsernameAndPassword("notUser", "somePassword");
+			amcComponent.getUserInformationForUsernameAndPassword("notUser", "somePassword");
 			fail();
 		} catch (Exception e) {
 			assertTrue(e instanceof AmcException);
