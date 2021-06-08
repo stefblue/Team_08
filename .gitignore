@@ -124,3 +124,6 @@ lint/tmp/
 .project
 target
 .eclipse-pmd
+.metadata
+
+*.db
