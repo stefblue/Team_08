@@ -3,9 +3,13 @@ package com.swt.amc.test;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Collections;
+
+import javax.imageio.ImageIO;
 
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeAll;
@@ -22,8 +26,13 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.zxing.BinaryBitmap;
+import com.google.zxing.LuminanceSource;
+import com.google.zxing.MultiFormatReader;
+import com.google.zxing.Result;
+import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
+import com.google.zxing.common.HybridBinarizer;
 import com.swt.amc.Amc;
 import com.swt.amc.api.LectureInformation;
 import com.swt.amc.exceptions.AmcException;
@@ -71,7 +80,7 @@ public class AmcRestControllerTests {
 	}
 
 	@Test
-	public void getFilteredLectureInformationTest() throws JsonProcessingException, Exception {
+	public void getFilteredLectureInformationTest() throws Exception {
 		ObjectMapper objectMapper = new ObjectMapper();
 		MvcResult result = mockService.perform(MockMvcRequestBuilders.get("/filterLectureInformation/Title"))
 				.andReturn();
@@ -85,5 +94,17 @@ public class AmcRestControllerTests {
 		assertEquals(lectureInformationResponse.getEcts(), 5);
 		assertEquals(lectureInformationResponse.getLecturer().get(0), "Dr. Super Lecturer");
 		assertEquals(lectureInformationResponse.getContent(), "Content");
+	}
+
+	@Test
+	public void getQrCodeTest() throws Exception {
+		MvcResult result = mockService.perform(MockMvcRequestBuilders.get("/generateQrCode/testTag")).andReturn();
+		result.getResponse().getContentAsByteArray();
+		ByteArrayInputStream bais = new ByteArrayInputStream(result.getResponse().getContentAsByteArray());
+		BufferedImage qrCode = ImageIO.read(bais);
+		LuminanceSource ls = new BufferedImageLuminanceSource(qrCode);
+		BinaryBitmap bm = new BinaryBitmap(new HybridBinarizer(ls));
+		Result qrCodeContent = new MultiFormatReader().decode(bm);
+		assertEquals(qrCodeContent.getText(), "http://192.168.1.10:8082/verifyQrCodeNoApp/testTag");
 	}
 }
