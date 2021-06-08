@@ -1,5 +1,6 @@
 package com.swt.augmentmycampus
 
+import com.swt.augmentmycampus.api.model.LectureInformation
 import com.swt.augmentmycampus.businessLogic.DataBusinessLogic
 import com.swt.augmentmycampus.businessLogic.DataBusinessLogicImpl
 import com.swt.augmentmycampus.businessLogic.UrlBusinessLogicImpl
@@ -68,6 +69,10 @@ class MockWebservice : Webservice {
     }
 
     override fun getTextResponse(url: String): Call<String> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getSearchResult(query: String): Call<List<LectureInformation>> {
         TODO("Not yet implemented")
     }
 

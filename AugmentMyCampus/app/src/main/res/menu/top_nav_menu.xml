@@ -9,11 +9,15 @@
     <item
         android:id="@+id/navigation_data"
         android:icon="@drawable/ic_baseline_description_24"
-        android:title="@string/title_data"></item>
+        android:title="@string/title_data"/>
+
+    <item
+        android:id="@+id/navigation_search"
+        android:icon="@drawable/ic_baseline_search_24"
+        android:title="@string/title_search"/>
 
     <item
         android:id="@+id/navigation_settings"
         android:icon="@drawable/ic_baseline_settings_24"
-        android:title="@string/title_settings"></item>
-
+        android:title="@string/title_settings"/>
 </menu>

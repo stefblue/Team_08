@@ -10,9 +10,12 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object ConfigurationModule {
+
+    public val endpoint = "http://192.168.1.172:8082";
+
     @Singleton
     @Provides
     fun provideWebserviceConfiguration(): WebserviceConfiguration =
-        WebserviceConfiguration("http://192.168.1.172:8082")
+        WebserviceConfiguration(endpoint)
 
 }

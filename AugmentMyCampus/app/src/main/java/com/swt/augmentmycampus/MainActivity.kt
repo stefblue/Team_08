@@ -13,6 +13,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.zxing.integration.android.IntentIntegrator
 import com.swt.augmentmycampus.ui.camera.CameraFragment
 import com.swt.augmentmycampus.ui.data.DataFragment
+import com.swt.augmentmycampus.ui.search.SearchFragment
 import com.swt.augmentmycampus.ui.settings.SettingsFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -23,6 +24,7 @@ class MainActivity : BaseActivity() {
     val cameraFragment : CameraFragment = CameraFragment()
     val dataFragment : DataFragment = DataFragment()
     val settingsFragment : SettingsFragment = SettingsFragment()
+    val searchFragment : SearchFragment = SearchFragment()
     val fragmentManager : FragmentManager = supportFragmentManager;
 
 
