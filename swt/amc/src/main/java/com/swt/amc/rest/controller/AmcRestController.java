@@ -1,13 +1,18 @@
 package com.swt.amc.rest.controller;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.time.Duration;
 import java.time.LocalDateTime;
+
+import javax.imageio.ImageIO;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Pair;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +29,7 @@ import com.swt.amc.api.UsernamePasswordInformation;
 import com.swt.amc.exceptions.AmcException;
 import com.swt.amc.interfaces.IFilterLectureComponent;
 import com.swt.amc.interfaces.IQRCodeLinkVerifier;
+import com.swt.amc.interfaces.IQrCodeGenerator;
 import com.swt.amc.interfaces.IValidateCredentialsComponent;
 
 @RestController
@@ -37,6 +43,9 @@ public class AmcRestController {
 
 	@Autowired
 	private IFilterLectureComponent filterLectureComponent;
+
+	@Autowired
+	private IQrCodeGenerator qrCodeGenerator;
 
 	private static final Logger log = LoggerFactory.getLogger(AmcRestController.class);
 
@@ -65,7 +74,7 @@ public class AmcRestController {
 		if (lectureInformation != null) {
 			return new ResponseEntity<LectureInformation>(lectureInformation, HttpStatus.OK);
 		} else {
-			return new ResponseEntity<LectureInformation>(HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 	}
 
@@ -76,6 +85,19 @@ public class AmcRestController {
 				validateCredentialsComponent.getUserInformationForUsernameAndPassword(usernameAndPassword.getUsername(),
 						usernameAndPassword.getPassword()),
 				HttpStatus.OK);
+	}
+
+	@GetMapping(value = "/generateQrCode/{tag}", produces = MediaType.IMAGE_PNG_VALUE)
+	public ResponseEntity<byte[]> generateQrCode(@PathVariable("tag") final String tag) throws AmcException {
+
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		try {
+			ImageIO.write(qrCodeGenerator.generateQrCode("http://192.168.1.10:8082/verifyQrCodeNoApp/" + tag), "png", baos);
+		} catch (IOException e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+
+		}
+		return new ResponseEntity<byte[]>(baos.toByteArray(), HttpStatus.OK);
 	}
 
 	@ExceptionHandler({ AmcException.class })
