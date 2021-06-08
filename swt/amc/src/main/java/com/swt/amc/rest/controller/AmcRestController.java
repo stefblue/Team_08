@@ -2,6 +2,7 @@ package com.swt.amc.rest.controller;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.view.RedirectView;
 
-import com.google.gson.Gson;
 import com.swt.amc.api.LectureInformation;
 import com.swt.amc.api.UserInformationResponse;
 import com.swt.amc.api.UsernamePasswordInformation;
@@ -63,10 +63,10 @@ public class AmcRestController {
 	}
 
 	@GetMapping("/search/{searchString}")
-	public ResponseEntity<String> search(@PathVariable("searchString") final String searchString)
+	public ResponseEntity<List<LectureInformation>> search(@PathVariable("searchString") final String searchString)
 			throws AmcException {
-		return new ResponseEntity<String>(
-				new Gson().toJson(searchLecturesComponent.findLecturesBySearchString(searchString)), HttpStatus.OK);
+		return new ResponseEntity<List<LectureInformation>>(
+				searchLecturesComponent.findLecturesBySearchString(searchString), HttpStatus.OK);
 	}
 
 	@GetMapping("/filterLectureInformation/{title}")

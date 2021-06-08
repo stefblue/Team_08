@@ -12,14 +12,19 @@ import android.widget.Toast
 import androidx.fragment.app.ListFragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import com.google.gson.Gson
 import com.google.gson.JsonObject
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonWriter
 import com.swt.augmentmycampus.R
+import com.swt.augmentmycampus.api.model.LectureInformation
 import com.swt.augmentmycampus.api.model.SearchResultItem
 import com.swt.augmentmycampus.businessLogic.CouldNotReachServerException
 import com.swt.augmentmycampus.businessLogic.InvalidUrlException
 import com.swt.augmentmycampus.ui.camera.CameraFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONObject
+import org.json.JSONStringer
 import java.lang.Exception
 import java.util.stream.Collectors
 
@@ -27,7 +32,7 @@ import java.util.stream.Collectors
 class SearchFragment : ListFragment() {
 
     private lateinit var searchViewModel: SearchViewModel
-    private lateinit var resultList: List<String>
+    private lateinit var resultList: List<LectureInformation>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -62,7 +67,7 @@ class SearchFragment : ListFragment() {
         } catch (ex: Exception) {
             Toast.makeText(this.requireContext(), ex.message, Toast.LENGTH_LONG).show()
         }
-        val titles = resultList.stream().map { json -> JSONObject(json).getString("title") }.collect(Collectors.toList())
+        val titles = resultList.stream().map { info -> info.title }.collect(Collectors.toList())
         listAdapter = ArrayAdapter(this.requireContext(), android.R.layout.simple_list_item_1, titles)
     }
 
@@ -73,9 +78,9 @@ class SearchFragment : ListFragment() {
         val item = resultList[position];
 
         try {
-            val resultText = searchViewModel.getTextData(JSONObject(item).getString("tag")); // get data from BL
+            val resultText = searchViewModel.getTextData(item.tag); // get data from BL
             //pass data to DataFragment and switch
-            val action = SearchFragmentDirections.actionNavigationSearchToNavigationData(resultText)
+            val action = SearchFragmentDirections.actionNavigationSearchToNavigationData(Gson().toJson(resultText))
             requireActivity().findNavController(R.id.nav_host_fragment).navigate(action)
 
         } catch (ex: InvalidUrlException) {

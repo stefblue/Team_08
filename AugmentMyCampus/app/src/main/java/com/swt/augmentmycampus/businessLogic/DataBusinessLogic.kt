@@ -1,6 +1,8 @@
 package com.swt.augmentmycampus.businessLogic
 
 import android.util.Log
+import com.squareup.moshi.Json
+import com.swt.augmentmycampus.api.model.LectureInformation
 import com.swt.augmentmycampus.dependencyInjection.ConfigurationModule
 import com.swt.augmentmycampus.network.Webservice
 import okhttp3.OkHttpClient
@@ -19,9 +21,9 @@ interface DataBusinessLogic {
     fun getTextFromUrl(url: String): String;
 
     @Throws(InvalidUrlException::class)
-    fun getTextFromTag(tag: String): String;
+    fun getLectureInformationFromTag(tag: String): LectureInformation;
 
-    fun getResultsForSearchQuery(query: String): List<String>;
+    fun getResultsForSearchQuery(query: String): List<LectureInformation>;
 
     @Throws(InvalidUrlException::class)
     fun performRestCall(url: String): String;
@@ -58,20 +60,15 @@ class DataBusinessLogicImpl @Inject constructor (
         return  performRestCall(url);
     }
 
-    override fun getTextFromTag(tag: String): String {
-        if (!urlBusinessLogic.isValidUrlFormat(ConfigurationModule.endpoint + "/verifyQrCode/" + tag)) throw InvalidUrlException()
-        return  performRestCall(ConfigurationModule.endpoint + "/verifyQrCode/" + tag);
+    override fun getLectureInformationFromTag(tag: String): LectureInformation {
+        val response = webservice.getLectureInformationForTag(tag).execute()
+        if(!response.isSuccessful) throw java.lang.Exception(response.errorBody().toString())
+        return response.body()!!
     }
 
-    override fun getResultsForSearchQuery(query: String): List<String> {
-        val response = performRestCall(ConfigurationModule.endpoint +  "/search/" + query);
-        val listdata = ArrayList<String>()
-        val jArray = JSONArray(response)
-        if (jArray != null) {
-            for (i in 0 until jArray.length()) {
-                listdata.add(jArray.getString(i))
-            }
-        }
-        return listdata
+    override fun getResultsForSearchQuery(query: String): List<LectureInformation> {
+        val response = webservice.getSearchResult(query).execute()
+        if(!response.isSuccessful) throw java.lang.Exception(response.errorBody().toString())
+        return response.body()!!
     }
 }

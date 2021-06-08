@@ -15,6 +15,7 @@ import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import com.jakewharton.espresso.OkHttp3IdlingResource
+import com.swt.augmentmycampus.api.model.LectureInformation
 import com.swt.augmentmycampus.api.model.SearchResponse
 import com.swt.augmentmycampus.api.model.SearchResultItem
 import com.swt.augmentmycampus.dependencyInjection.ApplicationModule
@@ -85,9 +86,13 @@ class SearchTest {
 
     @Test
     fun displaySearchResults() {
-        val i1 = SearchResultItem("lec1", "http://localhost:8080/test1");
-        val i2 = SearchResultItem("lec2", "http://localhost:8080/test2");
-        val list : List<SearchResultItem> = listOf(i1,i2);
+        val i1 = LectureInformation();
+        i1.title = "lec1"
+        i1.tag = "test1"
+        val i2 = LectureInformation();
+        i2.title = "lec2"
+        i2.tag = "test2"
+        val list : List<LectureInformation> = listOf(i1,i2);
         createSearchResponse(list);
 
         onView(withId(R.id.search_field)).perform(click())
@@ -95,17 +100,21 @@ class SearchTest {
             .perform(pressKey(KeyEvent.KEYCODE_ENTER))
 
         onView(withId(android.R.id.list)).check(matches(hasChildCount(2)))
-        onView(withText(i1.lectureName)).check(matches(isDisplayed()))
-        onView(withText(i2.lectureName)).check(matches(isDisplayed()))
+        onView(withText(i1.title)).check(matches(isDisplayed()))
+        onView(withText(i2.title)).check(matches(isDisplayed()))
     }
 
     @Test
     fun displaySearchResultsDetails() {
         val textToDisplay = getDummyData()
 
-        val i1 = SearchResultItem("lec1", "http://localhost:8080/test1");
-        val i2 = SearchResultItem("lec2", "http://localhost:8080/test2");
-        val list : List<SearchResultItem> = listOf(i1,i2);
+        val i1 = LectureInformation();
+        i1.title = "lec1"
+        i1.tag = "test1"
+        val i2 = LectureInformation();
+        i2.title = "lec2"
+        i2.tag = "test2"
+        val list : List<LectureInformation> = listOf(i1,i2);
         createSearchResponse(list);
 
         onView(withId(R.id.search_field)).perform(click())
@@ -114,7 +123,7 @@ class SearchTest {
 
         createTextResponse(textToDisplay)
 
-        onView(withText(i1.lectureName)).perform(click())
+        onView(withText(i1.title)).perform(click())
         onView(withId(R.id.navigation_data)).check(matches(isDisplayed()))
         onView(withText("TestTitle")).check(matches(isDisplayed()))
     }
@@ -123,11 +132,10 @@ class SearchTest {
         return "{\"title\":\"TestTitle\",\"number\":\"123\",\"semester\":\"Sommer\",\"ects\":5,\"lecturer\":[\"Lecturer A\"],\"content\":\"description\",\"link\":\"link\",\"dates\":[{\"first\":\"2021-05-24T10:00:00.000000\",\"second\":\"PT2H\"},{\"first\":\"2021-05-25T10:00:00.000000\",\"second\":\"PT2H\"},{\"first\":\"2021-05-25T14:00:00.000000\",\"second\":\"PT2H\"},{\"first\":\"2021-05-25T18:00:00.000000\",\"second\":\"PT2H\"},{\"first\":\"2021-05-26T10:00:00.000000\",\"second\":\"PT2H\"}]}";
     }
 
-    private fun createSearchResponse(list : List<SearchResultItem>) {
-        val searchResponse = SearchResponse(list)
+    private fun createSearchResponse(list : List<LectureInformation>) {
         mockWebServer.enqueue(MockResponse().apply {
             setResponseCode(200)
-            setBody(moshi.adapter(SearchResponse::class.java).toJson(searchResponse))
+            setBody(moshi.adapter(List::class.java).toJson(list))
         })
     }
 
