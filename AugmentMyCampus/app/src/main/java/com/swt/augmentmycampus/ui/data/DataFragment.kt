@@ -110,12 +110,19 @@ class DataFragment : Fragment() {
         var expandableListTitleDates = ArrayList(expandableListDetailDates!!.keys)
         var expandableListAdapterDates = DatesExpandableListAdapter(requireContext().applicationContext, expandableListTitleDates!!, expandableListDetailDates!!)
         CreateListView(expandableListViewDates, expandableListAdapterDates)
-
-        //Create List with future lecture dates
+        
         var futureAppointments = ArrayList<Pair<String, Boolean>>()
         val formatter : DateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")
         var currentDateDeft = LocalDateTime.now()
         var currentDateFormatted = currentDateDeft.format(formatter)
+
+        for(i in 0 until appointments.size)
+        {
+            if (appointments[i].first < currentDateFormatted)
+            {
+                futureAppointments.add(appointments[i])
+            }
+        }
 
         return root
     }
