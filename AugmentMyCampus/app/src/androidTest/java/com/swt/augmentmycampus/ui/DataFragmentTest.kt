@@ -106,5 +106,25 @@ class DataFragmentTest {
         onView(withId(R.id.registerButton)).perform(click())
         onView(withId(R.id.registerButton)).check(matches(withText("Unregister")))
     }
-    
+
+    @Test
+    fun testDataFragmentShowHideButtonClick() {
+        onView(withId(R.id.navigation_data)).perform(click())
+        onView(withId(R.id.fragment_data_id)).check(matches(isDisplayed()))
+
+        onView(withId(R.id.show_hide_dates_button)).perform(scrollTo()).check(matches(isDisplayed()))
+        onView(withId(R.id.show_hide_dates_button)).perform(click())
+        onView(withId(R.id.action_show_hide_past_events)).check(matches(isDisplayed()))
+        onView(withId(R.id.action_show_hide_past_events)).check(matches(withText("Hide past events")))
+        onView(withId(R.id.action_show_hide_past_events)).perform(click())
+
+        onView(withId(R.id.show_hide_dates_button)).perform(click())
+        onView(withId(R.id.action_show_hide_past_events)).check(matches(isDisplayed()))
+        onView(withId(R.id.action_show_hide_past_events)).check(matches(withText("Show past events")))
+
+        onView(withId(R.id.show_hide_dates_button)).perform(click())
+        onView(withId(R.id.action_show_hide_past_events)).check(matches(isDisplayed()))
+        onView(withId(R.id.action_show_hide_past_events)).check(matches(withText("Hide past events")))
+    }
+
 }
