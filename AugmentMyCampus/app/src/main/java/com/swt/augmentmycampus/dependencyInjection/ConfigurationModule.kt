@@ -11,7 +11,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object ConfigurationModule {
 
-    public val endpoint = "http://192.168.0.19:8082";
+    public val endpoint = "http://192.168.1.172:8082";
 
     @Singleton
     @Provides
