@@ -106,6 +106,5 @@ class DataFragmentTest {
         onView(withId(R.id.registerButton)).perform(click())
         onView(withId(R.id.registerButton)).check(matches(withText("Unregister")))
     }
-
-
+    
 }

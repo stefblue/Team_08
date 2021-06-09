@@ -20,6 +20,7 @@ import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.collections.HashMap
 
+
 @AndroidEntryPoint
 class DataFragment : Fragment() {
 
@@ -65,13 +66,14 @@ class DataFragment : Fragment() {
 
             var jArray : JSONArray = jsonObj.getJSONArray("dates")
 
+
+
             if (jArray != null) {
                 for(i in 0 until jArray.length()) {
                     val tmpObject : JSONObject = jArray.getJSONObject(i)
 
                     val startDateTime : LocalDateTime = LocalDateTime.parse(tmpObject.getString("key"), DateTimeFormatter.ISO_LOCAL_DATE_TIME)
                     val duration : Duration = Duration.parse(tmpObject.getString("value"))
-
                     val formatter : DateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")
                     val tmpString : String = startDateTime.format(formatter).plus(" for ").plus(DateUtils.formatElapsedTime(duration.seconds))
 
@@ -108,6 +110,12 @@ class DataFragment : Fragment() {
         var expandableListTitleDates = ArrayList(expandableListDetailDates!!.keys)
         var expandableListAdapterDates = DatesExpandableListAdapter(requireContext().applicationContext, expandableListTitleDates!!, expandableListDetailDates!!)
         CreateListView(expandableListViewDates, expandableListAdapterDates)
+
+        //Create List with future lecture dates
+        var futureAppointments = ArrayList<Pair<String, Boolean>>()
+        val formatter : DateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")
+        var currentDateDeft = LocalDateTime.now()
+        var currentDateFormatted = currentDateDeft.format(formatter)
 
         return root
     }
