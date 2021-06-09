@@ -16,6 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONArray
 import org.json.JSONObject
 import java.time.Duration
+import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -75,17 +76,11 @@ class DataFragment : Fragment() {
                     for (i in 0 until jArray.length()) {
                         val tmpObject: JSONObject = jArray.getJSONObject(i)
 
-                        val startDateTime: LocalDateTime = LocalDateTime.parse(
-                            tmpObject.getString("first"),
-                            DateTimeFormatter.ISO_LOCAL_DATE_TIME
-                        )
-                        val duration: Duration = Duration.parse(tmpObject.getString("second"))
+                        val startDateTime: LocalDateTime = LocalDateTime.parse(tmpObject.getString("time"), DateTimeFormatter.ISO_DATE_TIME)
+                        val duration: Duration = Duration.parse(tmpObject.getString("duration"))
 
-                        val formatter: DateTimeFormatter =
-                            DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")
-                        val tmpString: String = startDateTime.format(formatter).plus(" for ")
+                        val tmpString: String = startDateTime.format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")).plus(" for ")
                             .plus(DateUtils.formatElapsedTime(duration.seconds))
-
                         listOfDates.add(tmpString)
                     }
                 } else {

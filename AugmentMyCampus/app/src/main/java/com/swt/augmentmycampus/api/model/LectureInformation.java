@@ -8,24 +8,15 @@ import java.util.List;
 
 public class LectureInformation {
 
-	private Long id;
 	private String tag;
 	private String title;
 	private String number;
 	private String semester;
 	private Integer ects;
-	private List<String> lecturer = new ArrayList<String>();
+	private List<String> lecturer;
 	private String content;
 	private String link;
 	private Object dates;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getTag() {
 		return tag;
@@ -81,14 +72,6 @@ public class LectureInformation {
 
 	public void setContent(String content) {
 		this.content = content;
-	}
-
-	public String getLink() {
-		return link;
-	}
-
-	public void setLink(String link) {
-		this.link = link;
 	}
 
 	public Object getDates() {
