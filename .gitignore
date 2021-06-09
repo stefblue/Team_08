@@ -5,7 +5,7 @@
 *.log
 
 # Idea file
-*.idea
+.idea/
 
 # BlueJ files
 *.ctxt
@@ -124,3 +124,6 @@ lint/tmp/
 .project
 target
 .eclipse-pmd
+.metadata
+
+*.db

@@ -30,6 +30,9 @@
     <string name="placeholder_fragment_settings_user">Имя пользователя</string>
     <string name="placeholder_fragment_settings_password">Пароль</string>
     <string name="text_fragment_settings_submit">Авторизоваться</string>
+    <string name="text_fragment_settings_logout">выйти</string>
+    <string name="invalid_credentials">Неверный пользователь или пароль</string>
+    <string name="ok">ОК</string>
 
     <string name="label_number_text">Число</string>
     <string name="label_semester_text">Семестр</string>

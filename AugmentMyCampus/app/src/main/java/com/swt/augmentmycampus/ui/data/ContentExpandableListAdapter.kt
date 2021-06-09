@@ -6,21 +6,34 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ExpandableListView
 import android.widget.TextView;
 import com.swt.augmentmycampus.R
 
 
-class ContentExpandableListAdapter(context: Context, expandableListTitle: List<String>,
+class ContentExpandableListAdapter(expandableListView: ExpandableListView, context: Context, expandableListTitle: List<String>,
                                    expandableListDetail: HashMap<String, List<String>>) : BaseExpandableListAdapter() {
     private val context: Context
+    private val expandableListView: ExpandableListView
     private val expandableListTitle: List<String>
     private val expandableListDetail: HashMap<String, List<String>>
+
     override fun getChild(listPosition: Int, expandedListPosition: Int): Any {
         return expandableListDetail[expandableListTitle[listPosition]]!![expandedListPosition]
     }
 
     override fun getChildId(listPosition: Int, expandedListPosition: Int): Long {
         return expandedListPosition.toLong()
+    }
+
+    override fun onGroupCollapsed(groupPosition: Int) {
+        super.onGroupCollapsed(groupPosition)
+        expandableListView.layoutParams.height = 125;
+    }
+
+    override fun onGroupExpanded(groupPosition: Int) {
+        super.onGroupExpanded(groupPosition)
+        expandableListView.layoutParams.height = 500;
     }
 
     override fun getChildView(listPosition: Int, expandedListPosition: Int,
@@ -77,6 +90,7 @@ class ContentExpandableListAdapter(context: Context, expandableListTitle: List<S
 
     init {
         this.context = context
+        this.expandableListView = expandableListView
         this.expandableListTitle = expandableListTitle
         this.expandableListDetail = expandableListDetail
     }

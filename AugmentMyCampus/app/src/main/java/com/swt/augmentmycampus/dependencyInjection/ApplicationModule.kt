@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import androidx.viewbinding.BuildConfig
 import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.swt.augmentmycampus.ui.LocaleManager
 import com.swt.augmentmycampus.businessLogic.DataBusinessLogic
 import com.swt.augmentmycampus.businessLogic.DataBusinessLogicImpl
@@ -30,7 +31,7 @@ object ApplicationModule {
     @Singleton
     @Provides
     fun provideJsonSerializer(): Moshi {
-        return Moshi.Builder().build()
+        return Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
     }
 
     @Singleton

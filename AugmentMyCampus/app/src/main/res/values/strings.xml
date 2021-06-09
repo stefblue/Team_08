@@ -23,6 +23,9 @@
     <string name="placeholder_fragment_settings_user">Username</string>
     <string name="placeholder_fragment_settings_password">Password</string>
     <string name="text_fragment_settings_submit">Login</string>
+    <string name="text_fragment_settings_logout">Logout</string>
+    <string name="invalid_credentials">Invalid user or password</string>
+    <string name="ok">OK</string>
 
     <string name="error_default_msg">an error occurred</string>
     <string name="error_invalid_url">this qr code is not supported</string>
@@ -34,6 +37,9 @@
     <string name="label_lecturer_text">Lecturer</string>
 
     <string name="settings_language">Language</string>
+    <string name="account_image">Account image</string>
+    <string name="title_search">Search</string>
+    <string name="no_data_text">No data</string>
     <string-array name="availableLanguages">
         <item>English</item>
         <item>Pусский</item>

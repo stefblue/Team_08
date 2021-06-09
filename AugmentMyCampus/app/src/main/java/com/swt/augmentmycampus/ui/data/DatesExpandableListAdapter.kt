@@ -7,13 +7,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ExpandableListView
 import android.widget.TextView;
 import com.swt.augmentmycampus.R
 
 
-class DatesExpandableListAdapter(context: Context, expandableListTitle: List<String>,
+class DatesExpandableListAdapter(expandableListView: ExpandableListView, context: Context, expandableListTitle: List<String>,
                                  expandableListDetail: HashMap<String, List<Pair<String, Boolean>>>) : BaseExpandableListAdapter() {
     private val context: Context = context
+    private val expandableListView: ExpandableListView = expandableListView
     private val expandableListTitle: List<String> = expandableListTitle
     private val expandableListDetail: HashMap<String, List<Pair<String, Boolean>>> =
         expandableListDetail
@@ -24,6 +26,16 @@ class DatesExpandableListAdapter(context: Context, expandableListTitle: List<Str
 
     override fun getChildId(listPosition: Int, expandedListPosition: Int): Long {
         return expandedListPosition.toLong()
+    }
+
+    override fun onGroupCollapsed(groupPosition: Int) {
+        super.onGroupCollapsed(groupPosition)
+        expandableListView.layoutParams.height = 125;
+    }
+
+    override fun onGroupExpanded(groupPosition: Int) {
+        super.onGroupExpanded(groupPosition)
+        expandableListView.layoutParams.height = 500;
     }
 
     override fun getChildView(listPosition: Int, expandedListPosition: Int,
